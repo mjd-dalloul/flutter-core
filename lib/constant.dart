@@ -16,7 +16,19 @@ abstract class SupportedLanguage {
   static const String ENGLISH = 'en';
 }
 
-abstract class DefaultData {
+abstract class DefaultValues {
   static const String PROFILE_IMAGE =
       'https://www.techpowerusa.com/wp-content/uploads/2017/06/default-user.png';
+  static const String NO_INTERNET_CONNECTION = 'No internet connection';
+  static const String SERVER_FAILURE = 'Server error';
+  static const String UNAUTHENTICATED = 'Unauthenticated';
+  static const String REQUEST_CANCELLED = 'Request cancelled';
+}
+
+enum HttpRequestTypes {
+  GET,
+  POST,
+  DELETE,
+  PATCH,
+  PUT,
 }
