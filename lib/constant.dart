@@ -8,6 +8,7 @@ abstract class SharedPreferencesKeys {
   static const String IS_FIRST_TIME_OPENING_THE_APP = 'is_first_time';
   static const String NOTIFICATION_TOKEN = 'notification_token';
   static const String APP_LANGAUAGE = 'app_language';
+  static const String APP_THEME = 'app_language';
   static const String COOKIE_SITE = 'COOKIE';
 }
 

@@ -69,6 +69,12 @@ class BaseSharedPreferencesImpl implements BaseSharedPreferences {
   Future<bool> saveCookieSite(String cookie) =>
       saveString(SharedPreferencesKeys.COOKIE_SITE, cookie);
 
+  Future<bool> saveAppTheme(int theme) =>
+      saveInt(SharedPreferencesKeys.APP_THEME, theme);
+
+  Future<bool> saveIsFirstTimeOpeningTheApp() =>
+      saveBool(SharedPreferencesKeys.IS_FIRST_TIME_OPENING_THE_APP, false);
+
   String? getAccessToken() => getString(SharedPreferencesKeys.ACCESS_TOKEN);
 
   String? getRefreshToken() => getString(SharedPreferencesKeys.REFRESH_TOKEN);
@@ -84,4 +90,9 @@ class BaseSharedPreferencesImpl implements BaseSharedPreferences {
   String? getAppLanguage() => getString(SharedPreferencesKeys.APP_LANGAUAGE);
 
   String? getCookieSite() => getString(SharedPreferencesKeys.COOKIE_SITE);
+
+  int? getAppTheme() => getInt(SharedPreferencesKeys.APP_THEME);
+
+  bool? getIsFirstTimeOpeningTheApp() =>
+      getBool(SharedPreferencesKeys.IS_FIRST_TIME_OPENING_THE_APP);
 }
