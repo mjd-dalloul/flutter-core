@@ -5,6 +5,8 @@ part 'network_failures.freezed.dart';
 
 @freezed
 class NetworkFailure with _$NetworkFailure implements Exception {
+  const NetworkFailure._();
+
   const factory NetworkFailure.serverFailure([String? message]) = ServerFailure;
 
   const factory NetworkFailure.requestCancelled([String? message]) =
@@ -16,9 +18,11 @@ class NetworkFailure with _$NetworkFailure implements Exception {
       NoInternetFailure;
 
   const factory NetworkFailure.unauthenticatedFailure([String? message]) =
-      UnauthenticatedFailure;
+  UnauthenticatedFailure;
+}
 
-  String getFailureMessage() => map(
+extension NetworkFailureMessage on NetworkFailure {
+  String get message => map(
         serverFailure: (failure) =>
             failure.message ?? DefaultValues.SERVER_FAILURE,
         customFailure: (failure) => failure.message,

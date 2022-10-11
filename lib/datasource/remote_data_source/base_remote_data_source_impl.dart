@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_core/constant.dart';
 import 'package:flutter_core/datasource/remote_data_source/base_remote_data_source.dart';
 import 'package:flutter_core/type_defs.dart';
+import 'package:flutter_core/utils/extensions/map_ext.dart';
 import 'package:flutter_core/utils/network_failures.dart';
 import 'package:flutter_core/utils/remote_data.dart';
 
@@ -34,7 +35,11 @@ class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
           response = await get(
             endPoint: endPoint,
             params: params,
-            headers: Options(headers: headers),
+            headers: Options(
+              headers: headers,
+              extra: ({}.useAuthenticationToken(useAuthenticationToken))
+                  as Map<String, dynamic>,
+            ),
             onReceiveProgress: onSendProgress,
           );
           break;
@@ -42,7 +47,11 @@ class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
           response = await post(
             endPoint: endPoint,
             params: params,
-            headers: Options(headers: headers),
+            headers: Options(
+              headers: headers,
+              extra: ({}.useAuthenticationToken(useAuthenticationToken))
+                  as Map<String, dynamic>,
+            ),
             data: hasBaseRequestModel ? wrapBodyWithBaseRequest(data) : data,
             onSendProgress: onSendProgress,
             onReceiveProgress: onReceiveProgress,
@@ -52,14 +61,22 @@ class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
           response = await delete(
             endPoint: endPoint,
             params: params,
-            headers: Options(headers: headers),
+            headers: Options(
+              headers: headers,
+              extra: ({}.useAuthenticationToken(useAuthenticationToken))
+                  as Map<String, dynamic>,
+            ),
           );
           break;
         case HttpRequestTypes.PATCH:
           response = await patch(
             endPoint: endPoint,
             params: params,
-            headers: Options(headers: headers),
+            headers: Options(
+              headers: headers,
+              extra: ({}.useAuthenticationToken(useAuthenticationToken))
+                  as Map<String, dynamic>,
+            ),
             data: hasBaseRequestModel ? wrapBodyWithBaseRequest(data) : data,
           );
           break;
@@ -67,7 +84,11 @@ class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
           response = await put(
             endPoint: endPoint,
             params: params,
-            headers: Options(headers: headers),
+            headers: Options(
+              headers: headers,
+              extra: ({}.useAuthenticationToken(useAuthenticationToken))
+                  as Map<String, dynamic>,
+            ),
             data: hasBaseRequestModel ? wrapBodyWithBaseRequest(data) : data,
           );
           break;
@@ -202,7 +223,7 @@ class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
       case DioErrorType.receiveTimeout:
         return const NetworkFailure.noInternetFailure('Receive timeout');
       case DioErrorType.other:
-        return const NetworkFailure.noInternetFailure();
+        return const NetworkFailure.noInternetFailure('Something went wrong');
       case DioErrorType.cancel:
         return const NetworkFailure.requestCancelled();
       case DioErrorType.response:
@@ -224,7 +245,7 @@ class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
         );
       }
     } else {
-      return const NetworkFailure.serverFailure();
+      return const NetworkFailure.serverFailure('Something went wrong');
     }
   }
 

@@ -30,5 +30,5 @@ class FailureNetworkResponse<T> extends NetworkResponse<T> {
 
   @override
   String toString() =>
-      'network failure with message => ${networkFailure.getFailureMessage()} \n network failure is => ${networkFailure.toString()}';
+      'network failure with message => ${networkFailure.message} \n network failure is => ${networkFailure.toString()}';
 }

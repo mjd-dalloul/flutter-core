@@ -69,26 +69,19 @@ class BaseSharedPreferencesImpl implements BaseSharedPreferences {
   Future<bool> saveCookieSite(String cookie) =>
       saveString(SharedPreferencesKeys.COOKIE_SITE, cookie);
 
-  String? getAccessToken(String token) =>
-      getString(SharedPreferencesKeys.ACCESS_TOKEN);
+  String? getAccessToken() => getString(SharedPreferencesKeys.ACCESS_TOKEN);
 
-  String? getRefreshToken(String refreshToken) =>
-      getString(SharedPreferencesKeys.REFRESH_TOKEN);
+  String? getRefreshToken() => getString(SharedPreferencesKeys.REFRESH_TOKEN);
 
-  String? getUserInfo(String userInfoJson) =>
-      getString(SharedPreferencesKeys.USER_INFO);
+  String? getUserInfo() => getString(SharedPreferencesKeys.USER_INFO);
 
-  String? getPhoneNumber(String phoneNumber) =>
-      getString(SharedPreferencesKeys.PHONE);
+  String? getPhoneNumber() => getString(SharedPreferencesKeys.PHONE);
 
-  String? getEmail(String email) => getString(SharedPreferencesKeys.EMAIL);
+  String? getEmail() => getString(SharedPreferencesKeys.EMAIL);
 
-  String? getUsername(String username) =>
-      getString(SharedPreferencesKeys.USERNAME);
+  String? getUsername() => getString(SharedPreferencesKeys.USERNAME);
 
-  String? getAppLanguage(String appLanguage) =>
-      getString(SharedPreferencesKeys.APP_LANGAUAGE);
+  String? getAppLanguage() => getString(SharedPreferencesKeys.APP_LANGAUAGE);
 
-  String? getCookieSite(String cookie) =>
-      getString(SharedPreferencesKeys.COOKIE_SITE);
+  String? getCookieSite() => getString(SharedPreferencesKeys.COOKIE_SITE);
 }
