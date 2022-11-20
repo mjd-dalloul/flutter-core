@@ -8,7 +8,7 @@ import 'package:flutter_core/utils/network_failures.dart';
 import 'package:flutter_core/utils/remote_data.dart';
 
 /// this implementation is done by using dio as an http library
-class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
+abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
   const BaseRemoteDataSourceImpl(this.dio);
 
   final Dio dio;
@@ -231,21 +231,23 @@ class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
     }
   }
 
-  /// todo(Majd) make it more dynamic
-  /// todo(Majd) make the default message customizable
+  String get defaultErrorMessage;
+
+  String? failureParser(Response response);
+
   /// we are only interesting in the unauthenticated failure, otherwise we are returning
   /// the message from response if it's exist or we will return "Something went wrong"
   NetworkFailure mapStatusCodeToFailure(Response<dynamic>? response) {
     if (response != null) {
       if (response.statusCode! == 401 || response.statusCode! == 400) {
-        return NetworkFailure.unauthenticatedFailure(response.data['message']);
+        return NetworkFailure.unauthenticatedFailure(failureParser(response));
       } else {
         return NetworkFailure.customFailure(
-          response.data['message'] ?? 'Something went wrong',
+          failureParser(response) ?? defaultErrorMessage,
         );
       }
     } else {
-      return const NetworkFailure.serverFailure('Something went wrong');
+      return NetworkFailure.serverFailure(defaultErrorMessage);
     }
   }
 
