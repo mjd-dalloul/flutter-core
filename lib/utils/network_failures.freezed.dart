@@ -23,9 +23,9 @@ mixin _$NetworkFailure {
     required TResult Function(String message) customFailure,
     required TResult Function(String? message) noInternetFailure,
     required TResult Function(String? message) unauthenticatedFailure,
+    required TResult Function(dynamic error) unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? message)? serverFailure,
@@ -33,9 +33,9 @@ mixin _$NetworkFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? serverFailure,
@@ -43,10 +43,10 @@ mixin _$NetworkFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ServerFailure value) serverFailure,
@@ -55,9 +55,9 @@ mixin _$NetworkFailure {
     required TResult Function(NoInternetFailure value) noInternetFailure,
     required TResult Function(UnauthenticatedFailure value)
         unauthenticatedFailure,
+    required TResult Function(UnknownError value) unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ServerFailure value)? serverFailure,
@@ -65,9 +65,9 @@ mixin _$NetworkFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ServerFailure value)? serverFailure,
@@ -75,6 +75,7 @@ mixin _$NetworkFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -93,7 +94,6 @@ class _$NetworkFailureCopyWithImpl<$Res>
   _$NetworkFailureCopyWithImpl(this._value, this._then);
 
   final NetworkFailure _value;
-
   // ignore: unused_field
   final $Res Function(NetworkFailure) _then;
 }
@@ -103,7 +103,6 @@ abstract class _$$ServerFailureCopyWith<$Res> {
   factory _$$ServerFailureCopyWith(
           _$ServerFailure value, $Res Function(_$ServerFailure) then) =
       __$$ServerFailureCopyWithImpl<$Res>;
-
   $Res call({String? message});
 }
 
@@ -169,6 +168,7 @@ class _$ServerFailure extends ServerFailure {
     required TResult Function(String message) customFailure,
     required TResult Function(String? message) noInternetFailure,
     required TResult Function(String? message) unauthenticatedFailure,
+    required TResult Function(dynamic error) unknownError,
   }) {
     return serverFailure(message);
   }
@@ -181,6 +181,7 @@ class _$ServerFailure extends ServerFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
   }) {
     return serverFailure?.call(message);
   }
@@ -193,6 +194,7 @@ class _$ServerFailure extends ServerFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -210,6 +212,7 @@ class _$ServerFailure extends ServerFailure {
     required TResult Function(NoInternetFailure value) noInternetFailure,
     required TResult Function(UnauthenticatedFailure value)
         unauthenticatedFailure,
+    required TResult Function(UnknownError value) unknownError,
   }) {
     return serverFailure(this);
   }
@@ -222,6 +225,7 @@ class _$ServerFailure extends ServerFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
   }) {
     return serverFailure?.call(this);
   }
@@ -234,6 +238,7 @@ class _$ServerFailure extends ServerFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -245,11 +250,9 @@ class _$ServerFailure extends ServerFailure {
 
 abstract class ServerFailure extends NetworkFailure {
   const factory ServerFailure([final String? message]) = _$ServerFailure;
-
   const ServerFailure._() : super._();
 
   String? get message;
-
   @JsonKey(ignore: true)
   _$$ServerFailureCopyWith<_$ServerFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -260,7 +263,6 @@ abstract class _$$RequestCancelledCopyWith<$Res> {
   factory _$$RequestCancelledCopyWith(
           _$RequestCancelled value, $Res Function(_$RequestCancelled) then) =
       __$$RequestCancelledCopyWithImpl<$Res>;
-
   $Res call({String? message});
 }
 
@@ -326,6 +328,7 @@ class _$RequestCancelled extends RequestCancelled {
     required TResult Function(String message) customFailure,
     required TResult Function(String? message) noInternetFailure,
     required TResult Function(String? message) unauthenticatedFailure,
+    required TResult Function(dynamic error) unknownError,
   }) {
     return requestCancelled(message);
   }
@@ -338,6 +341,7 @@ class _$RequestCancelled extends RequestCancelled {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
   }) {
     return requestCancelled?.call(message);
   }
@@ -350,6 +354,7 @@ class _$RequestCancelled extends RequestCancelled {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
     if (requestCancelled != null) {
@@ -367,6 +372,7 @@ class _$RequestCancelled extends RequestCancelled {
     required TResult Function(NoInternetFailure value) noInternetFailure,
     required TResult Function(UnauthenticatedFailure value)
         unauthenticatedFailure,
+    required TResult Function(UnknownError value) unknownError,
   }) {
     return requestCancelled(this);
   }
@@ -379,6 +385,7 @@ class _$RequestCancelled extends RequestCancelled {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
   }) {
     return requestCancelled?.call(this);
   }
@@ -391,6 +398,7 @@ class _$RequestCancelled extends RequestCancelled {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
     required TResult orElse(),
   }) {
     if (requestCancelled != null) {
@@ -402,11 +410,9 @@ class _$RequestCancelled extends RequestCancelled {
 
 abstract class RequestCancelled extends NetworkFailure {
   const factory RequestCancelled([final String? message]) = _$RequestCancelled;
-
   const RequestCancelled._() : super._();
 
   String? get message;
-
   @JsonKey(ignore: true)
   _$$RequestCancelledCopyWith<_$RequestCancelled> get copyWith =>
       throw _privateConstructorUsedError;
@@ -417,7 +423,6 @@ abstract class _$$CustomFailureCopyWith<$Res> {
   factory _$$CustomFailureCopyWith(
           _$CustomFailure value, $Res Function(_$CustomFailure) then) =
       __$$CustomFailureCopyWithImpl<$Res>;
-
   $Res call({String message});
 }
 
@@ -483,6 +488,7 @@ class _$CustomFailure extends CustomFailure {
     required TResult Function(String message) customFailure,
     required TResult Function(String? message) noInternetFailure,
     required TResult Function(String? message) unauthenticatedFailure,
+    required TResult Function(dynamic error) unknownError,
   }) {
     return customFailure(message);
   }
@@ -495,6 +501,7 @@ class _$CustomFailure extends CustomFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
   }) {
     return customFailure?.call(message);
   }
@@ -507,6 +514,7 @@ class _$CustomFailure extends CustomFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
     if (customFailure != null) {
@@ -524,6 +532,7 @@ class _$CustomFailure extends CustomFailure {
     required TResult Function(NoInternetFailure value) noInternetFailure,
     required TResult Function(UnauthenticatedFailure value)
         unauthenticatedFailure,
+    required TResult Function(UnknownError value) unknownError,
   }) {
     return customFailure(this);
   }
@@ -536,6 +545,7 @@ class _$CustomFailure extends CustomFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
   }) {
     return customFailure?.call(this);
   }
@@ -548,6 +558,7 @@ class _$CustomFailure extends CustomFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
     required TResult orElse(),
   }) {
     if (customFailure != null) {
@@ -559,11 +570,9 @@ class _$CustomFailure extends CustomFailure {
 
 abstract class CustomFailure extends NetworkFailure {
   const factory CustomFailure(final String message) = _$CustomFailure;
-
   const CustomFailure._() : super._();
 
   String get message;
-
   @JsonKey(ignore: true)
   _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -574,7 +583,6 @@ abstract class _$$NoInternetFailureCopyWith<$Res> {
   factory _$$NoInternetFailureCopyWith(
           _$NoInternetFailure value, $Res Function(_$NoInternetFailure) then) =
       __$$NoInternetFailureCopyWithImpl<$Res>;
-
   $Res call({String? message});
 }
 
@@ -640,6 +648,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     required TResult Function(String message) customFailure,
     required TResult Function(String? message) noInternetFailure,
     required TResult Function(String? message) unauthenticatedFailure,
+    required TResult Function(dynamic error) unknownError,
   }) {
     return noInternetFailure(message);
   }
@@ -652,6 +661,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
   }) {
     return noInternetFailure?.call(message);
   }
@@ -664,6 +674,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
     if (noInternetFailure != null) {
@@ -681,6 +692,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     required TResult Function(NoInternetFailure value) noInternetFailure,
     required TResult Function(UnauthenticatedFailure value)
         unauthenticatedFailure,
+    required TResult Function(UnknownError value) unknownError,
   }) {
     return noInternetFailure(this);
   }
@@ -693,6 +705,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
   }) {
     return noInternetFailure?.call(this);
   }
@@ -705,6 +718,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
     required TResult orElse(),
   }) {
     if (noInternetFailure != null) {
@@ -717,11 +731,9 @@ class _$NoInternetFailure extends NoInternetFailure {
 abstract class NoInternetFailure extends NetworkFailure {
   const factory NoInternetFailure([final String? message]) =
       _$NoInternetFailure;
-
   const NoInternetFailure._() : super._();
 
   String? get message;
-
   @JsonKey(ignore: true)
   _$$NoInternetFailureCopyWith<_$NoInternetFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -732,7 +744,6 @@ abstract class _$$UnauthenticatedFailureCopyWith<$Res> {
   factory _$$UnauthenticatedFailureCopyWith(_$UnauthenticatedFailure value,
           $Res Function(_$UnauthenticatedFailure) then) =
       __$$UnauthenticatedFailureCopyWithImpl<$Res>;
-
   $Res call({String? message});
 }
 
@@ -800,6 +811,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     required TResult Function(String message) customFailure,
     required TResult Function(String? message) noInternetFailure,
     required TResult Function(String? message) unauthenticatedFailure,
+    required TResult Function(dynamic error) unknownError,
   }) {
     return unauthenticatedFailure(message);
   }
@@ -812,6 +824,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
   }) {
     return unauthenticatedFailure?.call(message);
   }
@@ -824,6 +837,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     TResult Function(String message)? customFailure,
     TResult Function(String? message)? noInternetFailure,
     TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
     if (unauthenticatedFailure != null) {
@@ -841,6 +855,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     required TResult Function(NoInternetFailure value) noInternetFailure,
     required TResult Function(UnauthenticatedFailure value)
         unauthenticatedFailure,
+    required TResult Function(UnknownError value) unknownError,
   }) {
     return unauthenticatedFailure(this);
   }
@@ -853,6 +868,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
   }) {
     return unauthenticatedFailure?.call(this);
   }
@@ -865,6 +881,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     TResult Function(CustomFailure value)? customFailure,
     TResult Function(NoInternetFailure value)? noInternetFailure,
     TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
     required TResult orElse(),
   }) {
     if (unauthenticatedFailure != null) {
@@ -884,5 +901,168 @@ abstract class UnauthenticatedFailure extends NetworkFailure {
 
   @JsonKey(ignore: true)
   _$$UnauthenticatedFailureCopyWith<_$UnauthenticatedFailure> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UnknownErrorCopyWith<$Res> {
+  factory _$$UnknownErrorCopyWith(
+          _$UnknownError value, $Res Function(_$UnknownError) then) =
+      __$$UnknownErrorCopyWithImpl<$Res>;
+
+  $Res call({dynamic error});
+}
+
+/// @nodoc
+class __$$UnknownErrorCopyWithImpl<$Res>
+    extends _$NetworkFailureCopyWithImpl<$Res>
+    implements _$$UnknownErrorCopyWith<$Res> {
+  __$$UnknownErrorCopyWithImpl(
+      _$UnknownError _value, $Res Function(_$UnknownError) _then)
+      : super(_value, (v) => _then(v as _$UnknownError));
+
+  @override
+  _$UnknownError get _value => super._value as _$UnknownError;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(_$UnknownError(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UnknownError extends UnknownError {
+  const _$UnknownError(this.error) : super._();
+
+  @override
+  final dynamic error;
+
+  @override
+  String toString() {
+    return 'NetworkFailure.unknownError(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnknownError &&
+            const DeepCollectionEquality().equals(other.error, error));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
+      __$$UnknownErrorCopyWithImpl<_$UnknownError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? message) serverFailure,
+    required TResult Function(String? message) requestCancelled,
+    required TResult Function(String message) customFailure,
+    required TResult Function(String? message) noInternetFailure,
+    required TResult Function(String? message) unauthenticatedFailure,
+    required TResult Function(dynamic error) unknownError,
+  }) {
+    return unknownError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String? message)? serverFailure,
+    TResult Function(String? message)? requestCancelled,
+    TResult Function(String message)? customFailure,
+    TResult Function(String? message)? noInternetFailure,
+    TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
+  }) {
+    return unknownError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? serverFailure,
+    TResult Function(String? message)? requestCancelled,
+    TResult Function(String message)? customFailure,
+    TResult Function(String? message)? noInternetFailure,
+    TResult Function(String? message)? unauthenticatedFailure,
+    TResult Function(dynamic error)? unknownError,
+    required TResult orElse(),
+  }) {
+    if (unknownError != null) {
+      return unknownError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ServerFailure value) serverFailure,
+    required TResult Function(RequestCancelled value) requestCancelled,
+    required TResult Function(CustomFailure value) customFailure,
+    required TResult Function(NoInternetFailure value) noInternetFailure,
+    required TResult Function(UnauthenticatedFailure value)
+        unauthenticatedFailure,
+    required TResult Function(UnknownError value) unknownError,
+  }) {
+    return unknownError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ServerFailure value)? serverFailure,
+    TResult Function(RequestCancelled value)? requestCancelled,
+    TResult Function(CustomFailure value)? customFailure,
+    TResult Function(NoInternetFailure value)? noInternetFailure,
+    TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
+  }) {
+    return unknownError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ServerFailure value)? serverFailure,
+    TResult Function(RequestCancelled value)? requestCancelled,
+    TResult Function(CustomFailure value)? customFailure,
+    TResult Function(NoInternetFailure value)? noInternetFailure,
+    TResult Function(UnauthenticatedFailure value)? unauthenticatedFailure,
+    TResult Function(UnknownError value)? unknownError,
+    required TResult orElse(),
+  }) {
+    if (unknownError != null) {
+      return unknownError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UnknownError extends NetworkFailure {
+  const factory UnknownError(final dynamic error) = _$UnknownError;
+
+  const UnknownError._() : super._();
+
+  dynamic get error;
+
+  @JsonKey(ignore: true)
+  _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
       throw _privateConstructorUsedError;
 }

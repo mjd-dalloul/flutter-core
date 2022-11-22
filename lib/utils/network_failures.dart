@@ -18,7 +18,9 @@ class NetworkFailure with _$NetworkFailure implements Exception {
       NoInternetFailure;
 
   const factory NetworkFailure.unauthenticatedFailure([String? message]) =
-  UnauthenticatedFailure;
+      UnauthenticatedFailure;
+
+  const factory NetworkFailure.unknownError(dynamic error) = UnknownError;
 }
 
 extension NetworkFailureMessage on NetworkFailure {
@@ -32,5 +34,6 @@ extension NetworkFailureMessage on NetworkFailure {
             failure.message ?? DefaultValues.UNAUTHENTICATED,
         requestCancelled: (failure) =>
             failure.message ?? DefaultValues.REQUEST_CANCELLED,
+        unknownError: (_) => DefaultValues.SOMETHING_WENT_WRONG,
       );
 }

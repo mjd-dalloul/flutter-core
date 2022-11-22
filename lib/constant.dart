@@ -20,10 +20,11 @@ abstract class SupportedLanguage {
 abstract class DefaultValues {
   static const String PROFILE_IMAGE =
       'https://www.techpowerusa.com/wp-content/uploads/2017/06/default-user.png';
-  static const String NO_INTERNET_CONNECTION = 'No internet connection';
-  static const String SERVER_FAILURE = 'Server error';
-  static const String UNAUTHENTICATED = 'Unauthenticated';
-  static const String REQUEST_CANCELLED = 'Request cancelled';
+  static const String NO_INTERNET_CONNECTION = 'no_internet_connection';
+  static const String SERVER_FAILURE = 'server_error';
+  static const String UNAUTHENTICATED = 'unauthenticated';
+  static const String REQUEST_CANCELLED = 'request_cancelled';
+  static const String SOMETHING_WENT_WRONG = 'something_went_wrong';
 }
 
 enum HttpRequestTypes {

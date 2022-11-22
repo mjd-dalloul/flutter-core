@@ -7,10 +7,10 @@ abstract class NetworkResponse<T> {
 
   bool get isFailure => this is FailureNetworkResponse;
 
-  T? get getResponse =>
+  T? get response =>
       isSuccess ? (this as SuccessNetworkResponse<T>).data : null;
 
-  NetworkFailure? get getFailure =>
+  NetworkFailure? get failure =>
       isFailure ? (this as FailureNetworkResponse<T>).networkFailure : null;
 }
 
