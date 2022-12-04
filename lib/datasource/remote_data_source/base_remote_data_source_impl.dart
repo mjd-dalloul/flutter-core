@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_core/constant.dart';
 import 'package:flutter_core/datasource/remote_data_source/base_remote_data_source.dart';
 import 'package:flutter_core/type_defs.dart';
+import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/extensions/map_ext.dart';
-import 'package:flutter_core/utils/network_failures.dart';
-import 'package:flutter_core/utils/remote_data.dart';
+import 'package:flutter_core/utils/failures/network_failures.dart';
 
 /// this implementation is done by using dio as an http library
 abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
@@ -16,7 +16,7 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
   /// [useAuthenticationToken] if the interceptor should attach the access token to the request.
   /// [hasBaseRequestModel] if every request should have some static data.
   /// [onSendProgress] & [onReceiveProgress] used by dio.
-  Future<NetworkResponse<T>> request<T>({
+  Future<DataModelWrapper<T>> request<T>({
     required HttpRequestTypes requestType,
     required String endPoint,
     Map<String, dynamic>? params,
@@ -96,11 +96,12 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
 
       /// if we are here then the status code of the request must be 200<=statusCode<=299
       return deserializer == null
-          ? const SuccessNetworkResponse(null)
-          : SuccessNetworkResponse(deserializer.call(response.data));
+          ? const DataModelWrapper.networkData(data: null)
+          : DataModelWrapper.networkData(
+              data: deserializer.call(response.data));
     } on NetworkFailure catch (e) {
       /// our failure we will handle it.
-      return FailureNetworkResponse(e);
+      return DataModelWrapper.networkDataFailure(networkFailure: e);
     } catch (e) {
       /// something went wrong.
       rethrow;

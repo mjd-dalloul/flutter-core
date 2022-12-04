@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/state_mangement/bloc_state_mangement/base_bloc/base_bloc.dart';
 import 'package:flutter_core/type_defs.dart';
-import 'package:flutter_core/utils/network_failures.dart';
-import 'package:flutter_core/utils/remote_data.dart';
+import 'package:flutter_core/utils/data_model_wrapper.dart';
+import 'package:flutter_core/utils/failures/base_failure.dart';
+import 'package:flutter_core/utils/failures/network_failures.dart';
 
 mixin BlocBridge {
   final BaseBloc _baseBloc = BaseBloc();
 
-  NetworkFailure? _networkFailure;
+  BaseFailure? _failure;
 
   BaseBloc get baseBloc => _baseBloc;
 
-  Future<NetworkResponse<T>> apiCallWrapper<T>({
-    required Future<NetworkResponse<T>> Function() apiCall,
+  Future<DataModelWrapper<T>> apiCallWrapper<T>({
+    required Future<DataModelWrapper<T>> Function() apiCall,
     required bool useBaseBlocLoader,
     required bool showUIErrorMessage,
-    void Function(NetworkResponse<T> result)? onSuccess,
-    void Function(NetworkFailure networkFailure)? onFailure,
+    void Function(DataModelWrapper<T> result)? onSuccess,
+    void Function(BaseFailure failure)? onFailure,
     void Function(dynamic e)? unknownError,
   }) =>
       _errorHandlingWrapper(
@@ -28,12 +29,12 @@ mixin BlocBridge {
         unknownError: unknownError,
       );
 
-  Future<NetworkResponse<T>> _errorHandlingWrapper<T>({
-    required Future<NetworkResponse<T>> Function() apiCall,
+  Future<DataModelWrapper<T>> _errorHandlingWrapper<T>({
+    required Future<DataModelWrapper<T>> Function() apiCall,
     required bool useBaseBlocLoader,
     required bool showUIErrorMessage,
-    void Function(NetworkResponse<T> result)? onSuccess,
-    void Function(NetworkFailure networkFailure)? onFailure,
+    void Function(DataModelWrapper<T> result)? onSuccess,
+    void Function(BaseFailure failure)? onFailure,
     void Function(dynamic e)? unknownError,
   }) async {
     try {
@@ -42,11 +43,11 @@ mixin BlocBridge {
       }
       final res = await apiCall();
       if (res.isFailure) {
-        _networkFailure = res.failure;
+        _failure = res.failure;
         if (showUIErrorMessage) {
-          _handleApiError(_networkFailure!);
+          _handleApiError(_failure!);
         }
-        onFailure?.call(_networkFailure!);
+        onFailure?.call(_failure!);
       }
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
@@ -60,7 +61,8 @@ mixin BlocBridge {
         _isLoadingChanged(false);
       }
       unknownError?.call(e);
-      return FailureNetworkResponse(NetworkFailure.unknownError(e));
+      return DataModelWrapper.networkDataFailure(
+          networkFailure: NetworkFailure.unknownError(e));
     }
   }
 
@@ -71,12 +73,12 @@ mixin BlocBridge {
       _baseBloc.add(BaseBlocEvent.loadingChanged(isLoading));
 
   /// todo add option to customize default error handler
-  void _handleApiError(NetworkFailure failure) => _baseBloc.add(
+  void _handleApiError(BaseFailure failure) => _baseBloc.add(
         BaseBlocEvent.contextCallbackTriggered(
           (context) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(failure.message),
+                content: Text(failure.failureMessage),
               ),
             );
           },

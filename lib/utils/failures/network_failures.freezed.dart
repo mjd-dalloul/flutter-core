@@ -894,11 +894,9 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
 abstract class UnauthenticatedFailure extends NetworkFailure {
   const factory UnauthenticatedFailure([final String? message]) =
       _$UnauthenticatedFailure;
-
   const UnauthenticatedFailure._() : super._();
 
   String? get message;
-
   @JsonKey(ignore: true)
   _$$UnauthenticatedFailureCopyWith<_$UnauthenticatedFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -909,7 +907,6 @@ abstract class _$$UnknownErrorCopyWith<$Res> {
   factory _$$UnknownErrorCopyWith(
           _$UnknownError value, $Res Function(_$UnknownError) then) =
       __$$UnknownErrorCopyWithImpl<$Res>;
-
   $Res call({dynamic error});
 }
 
@@ -1057,11 +1054,9 @@ class _$UnknownError extends UnknownError {
 
 abstract class UnknownError extends NetworkFailure {
   const factory UnknownError(final dynamic error) = _$UnknownError;
-
   const UnknownError._() : super._();
 
   dynamic get error;
-
   @JsonKey(ignore: true)
   _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
       throw _privateConstructorUsedError;

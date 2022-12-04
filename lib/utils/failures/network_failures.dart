@@ -1,10 +1,11 @@
 import 'package:flutter_core/constant.dart';
+import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'network_failures.freezed.dart';
 
 @freezed
-class NetworkFailure with _$NetworkFailure implements Exception {
+class NetworkFailure with _$NetworkFailure implements Exception, BaseFailure {
   const NetworkFailure._();
 
   const factory NetworkFailure.serverFailure([String? message]) = ServerFailure;
@@ -21,10 +22,13 @@ class NetworkFailure with _$NetworkFailure implements Exception {
       UnauthenticatedFailure;
 
   const factory NetworkFailure.unknownError(dynamic error) = UnknownError;
+
+  @override
+  String get failureMessage => _message;
 }
 
 extension NetworkFailureMessage on NetworkFailure {
-  String get message => map(
+  String get _message => map(
         serverFailure: (failure) =>
             failure.message ?? DefaultValues.SERVER_FAILURE,
         customFailure: (failure) => failure.message,

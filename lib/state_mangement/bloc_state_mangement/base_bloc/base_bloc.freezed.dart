@@ -23,14 +23,12 @@ mixin _$BaseBlocEvent {
         contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
     TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
@@ -38,7 +36,6 @@ mixin _$BaseBlocEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingChanged value) loadingChanged,
@@ -46,14 +43,12 @@ mixin _$BaseBlocEvent {
         contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
     TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
@@ -76,7 +71,6 @@ class _$BaseBlocEventCopyWithImpl<$Res>
   _$BaseBlocEventCopyWithImpl(this._value, this._then);
 
   final BaseBlocEvent _value;
-
   // ignore: unused_field
   final $Res Function(BaseBlocEvent) _then;
 }
@@ -86,7 +80,6 @@ abstract class _$$LoadingChangedCopyWith<$Res> {
   factory _$$LoadingChangedCopyWith(
           _$LoadingChanged value, $Res Function(_$LoadingChanged) then) =
       __$$LoadingChangedCopyWithImpl<$Res>;
-
   $Res call({bool isLoading});
 }
 
@@ -213,7 +206,6 @@ abstract class LoadingChanged implements BaseBlocEvent {
   const factory LoadingChanged(final bool isLoading) = _$LoadingChanged;
 
   bool get isLoading;
-
   @JsonKey(ignore: true)
   _$$LoadingChangedCopyWith<_$LoadingChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -224,7 +216,6 @@ abstract class _$$ContextCallbackTriggeredCopyWith<$Res> {
   factory _$$ContextCallbackTriggeredCopyWith(_$ContextCallbackTriggered value,
           $Res Function(_$ContextCallbackTriggered) then) =
       __$$ContextCallbackTriggeredCopyWithImpl<$Res>;
-
   $Res call({ContextCallback contextCallback});
 }
 
@@ -355,7 +346,6 @@ abstract class ContextCallbackTriggered implements BaseBlocEvent {
       final ContextCallback contextCallback) = _$ContextCallbackTriggered;
 
   ContextCallback get contextCallback;
-
   @JsonKey(ignore: true)
   _$$ContextCallbackTriggeredCopyWith<_$ContextCallbackTriggered>
       get copyWith => throw _privateConstructorUsedError;
@@ -364,7 +354,6 @@ abstract class ContextCallbackTriggered implements BaseBlocEvent {
 /// @nodoc
 mixin _$BaseBlocState {
   bool get isLoading => throw _privateConstructorUsedError;
-
   ContextCallback get contextCallback => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -377,7 +366,6 @@ abstract class $BaseBlocStateCopyWith<$Res> {
   factory $BaseBlocStateCopyWith(
           BaseBlocState value, $Res Function(BaseBlocState) then) =
       _$BaseBlocStateCopyWithImpl<$Res>;
-
   $Res call({bool isLoading, ContextCallback contextCallback});
 }
 
@@ -387,7 +375,6 @@ class _$BaseBlocStateCopyWithImpl<$Res>
   _$BaseBlocStateCopyWithImpl(this._value, this._then);
 
   final BaseBlocState _value;
-
   // ignore: unused_field
   final $Res Function(BaseBlocState) _then;
 
@@ -415,7 +402,6 @@ abstract class _$$_BaseBlocStateCopyWith<$Res>
   factory _$$_BaseBlocStateCopyWith(
           _$_BaseBlocState value, $Res Function(_$_BaseBlocState) then) =
       __$$_BaseBlocStateCopyWithImpl<$Res>;
-
   @override
   $Res call({bool isLoading, ContextCallback contextCallback});
 }
@@ -492,10 +478,8 @@ abstract class _BaseBlocState implements BaseBlocState {
 
   @override
   bool get isLoading;
-
   @override
   ContextCallback get contextCallback;
-
   @override
   @JsonKey(ignore: true)
   _$$_BaseBlocStateCopyWith<_$_BaseBlocState> get copyWith =>
