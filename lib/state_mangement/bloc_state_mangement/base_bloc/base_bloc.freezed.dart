@@ -19,6 +19,8 @@ mixin _$BaseBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) loadingChanged,
+    required TResult Function(BaseFailure failure) failureHappened,
+    required TResult Function(Object unknownError) unknownErrorHappened,
     required TResult Function(ContextCallback contextCallback)
         contextCallbackTriggered,
   }) =>
@@ -26,12 +28,16 @@ mixin _$BaseBlocEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
     TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
     TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
     required TResult orElse(),
   }) =>
@@ -39,6 +45,8 @@ mixin _$BaseBlocEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingChanged value) loadingChanged,
+    required TResult Function(FailureHappened value) failureHappened,
+    required TResult Function(UnknownErrorHappened value) unknownErrorHappened,
     required TResult Function(ContextCallbackTriggered value)
         contextCallbackTriggered,
   }) =>
@@ -46,12 +54,16 @@ mixin _$BaseBlocEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
     TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
     TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
     required TResult orElse(),
   }) =>
@@ -141,6 +153,8 @@ class _$LoadingChanged implements LoadingChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) loadingChanged,
+    required TResult Function(BaseFailure failure) failureHappened,
+    required TResult Function(Object unknownError) unknownErrorHappened,
     required TResult Function(ContextCallback contextCallback)
         contextCallbackTriggered,
   }) {
@@ -151,6 +165,8 @@ class _$LoadingChanged implements LoadingChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
     TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
   }) {
     return loadingChanged?.call(isLoading);
@@ -160,6 +176,8 @@ class _$LoadingChanged implements LoadingChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
     TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
     required TResult orElse(),
   }) {
@@ -173,6 +191,8 @@ class _$LoadingChanged implements LoadingChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingChanged value) loadingChanged,
+    required TResult Function(FailureHappened value) failureHappened,
+    required TResult Function(UnknownErrorHappened value) unknownErrorHappened,
     required TResult Function(ContextCallbackTriggered value)
         contextCallbackTriggered,
   }) {
@@ -183,6 +203,8 @@ class _$LoadingChanged implements LoadingChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
     TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
   }) {
     return loadingChanged?.call(this);
@@ -192,6 +214,8 @@ class _$LoadingChanged implements LoadingChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
     TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
     required TResult orElse(),
   }) {
@@ -206,8 +230,312 @@ abstract class LoadingChanged implements BaseBlocEvent {
   const factory LoadingChanged(final bool isLoading) = _$LoadingChanged;
 
   bool get isLoading;
+
   @JsonKey(ignore: true)
   _$$LoadingChangedCopyWith<_$LoadingChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FailureHappenedCopyWith<$Res> {
+  factory _$$FailureHappenedCopyWith(
+          _$FailureHappened value, $Res Function(_$FailureHappened) then) =
+      __$$FailureHappenedCopyWithImpl<$Res>;
+
+  $Res call({BaseFailure failure});
+}
+
+/// @nodoc
+class __$$FailureHappenedCopyWithImpl<$Res>
+    extends _$BaseBlocEventCopyWithImpl<$Res>
+    implements _$$FailureHappenedCopyWith<$Res> {
+  __$$FailureHappenedCopyWithImpl(
+      _$FailureHappened _value, $Res Function(_$FailureHappened) _then)
+      : super(_value, (v) => _then(v as _$FailureHappened));
+
+  @override
+  _$FailureHappened get _value => super._value as _$FailureHappened;
+
+  @override
+  $Res call({
+    Object? failure = freezed,
+  }) {
+    return _then(_$FailureHappened(
+      failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as BaseFailure,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FailureHappened implements FailureHappened {
+  const _$FailureHappened(this.failure);
+
+  @override
+  final BaseFailure failure;
+
+  @override
+  String toString() {
+    return 'BaseBlocEvent.failureHappened(failure: $failure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FailureHappened &&
+            const DeepCollectionEquality().equals(other.failure, failure));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$FailureHappenedCopyWith<_$FailureHappened> get copyWith =>
+      __$$FailureHappenedCopyWithImpl<_$FailureHappened>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) loadingChanged,
+    required TResult Function(BaseFailure failure) failureHappened,
+    required TResult Function(Object unknownError) unknownErrorHappened,
+    required TResult Function(ContextCallback contextCallback)
+        contextCallbackTriggered,
+  }) {
+    return failureHappened(failure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
+    TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
+  }) {
+    return failureHappened?.call(failure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
+    TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
+    required TResult orElse(),
+  }) {
+    if (failureHappened != null) {
+      return failureHappened(failure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadingChanged value) loadingChanged,
+    required TResult Function(FailureHappened value) failureHappened,
+    required TResult Function(UnknownErrorHappened value) unknownErrorHappened,
+    required TResult Function(ContextCallbackTriggered value)
+        contextCallbackTriggered,
+  }) {
+    return failureHappened(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
+    TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
+  }) {
+    return failureHappened?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
+    TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
+    required TResult orElse(),
+  }) {
+    if (failureHappened != null) {
+      return failureHappened(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FailureHappened implements BaseBlocEvent {
+  const factory FailureHappened(final BaseFailure failure) = _$FailureHappened;
+
+  BaseFailure get failure;
+
+  @JsonKey(ignore: true)
+  _$$FailureHappenedCopyWith<_$FailureHappened> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UnknownErrorHappenedCopyWith<$Res> {
+  factory _$$UnknownErrorHappenedCopyWith(_$UnknownErrorHappened value,
+          $Res Function(_$UnknownErrorHappened) then) =
+      __$$UnknownErrorHappenedCopyWithImpl<$Res>;
+
+  $Res call({Object unknownError});
+}
+
+/// @nodoc
+class __$$UnknownErrorHappenedCopyWithImpl<$Res>
+    extends _$BaseBlocEventCopyWithImpl<$Res>
+    implements _$$UnknownErrorHappenedCopyWith<$Res> {
+  __$$UnknownErrorHappenedCopyWithImpl(_$UnknownErrorHappened _value,
+      $Res Function(_$UnknownErrorHappened) _then)
+      : super(_value, (v) => _then(v as _$UnknownErrorHappened));
+
+  @override
+  _$UnknownErrorHappened get _value => super._value as _$UnknownErrorHappened;
+
+  @override
+  $Res call({
+    Object? unknownError = freezed,
+  }) {
+    return _then(_$UnknownErrorHappened(
+      unknownError == freezed
+          ? _value.unknownError
+          : unknownError // ignore: cast_nullable_to_non_nullable
+              as Object,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UnknownErrorHappened implements UnknownErrorHappened {
+  const _$UnknownErrorHappened(this.unknownError);
+
+  @override
+  final Object unknownError;
+
+  @override
+  String toString() {
+    return 'BaseBlocEvent.unknownErrorHappened(unknownError: $unknownError)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnknownErrorHappened &&
+            const DeepCollectionEquality()
+                .equals(other.unknownError, unknownError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(unknownError));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$UnknownErrorHappenedCopyWith<_$UnknownErrorHappened> get copyWith =>
+      __$$UnknownErrorHappenedCopyWithImpl<_$UnknownErrorHappened>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) loadingChanged,
+    required TResult Function(BaseFailure failure) failureHappened,
+    required TResult Function(Object unknownError) unknownErrorHappened,
+    required TResult Function(ContextCallback contextCallback)
+        contextCallbackTriggered,
+  }) {
+    return unknownErrorHappened(unknownError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
+    TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
+  }) {
+    return unknownErrorHappened?.call(unknownError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
+    TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
+    required TResult orElse(),
+  }) {
+    if (unknownErrorHappened != null) {
+      return unknownErrorHappened(unknownError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadingChanged value) loadingChanged,
+    required TResult Function(FailureHappened value) failureHappened,
+    required TResult Function(UnknownErrorHappened value) unknownErrorHappened,
+    required TResult Function(ContextCallbackTriggered value)
+        contextCallbackTriggered,
+  }) {
+    return unknownErrorHappened(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
+    TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
+  }) {
+    return unknownErrorHappened?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
+    TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
+    required TResult orElse(),
+  }) {
+    if (unknownErrorHappened != null) {
+      return unknownErrorHappened(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UnknownErrorHappened implements BaseBlocEvent {
+  const factory UnknownErrorHappened(final Object unknownError) =
+      _$UnknownErrorHappened;
+
+  Object get unknownError;
+
+  @JsonKey(ignore: true)
+  _$$UnknownErrorHappenedCopyWith<_$UnknownErrorHappened> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -216,6 +544,7 @@ abstract class _$$ContextCallbackTriggeredCopyWith<$Res> {
   factory _$$ContextCallbackTriggeredCopyWith(_$ContextCallbackTriggered value,
           $Res Function(_$ContextCallbackTriggered) then) =
       __$$ContextCallbackTriggeredCopyWithImpl<$Res>;
+
   $Res call({ContextCallback contextCallback});
 }
 
@@ -280,6 +609,8 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) loadingChanged,
+    required TResult Function(BaseFailure failure) failureHappened,
+    required TResult Function(Object unknownError) unknownErrorHappened,
     required TResult Function(ContextCallback contextCallback)
         contextCallbackTriggered,
   }) {
@@ -290,6 +621,8 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
     TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
   }) {
     return contextCallbackTriggered?.call(contextCallback);
@@ -299,6 +632,8 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
+    TResult Function(BaseFailure failure)? failureHappened,
+    TResult Function(Object unknownError)? unknownErrorHappened,
     TResult Function(ContextCallback contextCallback)? contextCallbackTriggered,
     required TResult orElse(),
   }) {
@@ -312,6 +647,8 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingChanged value) loadingChanged,
+    required TResult Function(FailureHappened value) failureHappened,
+    required TResult Function(UnknownErrorHappened value) unknownErrorHappened,
     required TResult Function(ContextCallbackTriggered value)
         contextCallbackTriggered,
   }) {
@@ -322,6 +659,8 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
     TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
   }) {
     return contextCallbackTriggered?.call(this);
@@ -331,6 +670,8 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
+    TResult Function(FailureHappened value)? failureHappened,
+    TResult Function(UnknownErrorHappened value)? unknownErrorHappened,
     TResult Function(ContextCallbackTriggered value)? contextCallbackTriggered,
     required TResult orElse(),
   }) {
@@ -354,7 +695,12 @@ abstract class ContextCallbackTriggered implements BaseBlocEvent {
 /// @nodoc
 mixin _$BaseBlocState {
   bool get isLoading => throw _privateConstructorUsedError;
+
   ContextCallback get contextCallback => throw _privateConstructorUsedError;
+
+  BaseFailure? get failure => throw _privateConstructorUsedError;
+
+  Object? get unknownError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BaseBlocStateCopyWith<BaseBlocState> get copyWith =>
@@ -366,7 +712,12 @@ abstract class $BaseBlocStateCopyWith<$Res> {
   factory $BaseBlocStateCopyWith(
           BaseBlocState value, $Res Function(BaseBlocState) then) =
       _$BaseBlocStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, ContextCallback contextCallback});
+
+  $Res call(
+      {bool isLoading,
+      ContextCallback contextCallback,
+      BaseFailure? failure,
+      Object? unknownError});
 }
 
 /// @nodoc
@@ -382,6 +733,8 @@ class _$BaseBlocStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? contextCallback = freezed,
+    Object? failure = freezed,
+    Object? unknownError = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -392,6 +745,12 @@ class _$BaseBlocStateCopyWithImpl<$Res>
           ? _value.contextCallback
           : contextCallback // ignore: cast_nullable_to_non_nullable
               as ContextCallback,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as BaseFailure?,
+      unknownError:
+          unknownError == freezed ? _value.unknownError : unknownError,
     ));
   }
 }
@@ -402,8 +761,13 @@ abstract class _$$_BaseBlocStateCopyWith<$Res>
   factory _$$_BaseBlocStateCopyWith(
           _$_BaseBlocState value, $Res Function(_$_BaseBlocState) then) =
       __$$_BaseBlocStateCopyWithImpl<$Res>;
+
   @override
-  $Res call({bool isLoading, ContextCallback contextCallback});
+  $Res call(
+      {bool isLoading,
+      ContextCallback contextCallback,
+      BaseFailure? failure,
+      Object? unknownError});
 }
 
 /// @nodoc
@@ -421,6 +785,8 @@ class __$$_BaseBlocStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? contextCallback = freezed,
+    Object? failure = freezed,
+    Object? unknownError = freezed,
   }) {
     return _then(_$_BaseBlocState(
       isLoading: isLoading == freezed
@@ -431,6 +797,12 @@ class __$$_BaseBlocStateCopyWithImpl<$Res>
           ? _value.contextCallback
           : contextCallback // ignore: cast_nullable_to_non_nullable
               as ContextCallback,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as BaseFailure?,
+      unknownError:
+          unknownError == freezed ? _value.unknownError : unknownError,
     ));
   }
 }
@@ -439,16 +811,23 @@ class __$$_BaseBlocStateCopyWithImpl<$Res>
 
 class _$_BaseBlocState implements _BaseBlocState {
   const _$_BaseBlocState(
-      {required this.isLoading, required this.contextCallback});
+      {required this.isLoading,
+      required this.contextCallback,
+      this.failure,
+      this.unknownError});
 
   @override
   final bool isLoading;
   @override
   final ContextCallback contextCallback;
+  @override
+  final BaseFailure? failure;
+  @override
+  final Object? unknownError;
 
   @override
   String toString() {
-    return 'BaseBlocState(isLoading: $isLoading, contextCallback: $contextCallback)';
+    return 'BaseBlocState(isLoading: $isLoading, contextCallback: $contextCallback, failure: $failure, unknownError: $unknownError)';
   }
 
   @override
@@ -458,12 +837,19 @@ class _$_BaseBlocState implements _BaseBlocState {
             other is _$_BaseBlocState &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             (identical(other.contextCallback, contextCallback) ||
-                other.contextCallback == contextCallback));
+                other.contextCallback == contextCallback) &&
+            const DeepCollectionEquality().equals(other.failure, failure) &&
+            const DeepCollectionEquality()
+                .equals(other.unknownError, unknownError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(isLoading), contextCallback);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isLoading),
+      contextCallback,
+      const DeepCollectionEquality().hash(failure),
+      const DeepCollectionEquality().hash(unknownError));
 
   @JsonKey(ignore: true)
   @override
@@ -474,12 +860,22 @@ class _$_BaseBlocState implements _BaseBlocState {
 abstract class _BaseBlocState implements BaseBlocState {
   const factory _BaseBlocState(
       {required final bool isLoading,
-      required final ContextCallback contextCallback}) = _$_BaseBlocState;
+      required final ContextCallback contextCallback,
+      final BaseFailure? failure,
+      final Object? unknownError}) = _$_BaseBlocState;
 
   @override
   bool get isLoading;
+
   @override
   ContextCallback get contextCallback;
+
+  @override
+  BaseFailure? get failure;
+
+  @override
+  Object? get unknownError;
+
   @override
   @JsonKey(ignore: true)
   _$$_BaseBlocStateCopyWith<_$_BaseBlocState> get copyWith =>
