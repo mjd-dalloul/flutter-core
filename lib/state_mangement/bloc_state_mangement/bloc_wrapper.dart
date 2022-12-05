@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/state_mangement/bloc_state_mangement/base_bloc/base_bloc.dart';
 import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 
-mixin BlocBridge {
+class BlocWrapper<E, S> {
+  BlocWrapper(this.bloc);
+
+  final Bloc<E, S> bloc;
+
   final BaseBloc _baseBloc = BaseBloc();
 
   BaseFailure? _failure;
@@ -42,15 +47,16 @@ mixin BlocBridge {
         _isLoadingChanged(true);
       }
       final res = await apiCall();
+      if (useBaseBlocLoader) {
+        _isLoadingChanged(false);
+      }
       if (res.isFailure) {
         _failure = res.failure;
         if (showUIErrorMessage) {
           _handleApiError(_failure!);
         }
         onFailure?.call(_failure!);
-      }
-      if (useBaseBlocLoader) {
-        _isLoadingChanged(false);
+        baseBloc.add(BaseBlocEvent.failureHappened(_failure!));
       }
       if (res.isSuccess) {
         onSuccess?.call(res);
@@ -60,6 +66,7 @@ mixin BlocBridge {
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
+      baseBloc.add(BaseBlocEvent.unknownErrorHappened(e));
       unknownError?.call(e);
       return DataModelWrapper.networkDataFailure(
           networkFailure: NetworkFailure.unknownError(e));
