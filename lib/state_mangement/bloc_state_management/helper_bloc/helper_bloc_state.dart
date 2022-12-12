@@ -1,15 +1,15 @@
-part of 'base_bloc.dart';
+part of 'helper_bloc.dart';
 
 @freezed
-class BaseBlocState with _$BaseBlocState {
-  const factory BaseBlocState({
+class HelperBlocState with _$HelperBlocState {
+  const factory HelperBlocState({
     required bool isLoading,
     required ContextCallback contextCallback,
     BaseFailure? failure,
     Object? unknownError,
-  }) = _BaseBlocState;
+  }) = _HelperBlocState;
 
-  factory BaseBlocState.initial() => BaseBlocState(
+  factory HelperBlocState.initial() => HelperBlocState(
         isLoading: false,
         contextCallback: (_) {},
       );

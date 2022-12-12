@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/state_mangement/bloc_state_mangement/base_bloc/base_bloc.dart';
-import 'package:flutter_core/state_mangement/bloc_state_mangement/bloc_wrapper.dart';
+import 'package:flutter_core/state_mangement/bloc_state_management/base_bloc.dart';
+import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/helper_bloc.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 
-abstract class BaseBlocPageState<P extends StatefulWidget> extends State<P> {
-  BlocWrapper get blocBridge;
+abstract class BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
+    extends State<P> {
+  late B bloc;
 
   bool get autoDispose => true;
 
@@ -17,8 +18,8 @@ abstract class BaseBlocPageState<P extends StatefulWidget> extends State<P> {
   @override
   void dispose() {
     if (autoDispose) {
-      blocBridge.baseBloc.close();
-      blocBridge.bloc.close();
+      bloc.helperBloc.close();
+      bloc.close();
     }
     super.dispose();
   }
@@ -29,21 +30,21 @@ abstract class BaseBlocPageState<P extends StatefulWidget> extends State<P> {
 
   Widget onUnknownError(Object e);
 
-  Widget buildWithState(BuildContext context, BaseBlocState state);
+  Widget buildWithState(BuildContext context, HelperBlocState state);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BaseBloc>.value(
-          value: blocBridge.baseBloc,
+        BlocProvider<B>.value(
+          value: bloc,
         ),
         BlocProvider.value(
-          value: blocBridge.bloc,
+          value: bloc.helperBloc,
         ),
       ],
       child: Builder(builder: (context) {
-        return BlocConsumer<BaseBloc, BaseBlocState>(
+        return BlocConsumer<HelperBloc, HelperBlocState>(
           listenWhen: (p, c) => p.contextCallback != c.contextCallback,
           listener: (context, state) => state.contextCallback.call(context),
           buildWhen: (p, c) =>

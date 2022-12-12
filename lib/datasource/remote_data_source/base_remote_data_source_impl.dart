@@ -40,7 +40,7 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
               extra: ({}.useAuthenticationToken(useAuthenticationToken))
                   as Map<String, dynamic>,
             ),
-            onReceiveProgress: onSendProgress,
+            onReceiveProgress: onReceiveProgress,
           );
           break;
         case HttpRequestTypes.POST:

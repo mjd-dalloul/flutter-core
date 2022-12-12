@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/state_mangement/bloc_state_mangement/base_bloc/base_bloc.dart';
+import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/helper_bloc.dart';
 import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 
-class BlocWrapper<E, S> {
-  BlocWrapper(this.bloc);
+class BaseBloc<E, S> extends Bloc<E, S> {
+  BaseBloc(super.initialState) {
+    helperBloc = HelperBloc();
+  }
 
-  final Bloc<E, S> bloc;
-
-  final BaseBloc _baseBloc = BaseBloc();
-
+  late final HelperBloc helperBloc;
   BaseFailure? _failure;
 
-  BaseBloc get baseBloc => _baseBloc;
-
-  Future<DataModelWrapper<T>> apiCallWrapper<T>({
-    required Future<DataModelWrapper<T>> Function() apiCall,
-    required bool useBaseBlocLoader,
-    required bool showUIErrorMessage,
+  Future<DataModelWrapper<T>> futureWrapper<T>({
+    required Future<DataModelWrapper<T>> Function() futureCall,
+    bool useBaseBlocLoader = false,
+    bool showUIErrorMessage = true,
     void Function(DataModelWrapper<T> result)? onSuccess,
     void Function(BaseFailure failure)? onFailure,
     void Function(dynamic e)? unknownError,
   }) =>
       _errorHandlingWrapper(
-        apiCall: apiCall,
+        futureCall: futureCall,
         onSuccess: onSuccess,
         useBaseBlocLoader: useBaseBlocLoader,
         showUIErrorMessage: showUIErrorMessage,
@@ -35,7 +32,7 @@ class BlocWrapper<E, S> {
       );
 
   Future<DataModelWrapper<T>> _errorHandlingWrapper<T>({
-    required Future<DataModelWrapper<T>> Function() apiCall,
+    required Future<DataModelWrapper<T>> Function() futureCall,
     required bool useBaseBlocLoader,
     required bool showUIErrorMessage,
     void Function(DataModelWrapper<T> result)? onSuccess,
@@ -43,10 +40,11 @@ class BlocWrapper<E, S> {
     void Function(dynamic e)? unknownError,
   }) async {
     try {
+      helperBloc.add(const HelperBlocEvent.failureCleared());
       if (useBaseBlocLoader) {
         _isLoadingChanged(true);
       }
-      final res = await apiCall();
+      final res = await futureCall();
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
@@ -56,7 +54,7 @@ class BlocWrapper<E, S> {
           _handleApiError(_failure!);
         }
         onFailure?.call(_failure!);
-        baseBloc.add(BaseBlocEvent.failureHappened(_failure!));
+        helperBloc.add(HelperBlocEvent.failureHappened(_failure!));
       }
       if (res.isSuccess) {
         onSuccess?.call(res);
@@ -66,7 +64,7 @@ class BlocWrapper<E, S> {
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
-      baseBloc.add(BaseBlocEvent.unknownErrorHappened(e));
+      helperBloc.add(HelperBlocEvent.unknownErrorHappened(e));
       unknownError?.call(e);
       return DataModelWrapper.networkDataFailure(
           networkFailure: NetworkFailure.unknownError(e));
@@ -74,14 +72,13 @@ class BlocWrapper<E, S> {
   }
 
   void runFunctionWithContext(ContextCallback contextCallback) =>
-      _baseBloc.add(BaseBlocEvent.contextCallbackTriggered(contextCallback));
+      helperBloc.add(HelperBlocEvent.contextCallbackTriggered(contextCallback));
 
   void _isLoadingChanged(bool isLoading) =>
-      _baseBloc.add(BaseBlocEvent.loadingChanged(isLoading));
+      helperBloc.add(HelperBlocEvent.loadingChanged(isLoading));
 
-  /// todo add option to customize default error handler
-  void _handleApiError(BaseFailure failure) => _baseBloc.add(
-        BaseBlocEvent.contextCallbackTriggered(
+  void _handleApiError(BaseFailure failure) => helperBloc.add(
+        HelperBlocEvent.contextCallbackTriggered(
           (context) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
