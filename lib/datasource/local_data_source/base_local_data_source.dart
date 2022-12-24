@@ -1,8 +1,8 @@
 import 'package:flutter_core/type_defs.dart';
+import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class BaseLocalDataSource {
-  String get _databaseName;
 
   Future<void> initializeDatabase(
     String databaseName,
@@ -10,28 +10,36 @@ abstract class BaseLocalDataSource {
     DatabaseSchema databaseSchema,
   );
 
-  Future<T?> getObject<T>({
+  Future<DataModelWrapper<T?>> getObject<T>({
     required String tableName,
     required MapDeserializer<T> deserializer,
+    SqlQuery? sqlQuery,
   });
 
-  Future<List<T>> getObjects<T>({
+  Future<DataModelWrapper<List<T>>> getObjects<T>({
     required String tableName,
     required MapDeserializer<T> deserializer,
+    SqlQuery? sqlQuery,
   });
 
-  Future<int> deleteObject({
+  Future<DataModelWrapper<int>> deleteObject({
     required String tableName,
     SqlQuery? whereCondition,
   });
 
-  Future<int> updateObject<T>({
+  Future<DataModelWrapper<int>> updateObject<T>({
     required String tableName,
     required ToMap<T> toMap,
     SqlQuery? whereCondition,
   });
 
-  Future<int> insertObject<T>({
+  Future<DataModelWrapper<int>> insertObjects<T>({
+    required String tableName,
+    required List<ToMap<T>> toMaps,
+    ConflictAlgorithm? conflictAlgorithm,
+  });
+
+  Future<DataModelWrapper<int>> insertObject<T>({
     required String tableName,
     required ToMap<T> toMap,
     ConflictAlgorithm? conflictAlgorithm,
