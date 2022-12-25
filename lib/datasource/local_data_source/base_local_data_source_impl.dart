@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 
 class BaseLocalDataSourceImpl implements BaseLocalDataSource {
   BaseLocalDataSourceImpl({
-    required this.databaseName,
+    required String databaseName,
     required int version,
     required DatabaseSchema databaseSchema,
   }) {
@@ -15,9 +15,15 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
         initializeDatabase(databaseName, version, databaseSchema);
   }
 
+  BaseLocalDataSourceImpl.fromDataBase({
+    required Database database,
+  }) {
+    _database = database;
+    databaseInitializer = Future.value();
+  }
+
   late final Future<void> databaseInitializer;
   late final Database _database;
-  final String databaseName;
 
   @override
   Future<void> initializeDatabase(String databaseName, int version,

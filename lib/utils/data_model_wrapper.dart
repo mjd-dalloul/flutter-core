@@ -50,7 +50,8 @@ class DataModelWrapper<T> with _$DataModelWrapper {
 
   @override
   String toString() {
-    return map(
+    return maybeWhen(
+      orElse: () => '',
       networkData: (data) =>
           'DataModelWrapper.networkData with data ${data.toString()}',
       localData: (data) =>
