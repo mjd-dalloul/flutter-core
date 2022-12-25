@@ -1,12 +1,10 @@
-import 'package:flutter_core/datasource/remote_data_source/base_remote_data_source_impl.dart';
 import 'package:flutter_core/datasource/shared_preferences_data_source/base_shared_preferences_impl.dart';
 import 'package:flutter_core/repository/base_repostiroy.dart';
 
 class CommonAppRepository extends BaseRepository {
   CommonAppRepository({
-    required BaseRemoteDataSourceImpl baseRemoteDataSource,
     required this.baseSharedPreferencesImpl,
-  }) : super(baseRemoteDataSource);
+  });
 
   final BaseSharedPreferencesImpl baseSharedPreferencesImpl;
 
