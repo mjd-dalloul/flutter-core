@@ -29,8 +29,7 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
         join(await getDatabasesPath(), databaseName),
         onCreate: (database, version) async {
           for (final createTableQuery in databaseSchema) {
-            final res = createTableQuery.call();
-            await database.execute(res.item1, res.item2);
+            await database.execute(createTableQuery);
           }
           return;
         },

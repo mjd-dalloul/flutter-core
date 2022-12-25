@@ -8,4 +8,4 @@ typedef ToMap<T> = Map<String, dynamic> Function();
 typedef NetworkRequest = Future<Response> Function();
 typedef ContextCallback = void Function(BuildContext);
 typedef SqlQuery = Tuple2<String, List<dynamic>?> Function();
-typedef DatabaseSchema = List<SqlQuery>;
+typedef DatabaseSchema = List<String>;
