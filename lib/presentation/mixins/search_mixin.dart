@@ -20,7 +20,7 @@ mixin SearchMixin<S extends StatefulWidget> on State<S> {
       timer?.cancel();
       timer = Timer(
         debounceMillisecondSeconds.asMilliseconds,
-        () {
+            () {
           searchQuery(searchController.text);
         },
       );

@@ -8,8 +8,8 @@ mixin SizeMixin<S extends StatefulWidget> on State<S> {
   late Orientation orientation;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     size = MediaQuery.of(context).size;
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;

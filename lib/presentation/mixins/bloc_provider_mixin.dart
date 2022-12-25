@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-mixin BlocProviderMixin<S extends StatefulWidget> on State<S> {
+mixin BlocProvidersMixin<S extends StatefulWidget> on State<S> {
   List<BlocProvider> get providers;
 
   @override
@@ -9,8 +9,10 @@ mixin BlocProviderMixin<S extends StatefulWidget> on State<S> {
     return MultiBlocProvider(
       providers: providers,
       child: Builder(builder: (context) {
-        return super.build(context);
+        return buildChild(context);
       }),
     );
   }
+
+  Widget buildChild(BuildContext context);
 }

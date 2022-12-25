@@ -1,19 +1,16 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/presentation/widgets/base_state_widget.dart';
 import 'package:flutter_core/state_mangement/bloc_state_management/base_bloc.dart';
 import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/helper_bloc.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
+import 'package:get_it/get_it.dart';
 
-abstract class BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
-    extends State<P> {
-  late B bloc;
+abstract class _BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
+    extends BaseState<P> {
+  B get bloc;
 
   bool get autoDispose => true;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -30,7 +27,7 @@ abstract class BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
 
   Widget onUnknownError(Object e);
 
-  Widget buildWithState(BuildContext context, HelperBlocState state);
+  Widget buildChild(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +56,25 @@ abstract class BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
             } else if (state.unknownError != null) {
               return onUnknownError(state.unknownError!);
             } else {
-              return buildWithState(context, state);
+              return buildChild(context);
             }
           },
         );
       }),
     );
   }
+}
+
+abstract class BaseBlocGetItPage<P extends StatefulWidget, B extends BaseBloc>
+    extends _BaseBlocPageState<P, B> {
+  final B _bloc = GetIt.I<B>();
+
+  @override
+  B get bloc => _bloc;
+}
+
+abstract class BaseBlocProviderPage<P extends StatefulWidget,
+    B extends BaseBloc> extends _BaseBlocPageState<P, B> {
+  @override
+  B get bloc => context.read<B>();
 }

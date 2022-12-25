@@ -11,8 +11,8 @@ mixin ThemeMixin<S extends StatefulWidget> on State<S> {
   late Color bottomAppBarColor;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     theme = Theme.of(context);
     textTheme = Theme.of(context).textTheme;
     colorScheme = Theme.of(context).colorScheme;
