@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../core/models/test_model.dart';
+import '../../core/models/test_model.dart';
 import 'local_data_source_test.mocks.dart';
 
 @GenerateMocks([Database])
