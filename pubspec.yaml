@@ -17,6 +17,7 @@ dependencies:
   intl: ^0.17.0
   sqflite: ^2.2.0+3
   tuple: ^2.0.1
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
@@ -24,6 +25,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.2.1
   freezed: ^2.1.1
+  mockito: ^5.3.2
+  json_serializable:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
