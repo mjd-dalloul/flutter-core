@@ -27,6 +27,7 @@ abstract class BaseRemoteDataSource {
   Future<Response> delete({
     required String endPoint,
     Map<String, dynamic>? params,
+    data,
     Options? headers,
   });
 
@@ -37,5 +38,5 @@ abstract class BaseRemoteDataSource {
     dynamic data,
   });
 
-  Map<String, dynamic> wrapBodyWithBaseRequest(dynamic data);
+  dynamic wrapBodyWithBaseRequest(dynamic data);
 }

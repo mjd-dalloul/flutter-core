@@ -8,7 +8,7 @@ import 'package:flutter_core/utils/extensions/map_ext.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 
 /// this implementation is done by using dio as an http library
-abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
+class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
   const BaseRemoteDataSourceImpl(this.dio);
 
   final Dio dio;
@@ -21,6 +21,7 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
     required String endPoint,
     Map<String, dynamic>? params,
     Map<String, dynamic>? headers,
+    Options? options,
     dynamic data,
     Deserializer<T?>? deserializer,
     bool useAuthenticationToken = true,
@@ -30,16 +31,18 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
   }) async {
     try {
       late final Response response;
+      final option = options ??
+          Options(
+            headers: headers,
+            extra: (<String, dynamic>{}
+                .useAuthenticationToken(useAuthenticationToken)),
+          );
       switch (HttpRequestTypes.values.byName(requestType.name)) {
         case HttpRequestTypes.GET:
           response = await get(
             endPoint: endPoint,
             params: params,
-            headers: Options(
-              headers: headers,
-              extra: ({}.useAuthenticationToken(useAuthenticationToken))
-                  as Map<String, dynamic>,
-            ),
+            headers: option,
             onReceiveProgress: onReceiveProgress,
           );
           break;
@@ -47,11 +50,7 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
           response = await post(
             endPoint: endPoint,
             params: params,
-            headers: Options(
-              headers: headers,
-              extra: ({}.useAuthenticationToken(useAuthenticationToken))
-                  as Map<String, dynamic>,
-            ),
+            headers: option,
             data: hasBaseRequestModel ? wrapBodyWithBaseRequest(data) : data,
             onSendProgress: onSendProgress,
             onReceiveProgress: onReceiveProgress,
@@ -61,22 +60,15 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
           response = await delete(
             endPoint: endPoint,
             params: params,
-            headers: Options(
-              headers: headers,
-              extra: ({}.useAuthenticationToken(useAuthenticationToken))
-                  as Map<String, dynamic>,
-            ),
+            headers: option,
+            data: data,
           );
           break;
         case HttpRequestTypes.PATCH:
           response = await patch(
             endPoint: endPoint,
             params: params,
-            headers: Options(
-              headers: headers,
-              extra: ({}.useAuthenticationToken(useAuthenticationToken))
-                  as Map<String, dynamic>,
-            ),
+            headers: option,
             data: hasBaseRequestModel ? wrapBodyWithBaseRequest(data) : data,
           );
           break;
@@ -84,11 +76,7 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
           response = await put(
             endPoint: endPoint,
             params: params,
-            headers: Options(
-              headers: headers,
-              extra: ({}.useAuthenticationToken(useAuthenticationToken))
-                  as Map<String, dynamic>,
-            ),
+            headers: option,
             data: hasBaseRequestModel ? wrapBodyWithBaseRequest(data) : data,
           );
           break;
@@ -112,14 +100,16 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
   @override
   Future<Response> delete({
     required String endPoint,
+    data,
     Map<String, dynamic>? params,
     Options? headers,
   }) =>
-      dio.delete(
+      wrapRequestWithTryAndCatch(dio.delete(
         endPoint,
+        data: data,
         queryParameters: params,
         options: headers,
-      );
+      ));
 
   ///dio get
   @override
@@ -168,7 +158,7 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
     Options? headers,
   }) =>
       wrapRequestWithTryAndCatch(
-        dio.post(
+        dio.put(
           endPoint,
           data: data,
           queryParameters: params,
@@ -201,13 +191,15 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
         throw const NetworkFailure.serverFailure('Something went wrong');
 
         /// 200 <= statusCode <= 299
-      } else if (response.statusCode! / 100 == 2) {
+      } else if (response.statusCode! ~/ 100 == 2) {
         return response;
       } else {
         throw mapStatusCodeToFailure(response);
       }
     } on DioError catch (e) {
       throw mapDioErrorToFailure(e);
+    } on NetworkFailure {
+      rethrow;
     } catch (e) {
       /// if this happen then it's not a network error, then it must be a bug in the request
       throw NetworkFailure.customFailure(e.toString());
@@ -232,9 +224,9 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
     }
   }
 
-  String get defaultErrorMessage;
+  String get defaultErrorMessage => 'something went wrong';
 
-  String? failureParser(Response response);
+  String? failureParser(Response response) => response.statusMessage;
 
   /// we are only interesting in the unauthenticated failure, otherwise we are returning
   /// the message from response if it's exist or we will return "Something went wrong"
@@ -242,6 +234,9 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
     if (response != null) {
       if (response.statusCode! == 401 || response.statusCode! == 400) {
         return NetworkFailure.unauthenticatedFailure(failureParser(response));
+      } else if (response.statusCode! ~/ 100 == 5) {
+        return NetworkFailure.serverFailure(
+            failureParser(response) ?? defaultErrorMessage);
       } else {
         return NetworkFailure.customFailure(
           failureParser(response) ?? defaultErrorMessage,
@@ -254,6 +249,5 @@ abstract class BaseRemoteDataSourceImpl implements BaseRemoteDataSource {
 
   ///this function need to override if you want to send the data as form data or add new field to the data before sending it
   @override
-  Map<String, dynamic> wrapBodyWithBaseRequest(data) =>
-      data as Map<String, dynamic>;
+  dynamic wrapBodyWithBaseRequest(data) => data;
 }
