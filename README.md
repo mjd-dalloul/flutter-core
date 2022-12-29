@@ -1,5 +1,26 @@
 # How to use
 
+```mermaid
+graph
+loading[LoadingWidget]
+failure[FailureWidget]
+child[ChildWidget]
+bloc[Bloc extends BaseBloc]
+repository[Repository]
+interceptor[json decoder interceptor && token interceptor]
+localDataSource[LocalDataSource]
+remoteDataSource[RemoteDataSource]
+bloc --futureWrapper ----> repository
+bloc --helperBloc.isLoading--> loading
+bloc --helperBloc.hasFailure--> failure
+bloc --result of futureWrapper is success --> child
+repository --> localDataSource
+localDataSource --> database
+repository --> remoteDataSource
+remoteDataSource --> interceptor
+interceptor --> server
+```
+
 - Create LocalDataSource for your app and make it depends on **BaseLocalDataSource** (it's
   recommended to read **BaseLocalDataSource** section).
 
