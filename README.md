@@ -184,12 +184,21 @@
 
       > update object inside database.
 
-    - insertObject:
+  - insertObject:
 
-      > insert object in database.
+    > insert object in database.
 
 ---
 
 - BaseSharedPreferences:
 
   > Implemation for **sharedPreferences** functions.
+
+# Repository
+
+- BaseRepository:
+
+    - Future<DataModelWrapper<T>> requestData<T>
+
+      > This function will wrap calls going to datasource layer, and will manage getting the data either from remote server or local data base, and caching the result in **localdatabase**.
+ 
