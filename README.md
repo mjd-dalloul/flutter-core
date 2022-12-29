@@ -270,4 +270,14 @@
       > `Widget onLoading()` this will return app loading page when **HelperBloc**  `isLoading = true`.
       > `Widget onFailure(BaseFailure failure)` this will return Failure widget when **HelperBloc** `failure != null`.
       > `Widget buildChild(BuildContext context)` this will return child widget when every thing is ok with helper bloc.
-		
+
+# Interceptors
+
+- TokenInterceptor
+
+  > Helper interceptor to inject the authentication token in the request.
+
+- JsonDecoderInterceptor
+
+  > Helper interceptor to convert the json from **String** to **Map<String, dyanmic>**
+ 
