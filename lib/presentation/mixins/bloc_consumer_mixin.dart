@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-mixin BlocListenerMixin<S extends StatefulWidget, B extends StateStreamable<T>,
+mixin BlocConsumerMixin<S extends StatefulWidget, B extends StateStreamable<T>,
     T> on State<S> {
   B? get bloc => null;
 

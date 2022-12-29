@@ -216,6 +216,58 @@
 
   > **Future<DataModelWrapper<T>> futureWrapper** :
   this function will wrap your future call and manage the page loading and displaying error message.
-	
 
- 
+# Presentation
+
+- Mixins
+  - 
+    - SizeMixin:
+
+      > Will provide main size property for your state class.
+
+    - ThemeMixin:
+
+      > Will provide main theme property for your state class.
+
+    - SearchMixin:
+
+      > Will provide main search functionallty for your state class.
+
+    - BlocProvidersMixin:
+
+      > Will inject a **BlocProvider** above your state class.
+
+    - BlocListenerMixin:
+
+      > Will inject a **BlocListener** above your state class.
+
+    - BlocConsumerMixin:
+
+      > Will inject a **BlocConsumer** above your state class.
+
+    - BlocBuilderMixin:
+
+      > Will inject a **BlocBuilder** above your state class.
+
+---
+
+- Widgets
+
+    - BaseState
+
+      > Will provide **ThemeMixin** & **SizeMixin**.
+
+    - BlocStateGetIt
+
+      > Will provide instance of **Bloc** from **GetIt**.
+
+    - BlocStateProvider
+
+      > Will provide instance of **Bloc** by using **BlocProvider**
+
+    - BaseBlocPageState
+
+      > `Widget onLoading()` this will return app loading page when **HelperBloc**  `isLoading = true`.
+      > `Widget onFailure(BaseFailure failure)` this will return Failure widget when **HelperBloc** `failure != null`.
+      > `Widget buildChild(BuildContext context)` this will return child widget when every thing is ok with helper bloc.
+		
