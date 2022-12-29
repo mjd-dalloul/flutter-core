@@ -1,4 +1,29 @@
+# How to use
+
+- Create LocalDataSource for your app and make it depends on **BaseLocalDataSource** (it's
+  recommended to read **BaseLocalDataSource** section).
+
+- Create RemoteDataSource for your app and extends from **BaseRemoteDataSource** (it's recommended
+  to read **BaseRemoteDataSource** section).
+
+- Create SharedPrefDataSource for your app and extends from **BaseSharedPreferences**.
+
+- Add  **TokenInterceptor** to take advantage of token management .
+
+- Add  **JsonDecoderInterceptor** to take advantage of decoding json inside interceptors.
+
+- Create your repository and make it extends from **BaseRepositiory**, then start using **
+  requestData** function for your datasource calls (it's recommended to read **BaseRepositiory**
+  section).
+
+- If you are using **Bloc** as statemangement then create a sub class for BaseBlocPageState and
+  override required functions.
+
+- For every **bloc** you create extend **BaseBloc** this will give you helper functions to fast the
+  development process (it's recommended to read **Statemangment** section).
+
 # Folder Structure
+
 	- lib
 	
 		|---- datasource
@@ -184,9 +209,9 @@
 
       > update object inside database.
 
-  - insertObject:
+    - insertObject:
 
-    > insert object in database.
+      > insert object in database.
 
 ---
 
