@@ -4,6 +4,13 @@ import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 
 class BaseRepository {
+  /// request wrapper
+  /// [remoteCall] function call to remote datasource
+  /// [saveRemoteDataFunction] callback after the remoteCall finished, will be called with network result
+  /// [forceUpdate] if we should try to get the result from local datasource
+  /// [localCall] where to get the data if it from local database
+  /// [onCacheSuccess] callback when cache happened successfully
+  /// [onCacheFailure] callback when cache failed
   Future<DataModelWrapper<T>> requestData<T>({
     required Future<DataModelWrapper<T>> Function() remoteCall,
     Future<DataModelWrapper<int>> Function(T data)? saveRemoteDataFunction,
