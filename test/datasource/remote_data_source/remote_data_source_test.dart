@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_core/constant.dart';
-import 'package:flutter_core/datasource/remote_data_source/base_remote_data_source_impl.dart';
+import 'package:flutter_core/datasource/remote_data_source/base_remote_data_source.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/extensions/map_ext.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
@@ -16,8 +16,8 @@ void main() {
   final dio = MockDio();
   TestModel testModel = const TestModel(id: 1, body: 'test');
   group('Http requests', () {
-    final BaseRemoteDataSourceImpl baseRemoteDataSourceImpl =
-        BaseRemoteDataSourceImpl(dio);
+    final BaseRemoteDataSource baseRemoteDataSourceImpl =
+        BaseRemoteDataSource(dio);
     final options = Options(
       headers: null,
       extra: <String, dynamic>{}.useAuthenticationToken(true),
@@ -170,8 +170,8 @@ void main() {
     });
   });
   group('Http failures', () {
-    final BaseRemoteDataSourceImpl baseRemoteDataSourceImpl =
-        BaseRemoteDataSourceImpl(dio);
+    final BaseRemoteDataSource baseRemoteDataSourceImpl =
+        BaseRemoteDataSource(dio);
     test('un authentication exception', () async {
       final options = Options(
         headers: null,

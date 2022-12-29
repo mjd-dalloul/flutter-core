@@ -1,4 +1,4 @@
-import 'package:flutter_core/datasource/local_data_source/base_local_data_source_impl.dart';
+import 'package:flutter_core/datasource/local_data_source/base_local_data_source.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/local_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,8 +22,8 @@ void main() {
           conflictAlgorithm: ConflictAlgorithm.replace,
         ),
       ).thenThrow('test');
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.insertObjects(
         tableName: 'test',
         toMaps: [testModel.toJson, testModel.toJson, testModel.toJson],
@@ -38,8 +38,8 @@ void main() {
       when(
         database.delete('test'),
       ).thenThrow('test');
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.deleteObject(
         tableName: 'test',
       );
@@ -56,8 +56,8 @@ void main() {
           testModel.toJson(),
         ),
       ).thenThrow('test');
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.updateObject(
         tableName: 'test',
         toMap: testModel.toJson,
@@ -73,8 +73,8 @@ void main() {
           'test',
         ),
       ).thenThrow('test');
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.getObject(
         tableName: 'test',
         deserializer: TestModel.fromJson,
@@ -94,8 +94,8 @@ void main() {
           conflictAlgorithm: ConflictAlgorithm.replace,
         ),
       ).thenAnswer((realInvocation) async => 1);
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.insertObject(
         tableName: 'test',
         toMap: testModel.toJson,
@@ -110,8 +110,8 @@ void main() {
           conflictAlgorithm: ConflictAlgorithm.replace,
         ),
       ).thenAnswer((realInvocation) async => 3);
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.insertObjects(
         tableName: 'test',
         toMaps: [testModel.toJson, testModel.toJson, testModel.toJson],
@@ -124,8 +124,8 @@ void main() {
       when(
         database.delete('test'),
       ).thenAnswer((_) async => 1);
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.deleteObject(
         tableName: 'test',
       );
@@ -137,8 +137,8 @@ void main() {
       when(
         database.update('test', testModel.toJson()),
       ).thenAnswer((_) async => 1);
-      BaseLocalDataSourceImpl localDataSourceImpl =
-          BaseLocalDataSourceImpl.fromDataBase(database: database);
+      BaseLocalDataSource localDataSourceImpl =
+          BaseLocalDataSource.fromDataBase(database: database);
       final res = await localDataSourceImpl.updateObject(
         tableName: 'test',
         toMap: testModel.toJson,

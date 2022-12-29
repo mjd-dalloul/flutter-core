@@ -1,4 +1,4 @@
-import 'package:flutter_core/datasource/shared_preferences_data_source/base_shared_preferences_impl.dart';
+import 'package:flutter_core/datasource/shared_preferences_data_source/base_shared_preferences.dart';
 import 'package:flutter_core/repository/base_repostiroy.dart';
 
 class CommonAppRepository extends BaseRepository {
@@ -6,7 +6,7 @@ class CommonAppRepository extends BaseRepository {
     required this.baseSharedPreferencesImpl,
   });
 
-  final BaseSharedPreferencesImpl baseSharedPreferencesImpl;
+  final BaseSharedPreferences baseSharedPreferencesImpl;
 
   Future<bool> changeLanguage(String languageCode) =>
       baseSharedPreferencesImpl.saveAppLanguage(languageCode);

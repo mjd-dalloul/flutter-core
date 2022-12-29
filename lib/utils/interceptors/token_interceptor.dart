@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_core/datasource/shared_preferences_data_source/base_shared_preferences_impl.dart';
+import 'package:flutter_core/datasource/shared_preferences_data_source/base_shared_preferences.dart';
 import 'package:flutter_core/utils/token_constants.dart';
 
 /// interceptor to add bearer token to the request.
 class TokenInterceptor extends Interceptor {
   TokenInterceptor(this.sharedPreferencesImpl);
 
-  final BaseSharedPreferencesImpl sharedPreferencesImpl;
+  final BaseSharedPreferences sharedPreferencesImpl;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
