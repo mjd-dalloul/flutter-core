@@ -18,6 +18,7 @@
 		|		|--- shared_preferences_data_source
 		|		|		|
 		|		|		|-- i_base_shared_preferences.dart
+		|		|		|
 		|		|		|-- base_shared_preferences.dart
 		|		|
 		|---- repository
@@ -103,7 +104,6 @@
 		|---- constant.dart
 		|
 		|---- type_defs.dart
-
 [BaseSharedPreferences]
 This class will remove the shared preferences boilerplate code, by saving the common application
 info which present at [SharedPreferencesKeys], to save addition data.
