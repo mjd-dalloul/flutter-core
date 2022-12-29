@@ -201,4 +201,21 @@
     - Future<DataModelWrapper<T>> requestData<T>
 
       > This function will wrap calls going to datasource layer, and will manage getting the data either from remote server or local data base, and caching the result in **localdatabase**.
+
+# Statemangment
+
+- HelperBloc
+
+  > This bloc will provide three main functionallty:
+  1- **PageLoading**. 2- **ErrorHandling**. 3- Providing **BuildContext** to your bloc.
+
+- BaseBloc:
+
+  > `void runFunctionWithContext(ContextCallback contextCallback)`
+  This function will provide **BuildContext**.
+
+  > **Future<DataModelWrapper<T>> futureWrapper** :
+  this function will wrap your future call and manage the page loading and displaying error message.
+	
+
  
