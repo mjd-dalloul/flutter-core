@@ -6,6 +6,8 @@ import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 
+/// BaseBloc
+/// every bloc should extend this bloc, will add helper function to fast the development process.
 class BaseBloc<E, S> extends Bloc<E, S> {
   BaseBloc(super.initialState) {
     helperBloc = HelperBloc();
@@ -14,6 +16,10 @@ class BaseBloc<E, S> extends Bloc<E, S> {
   late final HelperBloc helperBloc;
   BaseFailure? _failure;
 
+  /// [useBaseBlocLoader] will trigger [HelperBloc] loading.
+  /// [showUIErrorMessage] show error on screen if the [futureCall] failed
+  /// [onSuccess] will triggered if the [futureCall] done with success result
+  /// [onFailure] will triggered if the [futureCall] done with failure result
   Future<DataModelWrapper<T>> futureWrapper<T>({
     required Future<DataModelWrapper<T>> Function() futureCall,
     bool useBaseBlocLoader = false,
@@ -71,6 +77,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     }
   }
 
+  /// call this function when you need access to [BuildContext] inside your bloc.
   void runFunctionWithContext(ContextCallback contextCallback) =>
       helperBloc.add(HelperBlocEvent.contextCallbackTriggered(contextCallback));
 
