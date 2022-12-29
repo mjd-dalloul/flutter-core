@@ -14,6 +14,9 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
   final Dio dio;
 
   /// [useAuthenticationToken] if the interceptor should attach the access token to the request.
+  /// [deserializer] T Function(Map<String, dynamic>) how to deserialize object.
+  /// [params] attached to the request.
+  /// [headers] custom headers.
   /// [hasBaseRequestModel] if every request should have some static data.
   /// [onSendProgress] & [onReceiveProgress] used by dio.
   Future<DataModelWrapper<T>> request<T>({
@@ -224,8 +227,10 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     }
   }
 
+  ///default error message if [failureParser] returned null.
   String get defaultErrorMessage => 'something went wrong';
 
+  ///extract error message from [response]
   String? failureParser(Response response) => response.statusMessage;
 
   /// we are only interesting in the unauthenticated failure, otherwise we are returning
@@ -247,7 +252,8 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     }
   }
 
-  ///this function need to override if you want to send the data as form data or add new field to the data before sending it
+  ///this function need to override if you want to send the data as form data
+  ///or add new field to the data before sending it
   @override
   dynamic wrapBodyWithBaseRequest(data) => data;
 }

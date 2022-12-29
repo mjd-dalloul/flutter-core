@@ -15,6 +15,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
         initializeDatabase(databaseName, version, databaseSchema);
   }
 
+  /// create [BaseLocalDataSource] with custom database object.
   BaseLocalDataSource.fromDataBase({
     required Database database,
   }) {
@@ -22,6 +23,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     databaseInitializer = Future.value();
   }
 
+  /// future for initializing database
   late final Future<void> databaseInitializer;
   late final Database _database;
 
@@ -42,6 +44,12 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
         version: version,
       ).then((value) => _database = value);
 
+  ///delete object from database
+  ///[whereCondition] Tuple2<String, List<dynamic>?>
+  /// item1 is the where statement,
+  /// item2 is the args of where statement.
+  /// ex: item1 = 'columnId = ?'
+  /// item2 = [10]
   @override
   Future<DataModelWrapper<int>> deleteObject({
     required String tableName,
@@ -57,6 +65,13 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     );
   }
 
+  ///update object from database
+  ///[toMap] Map<String, dynamic> Function() toJson object
+  ///[whereCondition] Tuple2<String, List<dynamic>?>
+  /// item1 is the where statement,
+  /// item2 is the args of where statement.
+  /// ex: item1 = 'columnId = ?'
+  /// item2 = [10]
   @override
   Future<DataModelWrapper<int>> updateObject<T>({
     required String tableName,
@@ -68,6 +83,13 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
         where: deleteQuery?.item1, whereArgs: deleteQuery?.item2));
   }
 
+  /// get object from database
+  /// [deserializer] T Function(Map<String, dynamic>); fromJson
+  /// [sqlQuery] Tuple2<String, List<dynamic>?>
+  /// item1 is the where statement,
+  /// item2 is the args of where statement.
+  /// ex: item1 = 'columnId = ?'
+  /// item2 = [10]
   @override
   Future<DataModelWrapper<T?>> getObject<T>({
     required String tableName,
@@ -90,6 +112,13 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     });
   }
 
+  /// get objects from database
+  /// [deserializer] T Function(Map<String, dynamic>); fromJson
+  /// [sqlQuery] Tuple2<String, List<dynamic>?>
+  /// item1 is the where statement,
+  /// item2 is the args of where statement.
+  /// ex: item1 = 'columnId = ?'
+  /// item2 = [10]
   @override
   Future<DataModelWrapper<List<T>>> getObjects<T>({
     required String tableName,
@@ -112,6 +141,8 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     });
   }
 
+  /// insert objects in database
+  /// [toMaps] List of Map<String, dynamic> Function() toJson
   @override
   Future<DataModelWrapper<int>> insertObjects<T>({
     required String tableName,
@@ -131,6 +162,8 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     });
   }
 
+  /// insert object in database
+  /// [toMaps] Map<String, dynamic> Function() toJson
   @override
   Future<DataModelWrapper<int>> insertObject<T>({
     required String tableName,
