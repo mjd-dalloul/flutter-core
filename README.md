@@ -109,13 +109,16 @@
 
 1. Failures:
     - BaseFailure:
+
       > Base failure class which every failure must implement, has one property to 		    override which is **failureMessage**
    ---
     - LocalFailure:
+
       > This failure will return from local data source, has 2 type:
       **CustomFailure**  with message property, **UknownError** with Object the error object.
    ---
     - NetworkFailure:
+
       > This Failure will return from remote data source, has six types, all of these failures has an optional **message** property:
       **ServerFailure** will return if  status code of the request > **500**.
       **RequestCancelled** will return if the request got cancelled.
@@ -138,18 +141,23 @@
 - BaseRemoteDataSource:
 
     - Deserializer
+
       > `T Function(Object?)` how to parse the json to an object.
 
     - Future<DataModelWrapper<T>> request<T>
+
       > This function will make the Http request, parse the response and return DataModelWrapper based on http response.
 
     - failureParser(Response response)
+
       > Return failure String base on response.
 
     - defaultErrorMessage
+
       > The default message inside failures, if couldn't **failureParser** return null.
 
     - wrapBodyWithBaseRequest(data)
+
       > wrap requsted body with base request.
 
 ---
@@ -183,4 +191,5 @@
 ---
 
 - BaseSharedPreferences:
+
   > Implemation for **sharedPreferences** functions.
