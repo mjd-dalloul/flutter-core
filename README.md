@@ -1,5 +1,5 @@
 # Folder Structure
-	|- lib
+	- lib
 	
 		|---- datasource
 		|		|
