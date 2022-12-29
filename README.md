@@ -196,6 +196,14 @@
 
 # Repository
 
+```mermaid
+graph LR
+A[Repository] --1- localCall --> B[LocalDataSource]
+A --2- remoteCall --> C[RemoteDataSource]
+C --3- data--> A
+A --4- saveRemoteDataFunction--> B
+```
+
 - BaseRepository:
 
     - Future<DataModelWrapper<T>> requestData<T>
