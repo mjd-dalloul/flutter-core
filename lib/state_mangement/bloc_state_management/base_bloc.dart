@@ -18,12 +18,15 @@ class BaseBloc<E, S> extends Bloc<E, S> {
 
   /// [useBaseBlocLoader] will trigger [HelperBloc] loading.
   /// [showUIErrorMessage] show error on screen if the [futureCall] failed
+  /// [loadingChanged] will triggered before [futureCall] with [isFinished = false]
+  /// and when [futureCall] is finished or failed with [isFinished = true]
   /// [onSuccess] will triggered if the [futureCall] done with success result
   /// [onFailure] will triggered if the [futureCall] done with failure result
   Future<DataModelWrapper<T>> futureWrapper<T>({
     required Future<DataModelWrapper<T>> Function() futureCall,
     bool useBaseBlocLoader = false,
     bool showUIErrorMessage = true,
+    void Function(bool isFinished)? loadingChanged,
     void Function(DataModelWrapper<T> result)? onSuccess,
     void Function(BaseFailure failure)? onFailure,
     void Function(dynamic e)? unknownError,
@@ -31,6 +34,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       _errorHandlingWrapper(
         futureCall: futureCall,
         onSuccess: onSuccess,
+        loadingChanged: loadingChanged,
         useBaseBlocLoader: useBaseBlocLoader,
         showUIErrorMessage: showUIErrorMessage,
         onFailure: onFailure,
@@ -41,6 +45,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     required Future<DataModelWrapper<T>> Function() futureCall,
     required bool useBaseBlocLoader,
     required bool showUIErrorMessage,
+    void Function(bool isFinished)? loadingChanged,
     void Function(DataModelWrapper<T> result)? onSuccess,
     void Function(BaseFailure failure)? onFailure,
     void Function(dynamic e)? unknownError,
@@ -50,7 +55,9 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       if (useBaseBlocLoader) {
         _isLoadingChanged(true);
       }
+      loadingChanged?.call(false);
       final res = await futureCall();
+      loadingChanged?.call(true);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
@@ -67,6 +74,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       }
       return res;
     } catch (e) {
+      loadingChanged?.call(true);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
