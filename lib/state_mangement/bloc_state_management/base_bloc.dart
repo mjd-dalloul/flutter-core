@@ -27,7 +27,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     bool useBaseBlocLoader = false,
     bool showUIErrorMessage = true,
     void Function(bool isFinished)? loadingChanged,
-    void Function(DataModelWrapper<T> result)? onSuccess,
+    void Function(T? result)? onSuccess,
     void Function(BaseFailure failure)? onFailure,
     void Function(dynamic e)? unknownError,
   }) =>
@@ -46,7 +46,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     required bool useBaseBlocLoader,
     required bool showUIErrorMessage,
     void Function(bool isFinished)? loadingChanged,
-    void Function(DataModelWrapper<T> result)? onSuccess,
+    void Function(T? result)? onSuccess,
     void Function(BaseFailure failure)? onFailure,
     void Function(dynamic e)? unknownError,
   }) async {
@@ -70,7 +70,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         helperBloc.add(HelperBlocEvent.failureHappened(_failure!));
       }
       if (res.isSuccess) {
-        onSuccess?.call(res);
+        onSuccess?.call(res.data);
       }
       return res;
     } catch (e) {
