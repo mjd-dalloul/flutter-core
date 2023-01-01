@@ -194,7 +194,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
         throw const NetworkFailure.serverFailure('Something went wrong');
 
         /// 200 <= statusCode <= 299
-      } else if (response.statusCode! ~/ 100 == 2) {
+      } else if (responseIsOk(response)) {
         return response;
       } else {
         throw mapStatusCodeToFailure(response);
@@ -208,6 +208,8 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
       throw NetworkFailure.customFailure(e.toString());
     }
   }
+
+  bool responseIsOk(Response response) => response.statusCode! ~/ 100 == 2;
 
   /// mapping dio errors to proper failure
   NetworkFailure mapDioErrorToFailure(DioError error) {
