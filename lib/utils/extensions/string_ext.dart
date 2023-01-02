@@ -63,4 +63,10 @@ extension StringExt on String? {
 
   String getDayNameMonthNameWithDate([String? locale]) =>
       intl.DateFormat.MMMEd(locale).format(DateTime.parse(this!));
+
+  String get svg => '$this.svg';
+
+  String get png => '$this.png';
+
+  String get jpg => '$this.jpg';
 }
