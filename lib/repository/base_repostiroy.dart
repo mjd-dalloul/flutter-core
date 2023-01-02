@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 
@@ -20,6 +21,8 @@ class BaseRepository {
     void Function(BaseFailure failure)? onCacheFailure,
   }) async {
     DataModelWrapper<T>? ret;
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    forceUpdate |= (connectivityResult != ConnectivityResult.none);
     if (forceUpdate) {
       ret = await _remoteObjectWrapper(
         remoteCall: remoteCall,
@@ -29,6 +32,7 @@ class BaseRepository {
       );
     } else {
       ret = await _localObjectWrapper(localCall: localCall);
+
       if (ret == null || ret.isFailure) {
         ret = await _remoteObjectWrapper(
           remoteCall: remoteCall,
