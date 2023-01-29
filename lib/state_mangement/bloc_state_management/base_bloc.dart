@@ -26,6 +26,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     required Future<DataModelWrapper<T>> Function() futureCall,
     bool useBaseBlocLoader = false,
     bool showUIErrorMessage = true,
+    bool onFailureDefaultHandler = false,
+    bool onUnknownErrorDefaultHandler = false,
     void Function(bool isFinished)? loadingChanged,
     void Function(T? result)? onSuccess,
     void Function(BaseFailure failure)? onFailure,
@@ -37,6 +39,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         loadingChanged: loadingChanged,
         useBaseBlocLoader: useBaseBlocLoader,
         showUIErrorMessage: showUIErrorMessage,
+        onFailureDefaultHandler: onFailureDefaultHandler,
+        onUnknownErrorDefaultHandler: onUnknownErrorDefaultHandler,
         onFailure: onFailure,
         unknownError: unknownError,
       );
@@ -45,6 +49,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     required Future<DataModelWrapper<T>> Function() futureCall,
     required bool useBaseBlocLoader,
     required bool showUIErrorMessage,
+    required bool onFailureDefaultHandler,
+    required bool onUnknownErrorDefaultHandler,
     void Function(bool isFinished)? loadingChanged,
     void Function(T? result)? onSuccess,
     void Function(BaseFailure failure)? onFailure,
@@ -67,7 +73,9 @@ class BaseBloc<E, S> extends Bloc<E, S> {
           _handleApiError(_failure!);
         }
         onFailure?.call(_failure!);
-        helperBloc.add(HelperBlocEvent.failureHappened(_failure!));
+        if (onFailureDefaultHandler) {
+          helperBloc.add(HelperBlocEvent.failureHappened(_failure!));
+        }
       }
       if (res.isSuccess) {
         onSuccess?.call(res.data);
@@ -78,8 +86,10 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
-      helperBloc.add(HelperBlocEvent.unknownErrorHappened(e));
       unknownError?.call(e);
+      if (onUnknownErrorDefaultHandler) {
+        helperBloc.add(HelperBlocEvent.unknownErrorHappened(e));
+      }
       return DataModelWrapper.networkDataFailure(
           networkFailure: NetworkFailure.unknownError(e));
     }

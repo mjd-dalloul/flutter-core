@@ -47,9 +47,9 @@ abstract class _BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
           listenWhen: (p, c) => p.contextCallback != c.contextCallback,
           listener: (context, state) => state.contextCallback.call(context),
           buildWhen: (p, c) =>
-          p.isLoading != c.isLoading ||
-              c.unknownError != null ||
-              c.failure != null,
+              p.isLoading != c.isLoading ||
+              p.unknownError != c.unknownError ||
+              p.failure != c.failure,
           builder: (context, state) {
             late final Widget child;
             if (state.isLoading) {
