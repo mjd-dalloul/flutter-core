@@ -15,6 +15,5 @@ mixin BlocStateProviderMixin<S extends StatefulWidget, B extends BaseBloc>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    bloc = context.read<B>();
   }
 }

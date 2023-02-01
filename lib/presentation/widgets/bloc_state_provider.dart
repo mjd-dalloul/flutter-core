@@ -11,9 +11,14 @@ abstract class BlocStateProvider<P extends StatefulWidget, B extends BaseBloc>
   bool get autoDispose => true;
 
   @override
+  void initState() {
+    super.initState();
+    bloc = context.read<B>();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    bloc = context.read<B>();
   }
 
   @override
