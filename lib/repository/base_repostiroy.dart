@@ -16,15 +16,18 @@ class BaseRepository {
     required Future<DataModelWrapper<T>> Function() remoteCall,
     Future<DataModelWrapper<int>> Function(T data)? saveRemoteDataFunction,
     bool forceUpdate = true,
+    bool checkForConnectivity = true,
     Future<DataModelWrapper<T>> Function()? localCall,
     void Function(int insertedRow)? onCacheSuccess,
     void Function(BaseFailure failure)? onCacheFailure,
   }) async {
     DataModelWrapper<T>? ret;
-    final connectivityResult = await (Connectivity().checkConnectivity());
+    final connectivityResult = checkForConnectivity
+        ? await (Connectivity().checkConnectivity())
+        : null;
     forceUpdate |= (connectivityResult != ConnectivityResult.none);
     if (forceUpdate) {
-      ret = await _remoteObjectWrapper(
+      ret = await _getFromRemoteDataSource(
         remoteCall: remoteCall,
         saveRemoteDataFunction: saveRemoteDataFunction,
         onCacheFailure: onCacheFailure,
@@ -34,7 +37,7 @@ class BaseRepository {
       ret = await _localObjectWrapper(localCall: localCall);
 
       if (ret == null || ret.isFailure) {
-        ret = await _remoteObjectWrapper(
+        ret = await _getFromRemoteDataSource(
           remoteCall: remoteCall,
           saveRemoteDataFunction: saveRemoteDataFunction,
           onCacheFailure: onCacheFailure,
@@ -44,6 +47,19 @@ class BaseRepository {
     }
     return ret;
   }
+
+  Future<DataModelWrapper<T>> _getFromRemoteDataSource<T>({
+    required Future<DataModelWrapper<T>> Function() remoteCall,
+    Future<DataModelWrapper<int>> Function(T data)? saveRemoteDataFunction,
+    void Function(int insertedRow)? onCacheSuccess,
+    void Function(BaseFailure failure)? onCacheFailure,
+  }) =>
+      _remoteObjectWrapper(
+        remoteCall: remoteCall,
+        saveRemoteDataFunction: saveRemoteDataFunction,
+        onCacheFailure: onCacheFailure,
+        onCacheSuccess: onCacheSuccess,
+      );
 
   Future<DataModelWrapper<T>> _remoteObjectWrapper<T>({
     required Future<DataModelWrapper<T>> Function() remoteCall,
@@ -56,7 +72,7 @@ class BaseRepository {
       if (res.isFailure) {
         log('<BaseRepository>: Could not save because network call did not go well');
       } else if (res.data != null) {
-        final saveResult = await saveRemoteDataFunction.call(res.data!);
+        final saveResult = await saveRemoteDataFunction.call(res.data as T);
         if (saveResult.isFailure) {
           log('<BaseRepository>: Could not save in database because ${saveResult.failure}');
           onCacheFailure?.call(saveResult.failure!);
