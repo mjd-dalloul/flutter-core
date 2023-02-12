@@ -105,12 +105,15 @@ class BaseBloc<E, S> extends Bloc<E, S> {
   void _handleApiError(BaseFailure failure) => helperBloc.add(
         HelperBlocEvent.contextCallbackTriggered(
           (context) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(failure.failureMessage),
-              ),
-            );
+            errorHandler(failure, context);
           },
+        ),
+      );
+
+  void errorHandler(BaseFailure failure, BuildContext context) =>
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(failure.failureMessage),
         ),
       );
 }
