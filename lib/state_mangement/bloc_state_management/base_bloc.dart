@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/helper_bloc.dart';
@@ -23,16 +24,16 @@ class BaseBloc<E, S> extends Bloc<E, S> {
   /// [onSuccess] will triggered if the [futureCall] done with success result
   /// [onFailure] will triggered if the [futureCall] done with failure result
   Future<DataModelWrapper<T>> futureWrapper<T>({
-    required Future<DataModelWrapper<T>> Function() futureCall,
+    required AsyncValueGetter<DataModelWrapper<T>> futureCall,
     bool useBaseBlocLoader = false,
     bool showUIErrorMessage = true,
     bool onFailureDefaultHandler = false,
     bool onUnknownErrorDefaultHandler = false,
-    void Function(bool isFinished)? loadingChanged,
-    void Function(T? result)? onSuccess,
-    void Function(BaseFailure failure)? onFailure,
-    void Function(dynamic e)? unknownError,
-  }) =>
+    ValueSetter<bool>? loadingChanged,
+    ValueSetter<T?>? onSuccess,
+    ValueSetter<BaseFailure>? onFailure,
+    ValueSetter<dynamic>? unknownError,
+  }) async =>
       _errorHandlingWrapper(
         futureCall: futureCall,
         onSuccess: onSuccess,
@@ -46,15 +47,15 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       );
 
   Future<DataModelWrapper<T>> _errorHandlingWrapper<T>({
-    required Future<DataModelWrapper<T>> Function() futureCall,
+    required AsyncValueGetter<DataModelWrapper<T>> futureCall,
     required bool useBaseBlocLoader,
     required bool showUIErrorMessage,
     required bool onFailureDefaultHandler,
     required bool onUnknownErrorDefaultHandler,
-    void Function(bool isFinished)? loadingChanged,
-    void Function(T? result)? onSuccess,
-    void Function(BaseFailure failure)? onFailure,
-    void Function(dynamic e)? unknownError,
+    ValueSetter<bool>? loadingChanged,
+    ValueSetter<T?>? onSuccess,
+    ValueSetter<BaseFailure>? onFailure,
+    ValueSetter<dynamic>? unknownError,
   }) async {
     try {
       helperBloc.add(const HelperBlocEvent.failureCleared());
@@ -78,7 +79,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         }
       }
       if (res.isSuccess) {
-        onSuccess?.call(res.data);
+        T? data = res.data;
+        onSuccess?.call(data);
       }
       return res;
     } catch (e) {
@@ -103,12 +105,12 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       helperBloc.add(HelperBlocEvent.loadingChanged(isLoading));
 
   void _handleApiError(BaseFailure failure) => helperBloc.add(
-        HelperBlocEvent.contextCallbackTriggered(
+    HelperBlocEvent.contextCallbackTriggered(
           (context) {
-            errorHandler(failure, context);
-          },
-        ),
-      );
+        errorHandler(failure, context);
+      },
+    ),
+  );
 
   void errorHandler(BaseFailure failure, BuildContext context) =>
       ScaffoldMessenger.of(context).showSnackBar(
