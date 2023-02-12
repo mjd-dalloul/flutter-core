@@ -8,18 +8,20 @@ part 'network_failures.freezed.dart';
 class NetworkFailure with _$NetworkFailure implements Exception, BaseFailure {
   const NetworkFailure._();
 
-  const factory NetworkFailure.serverFailure([String? message]) = ServerFailure;
+  const factory NetworkFailure.serverFailure(
+      [String? message, dynamic failure]) = ServerFailure;
 
-  const factory NetworkFailure.requestCancelled([String? message]) =
-      RequestCancelled;
+  const factory NetworkFailure.requestCancelled(
+      [String? message, dynamic failure]) = RequestCancelled;
 
-  const factory NetworkFailure.customFailure(String message) = CustomFailure;
+  const factory NetworkFailure.customFailure(String message,
+      [dynamic failure]) = CustomFailure;
 
-  const factory NetworkFailure.noInternetFailure([String? message]) =
-      NoInternetFailure;
+  const factory NetworkFailure.noInternetFailure(
+      [String? message, dynamic failure]) = NoInternetFailure;
 
-  const factory NetworkFailure.unauthenticatedFailure([String? message]) =
-      UnauthenticatedFailure;
+  const factory NetworkFailure.unauthenticatedFailure(
+      [String? message, dynamic failure]) = UnauthenticatedFailure;
 
   const factory NetworkFailure.unknownError(dynamic error) = UnknownError;
 

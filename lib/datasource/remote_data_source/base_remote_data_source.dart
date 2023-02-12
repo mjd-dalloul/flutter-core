@@ -27,6 +27,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Options? options,
     dynamic data,
     Deserializer<T?>? deserializer,
+    MapDeserializer<T?>? mapDeserializer,
     bool useAuthenticationToken = true,
     bool hasBaseRequestModel = true,
     void Function(int, int)? onSendProgress,
@@ -86,10 +87,10 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
       }
 
       /// if we are here then the status code of the request must be 200<=statusCode<=299
-      return deserializer == null
-          ? const DataModelWrapper.networkData(data: null)
-          : DataModelWrapper.networkData(
-              data: deserializer.call(response.data));
+      return DataModelWrapper.networkData(
+        data: deserializer?.call(response.data) ??
+            mapDeserializer?.call(response.data),
+      );
     } on NetworkFailure catch (e) {
       /// our failure we will handle it.
       return DataModelWrapper.networkDataFailure(networkFailure: e);
@@ -229,28 +230,38 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     }
   }
 
-  ///default error message if [failureParser] returned null.
+  ///default error message if [failureToString] returned null.
   String get defaultErrorMessage => 'something went wrong';
 
   ///extract error message from [response]
-  String? failureParser(Response response) => response.statusMessage;
+  String? failureToString(Response response) => response.statusMessage;
+
+  dynamic failureParser(Response response) => null;
 
   /// we are only interesting in the unauthenticated failure, otherwise we are returning
   /// the message from response if it's exist or we will return "Something went wrong"
   NetworkFailure mapStatusCodeToFailure(Response<dynamic>? response) {
     if (response != null) {
       if (response.statusCode! == 401 || response.statusCode! == 400) {
-        return NetworkFailure.unauthenticatedFailure(failureParser(response));
+        return NetworkFailure.unauthenticatedFailure(
+          failureToString(response) ?? defaultErrorMessage,
+          failureParser(response),
+        );
       } else if (response.statusCode! ~/ 100 == 5) {
         return NetworkFailure.serverFailure(
-            failureParser(response) ?? defaultErrorMessage);
+          failureToString(response) ?? defaultErrorMessage,
+          failureParser(response),
+        );
       } else {
         return NetworkFailure.customFailure(
-          failureParser(response) ?? defaultErrorMessage,
+          failureToString(response) ?? defaultErrorMessage,
+          failureParser(response),
         );
       }
     } else {
-      return NetworkFailure.serverFailure(defaultErrorMessage);
+      return NetworkFailure.serverFailure(
+        defaultErrorMessage,
+      );
     }
   }
 
