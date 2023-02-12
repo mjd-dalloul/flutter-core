@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_core/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,6 +46,12 @@ class BaseSharedPreferences implements IBaseSharedPreferences {
 
   @override
   Future<bool> removeKey(String key) => sharedPreferences.remove(key);
+
+  Future<bool> saveRequest(String key, Map<String, dynamic> response) =>
+      saveString(key, jsonEncode(response));
+
+  Map<String, dynamic>? getCachedRequest(String key) =>
+      getString(key) == null ? null : jsonDecode(getString(key)!);
 
   Future<bool> saveAccessToken(String token) =>
       saveString(SharedPreferencesKeys.ACCESS_TOKEN, token);
