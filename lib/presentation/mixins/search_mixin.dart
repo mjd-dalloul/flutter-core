@@ -18,18 +18,20 @@ mixin SearchMixin<S extends StatefulWidget> on State<S> {
   void initState() {
     super.initState();
     searchController = TextEditingController(text: initialSearchValue);
-    searchController.addListener(() {
-      timer?.cancel();
-      timer = Timer(
-        debounceMillisecondSeconds.asMilliseconds,
-        () {
-          if (query == searchController.text) {
-            return;
-          }
-          query = searchController.text;
-          searchQuery(searchController.text);
-        },
-      );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      searchController.addListener(() {
+        timer?.cancel();
+        timer = Timer(
+          debounceMillisecondSeconds.asMilliseconds,
+          () {
+            if (query == searchController.text) {
+              return;
+            }
+            query = searchController.text;
+            searchQuery(searchController.text);
+          },
+        );
+      });
     });
   }
 
