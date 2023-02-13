@@ -5,6 +5,7 @@ import 'package:flutter_core/utils/extensions/int_ext.dart';
 
 mixin SearchMixin<S extends StatefulWidget> on State<S> {
   late final TextEditingController searchController;
+  late final FocusNode searchFocusNode;
 
   String get initialSearchValue => '';
 
@@ -17,6 +18,7 @@ mixin SearchMixin<S extends StatefulWidget> on State<S> {
   @override
   void initState() {
     super.initState();
+    searchFocusNode = FocusNode();
     searchController = TextEditingController(text: initialSearchValue);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       searchController.addListener(() {
@@ -39,6 +41,7 @@ mixin SearchMixin<S extends StatefulWidget> on State<S> {
   void dispose() {
     super.dispose();
     searchController.dispose();
+    searchFocusNode.dispose();
   }
 
   void searchQuery(String text);
