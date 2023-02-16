@@ -1,25 +1,41 @@
 import 'package:flutter/material.dart';
 
 mixin ThemeMixin<S extends StatefulWidget> on State<S> {
-  late ThemeData theme;
-  late TextTheme textTheme;
-  late ColorScheme colorScheme;
-  late Color errorColor;
-  late Color primaryColor;
-  late Color backgroundColor;
-  late Color scaffoldBackgroundColor;
-  late Color bottomAppBarColor;
+  ThemeData get theme => _theme!;
+
+  TextTheme get textTheme => _textTheme!;
+
+  ColorScheme get colorScheme => _colorScheme!;
+
+  Color get errorColor => _errorColor!;
+
+  Color get primaryColor => _primaryColor!;
+
+  Color get backgroundColor => _backgroundColor!;
+
+  Color get scaffoldBackgroundColor => _scaffoldBackgroundColor!;
+
+  Color get bottomAppBarColor => _bottomAppBarColor!;
+
+  ThemeData? _theme;
+  TextTheme? _textTheme;
+  ColorScheme? _colorScheme;
+  Color? _errorColor;
+  Color? _primaryColor;
+  Color? _backgroundColor;
+  Color? _scaffoldBackgroundColor;
+  Color? _bottomAppBarColor;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    theme = Theme.of(context);
-    textTheme = Theme.of(context).textTheme;
-    colorScheme = Theme.of(context).colorScheme;
-    errorColor = Theme.of(context).errorColor;
-    primaryColor = Theme.of(context).primaryColor;
-    backgroundColor = Theme.of(context).backgroundColor;
-    scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-    bottomAppBarColor = Theme.of(context).bottomAppBarColor;
+    _theme = Theme.of(context);
+    _textTheme = Theme.of(context).textTheme;
+    _colorScheme = Theme.of(context).colorScheme;
+    _errorColor = Theme.of(context).colorScheme.error;
+    _primaryColor = Theme.of(context).primaryColor;
+    _backgroundColor = Theme.of(context).colorScheme.background;
+    _scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    _bottomAppBarColor = Theme.of(context).bottomSheetTheme.backgroundColor;
   }
 }

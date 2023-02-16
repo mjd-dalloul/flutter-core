@@ -9,7 +9,7 @@ import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:get_it/get_it.dart';
 
 abstract class _BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
-    extends BaseState<P> with TickerProviderStateMixin {
+    extends BaseState<P> {
   B get bloc;
 
   bool get autoDispose => true;
@@ -51,45 +51,37 @@ abstract class _BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
               p.unknownError != c.unknownError ||
               p.failure != c.failure,
           builder: (context, state) {
-            late final Widget child;
-            if (state.isLoading) {
-              child = onLoading();
-            } else if (state.failure != null) {
-              child = onFailure(state.failure!);
-            } else if (state.unknownError != null) {
-              child = onUnknownError(state.unknownError!);
-            } else {
-              child = buildChild(context);
-            }
-            return AnimatedSwitcher(
-              duration: switchingAnimationDuration,
-              switchInCurve: switchInCurve,
-              switchOutCurve: switchOutCurve,
-              transitionBuilder: transitionBuilder,
-              layoutBuilder: layoutBuilder,
-              child: child,
-            );
+            return _getChild(state, context);
+            // return AnimatedSwitcher(
+            //   duration: switchingAnimationDuration,
+            //   transitionBuilder: transitionBuilder,
+            //   child: child,
+            // );
           },
         );
       }),
     );
   }
 
+  Widget _getChild(HelperBlocState state, BuildContext context) {
+    if (state.isLoading) {
+      return onLoading();
+    } else if (state.failure != null) {
+      return onFailure(state.failure!);
+    } else if (state.unknownError != null) {
+      return onUnknownError(state.unknownError!);
+    } else {
+      return buildChild(context);
+    }
+  }
+
   Duration get switchingAnimationDuration => 500.asMilliseconds;
 
-  Curve get switchInCurve => Curves.linear;
-
-  Curve get switchOutCurve => Curves.linear;
-
   Widget transitionBuilder(Widget child, Animation<double> animation) =>
-      AnimatedSwitcher.defaultTransitionBuilder.call(
-        child,
-        animation,
+      FadeTransition(
+        opacity: animation,
+        child: child,
       );
-
-  Widget layoutBuilder(Widget? currentChild, List<Widget> previousChildren) =>
-      AnimatedSwitcher.defaultLayoutBuilder
-          .call(currentChild, previousChildren);
 }
 
 abstract class BaseBlocGetItPage<P extends StatefulWidget, B extends BaseBloc>
