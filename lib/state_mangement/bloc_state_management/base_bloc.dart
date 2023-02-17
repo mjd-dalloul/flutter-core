@@ -65,10 +65,10 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       if (useBaseBlocLoader) {
         _isLoadingChanged(true);
       }
-      loadingChanged?.call(false);
+      loadingChanged?.call(true);
       beforeFutureStarted?.call();
       final res = await futureCall();
-      loadingChanged?.call(true);
+      loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
@@ -88,7 +88,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       }
       return res;
     } catch (e) {
-      loadingChanged?.call(true);
+      loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
