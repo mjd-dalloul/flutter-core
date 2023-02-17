@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,38 @@ class BaseBloc<E, S> extends Bloc<E, S> {
 
   late final HelperBloc helperBloc;
   BaseFailure? _failure;
+
+  Future<void> futureWrapper2<T>({
+    required AsyncValueGetter<T?> futureCall,
+    required bool Function(T?) validateFuture,
+    bool useBaseBlocLoader = false,
+    ValueSetter<bool>? loadingChanged,
+    ValueSetter<T?>? onSuccess,
+    VoidCallback? beforeFutureStarted,
+    ValueSetter<T?>? onFailure,
+    ValueSetter<dynamic>? unknownError,
+  }) async {
+    try {
+      if (useBaseBlocLoader) {
+        _isLoadingChanged(true);
+      }
+      loadingChanged?.call(true);
+      beforeFutureStarted?.call();
+      final res = await futureCall();
+      loadingChanged?.call(false);
+      if (useBaseBlocLoader) {
+        _isLoadingChanged(false);
+      }
+      if (validateFuture.call(res)) {
+        onSuccess?.call(res);
+      } else {
+        onFailure?.call(res);
+      }
+    } catch (e) {
+      log('Error in FutureWrapper2 ${e}');
+      unknownError?.call(e);
+    }
+  }
 
   /// [useBaseBlocLoader] will trigger [HelperBloc] loading.
   /// [showUIErrorMessage] show error on screen if the [futureCall] failed
@@ -109,12 +143,12 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       helperBloc.add(HelperBlocEvent.loadingChanged(isLoading));
 
   void _handleApiError(BaseFailure failure) => helperBloc.add(
-    HelperBlocEvent.contextCallbackTriggered(
+        HelperBlocEvent.contextCallbackTriggered(
           (context) {
-        errorHandler(failure, context);
-      },
-    ),
-  );
+            errorHandler(failure, context);
+          },
+        ),
+      );
 
   void errorHandler(BaseFailure failure, BuildContext context) =>
       ScaffoldMessenger.of(context).showSnackBar(
