@@ -29,6 +29,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     bool showUIErrorMessage = true,
     bool onFailureDefaultHandler = false,
     bool onUnknownErrorDefaultHandler = false,
+    VoidCallback? beforeFutureStarted,
     ValueSetter<bool>? loadingChanged,
     ValueSetter<T?>? onSuccess,
     ValueSetter<BaseFailure>? onFailure,
@@ -37,6 +38,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       _errorHandlingWrapper(
         futureCall: futureCall,
         onSuccess: onSuccess,
+        beforeFutureStarted: beforeFutureStarted,
         loadingChanged: loadingChanged,
         useBaseBlocLoader: useBaseBlocLoader,
         showUIErrorMessage: showUIErrorMessage,
@@ -52,6 +54,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     required bool showUIErrorMessage,
     required bool onFailureDefaultHandler,
     required bool onUnknownErrorDefaultHandler,
+    VoidCallback? beforeFutureStarted,
     ValueSetter<bool>? loadingChanged,
     ValueSetter<T?>? onSuccess,
     ValueSetter<BaseFailure>? onFailure,
@@ -63,6 +66,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         _isLoadingChanged(true);
       }
       loadingChanged?.call(false);
+      beforeFutureStarted?.call();
       final res = await futureCall();
       loadingChanged?.call(true);
       if (useBaseBlocLoader) {
