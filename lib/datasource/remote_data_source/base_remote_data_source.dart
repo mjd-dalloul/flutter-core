@@ -87,12 +87,15 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
           );
           break;
       }
-
-      /// if we are here then the status code of the request must be 200<=statusCode<=299
-      return DataModelWrapper.networkData(
+      final ret = DataModelWrapper.networkData(
         data: deserializer?.call(response.data) ??
             mapDeserializer?.call(response.data),
       );
+      logger.d('response data as json ${response.data}');
+      logger.d('response data as object ${ret}');
+
+      /// if we are here then the status code of the request must be 200<=statusCode<=299
+      return ret;
     } on NetworkFailure catch (e) {
       /// our failure we will handle it.
       logger.e('Network failure happen', e);
@@ -126,15 +129,18 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Map<String, dynamic>? params,
     Options? headers,
     void Function(int, int)? onReceiveProgress,
-  }) =>
-      wrapRequestWithTryAndCatch(
-        dio.get(
-          endPoint,
-          queryParameters: params,
-          options: headers,
-          onReceiveProgress: onReceiveProgress,
-        ),
-      );
+  }) {
+    logger.d(
+        'Get request to ${endPoint} with headers ${headers} and params ${params}');
+    return wrapRequestWithTryAndCatch(
+      dio.get(
+        endPoint,
+        queryParameters: params,
+        options: headers,
+        onReceiveProgress: onReceiveProgress,
+      ),
+    );
+  }
 
   ///dio post
   @override
@@ -145,17 +151,20 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Options? headers,
     void Function(int, int)? onSendProgress,
     void Function(int, int)? onReceiveProgress,
-  }) =>
-      wrapRequestWithTryAndCatch(
-        dio.post(
-          endPoint,
-          data: data,
-          queryParameters: params,
-          options: headers,
-          onSendProgress: onSendProgress,
-          onReceiveProgress: onReceiveProgress,
-        ),
-      );
+  }) {
+    logger.d(
+        'Post request to ${endPoint} with headers ${headers} and params ${params} and data ${data}');
+    return wrapRequestWithTryAndCatch(
+      dio.post(
+        endPoint,
+        data: data,
+        queryParameters: params,
+        options: headers,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      ),
+    );
+  }
 
   ///dio put
   @override
@@ -164,15 +173,18 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     data,
     Map<String, dynamic>? params,
     Options? headers,
-  }) =>
-      wrapRequestWithTryAndCatch(
-        dio.put(
-          endPoint,
-          data: data,
-          queryParameters: params,
-          options: headers,
-        ),
-      );
+  }) {
+    logger.d(
+        'Put request to ${endPoint} with headers ${headers} and params ${params} and data ${data}');
+    return wrapRequestWithTryAndCatch(
+      dio.put(
+        endPoint,
+        data: data,
+        queryParameters: params,
+        options: headers,
+      ),
+    );
+  }
 
   ///dio patch
   @override
@@ -181,20 +193,24 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Map<String, dynamic>? params,
     Options? headers,
     data,
-  }) =>
-      wrapRequestWithTryAndCatch(
-        dio.patch(
-          endPoint,
-          data: data,
-          options: headers,
-          queryParameters: params,
-        ),
-      );
+  }) {
+    logger.d(
+        'Patch request to ${endPoint} with headers ${headers} and params ${params} and data ${data}');
+    return wrapRequestWithTryAndCatch(
+      dio.patch(
+        endPoint,
+        data: data,
+        options: headers,
+        queryParameters: params,
+      ),
+    );
+  }
 
   /// any post, get, put, patch request will be inside try, catch block to catch any kind of error
   Future<Response> wrapRequestWithTryAndCatch(Future<Response> request) async {
     try {
       final response = await request;
+      logger.d('response status code is ${response.statusCode}');
       if (response.statusCode == null) {
         throw const NetworkFailure.serverFailure('Something went wrong');
 
