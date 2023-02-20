@@ -2,6 +2,7 @@ import 'package:flutter_core/datasource/local_data_source/base_local_data_source
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/local_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logger/logger.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,6 +13,7 @@ import 'local_data_source_test.mocks.dart';
 @GenerateMocks([Database])
 void main() {
   final database = MockDatabase();
+  final Logger logger = Logger();
   TestModel testModel = const TestModel(id: 1, body: 'test');
   group('database exception', () {
     test('insert rows database exception', () async {
@@ -23,7 +25,7 @@ void main() {
         ),
       ).thenThrow('test');
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.insertObjects(
         tableName: 'test',
         toMaps: [testModel.toJson, testModel.toJson, testModel.toJson],
@@ -39,7 +41,7 @@ void main() {
         database.delete('test'),
       ).thenThrow('test');
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.deleteObject(
         tableName: 'test',
       );
@@ -57,7 +59,7 @@ void main() {
         ),
       ).thenThrow('test');
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.updateObject(
         tableName: 'test',
         toMap: testModel.toJson,
@@ -74,7 +76,7 @@ void main() {
         ),
       ).thenThrow('test');
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.getObject(
         tableName: 'test',
         deserializer: TestModel.fromJson,
@@ -95,7 +97,7 @@ void main() {
         ),
       ).thenAnswer((realInvocation) async => 1);
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.insertObject(
         tableName: 'test',
         toMap: testModel.toJson,
@@ -111,7 +113,7 @@ void main() {
         ),
       ).thenAnswer((realInvocation) async => 3);
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.insertObjects(
         tableName: 'test',
         toMaps: [testModel.toJson, testModel.toJson, testModel.toJson],
@@ -125,7 +127,7 @@ void main() {
         database.delete('test'),
       ).thenAnswer((_) async => 1);
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.deleteObject(
         tableName: 'test',
       );
@@ -138,7 +140,7 @@ void main() {
         database.update('test', testModel.toJson()),
       ).thenAnswer((_) async => 1);
       BaseLocalDataSource localDataSourceImpl =
-          BaseLocalDataSource.fromDataBase(database: database);
+          BaseLocalDataSource.fromDataBase(database: database, logger: logger);
       final res = await localDataSourceImpl.updateObject(
         tableName: 'test',
         toMap: testModel.toJson,

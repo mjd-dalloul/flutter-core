@@ -2,6 +2,7 @@ import 'package:flutter_core/datasource/local_data_source/i_base_local_data_sour
 import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/local_failures.dart';
+import 'package:logger/logger.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,6 +11,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     required String databaseName,
     required int version,
     required DatabaseSchema databaseSchema,
+    required this.logger,
   }) {
     databaseInitializer =
         initializeDatabase(databaseName, version, databaseSchema);
@@ -18,6 +20,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
   /// create [BaseLocalDataSource] with custom database object.
   BaseLocalDataSource.fromDataBase({
     required Database database,
+    required this.logger,
   }) {
     _database = database;
     databaseInitializer = Future.value();
@@ -26,6 +29,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
   /// future for initializing database
   late final Future<void> databaseInitializer;
   late final Database _database;
+  final Logger logger;
 
   @override
   Future<void> initializeDatabase(String databaseName, int version,
@@ -181,6 +185,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     try {
       return DataModelWrapper.localData(data: await databaseCall.call());
     } catch (e) {
+      logger.e('Error happened in base local data source ', e);
       return DataModelWrapper.localDataFailure(
           localFailure: LocalFailure.unknownError(e));
     }

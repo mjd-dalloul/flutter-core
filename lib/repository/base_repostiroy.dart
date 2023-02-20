@@ -1,10 +1,13 @@
-import 'dart:developer';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
+import 'package:logger/logger.dart';
 
-class BaseRepository {
+abstract class BaseRepository {
+  BaseRepository(this.logger);
+
+  final Logger logger;
+
   /// request wrapper
   /// [remoteCall] function call to remote datasource
   /// [saveRemoteDataFunction] callback after the remoteCall finished, will be called with network result
@@ -27,6 +30,7 @@ class BaseRepository {
         : null;
     forceUpdate |= (connectivityResult != ConnectivityResult.none);
     if (forceUpdate) {
+      logger.d('Requesting to remote datasource $remoteCall');
       ret = await _getFromRemoteDataSource(
         remoteCall: remoteCall,
         saveRemoteDataFunction: saveRemoteDataFunction,
@@ -34,9 +38,10 @@ class BaseRepository {
         onCacheSuccess: onCacheSuccess,
       );
     } else {
+      logger.d('Requesting to local datasource $localCall');
       ret = await _localObjectWrapper(localCall: localCall);
-
       if (ret == null || ret.isFailure) {
+        logger.d('since $localCall failed trying to get it from remote call');
         ret = await _getFromRemoteDataSource(
           remoteCall: remoteCall,
           saveRemoteDataFunction: saveRemoteDataFunction,
@@ -45,6 +50,7 @@ class BaseRepository {
         );
       }
     }
+    logger.d('Results of calling requestData are ${ret.toString()}');
     return ret;
   }
 
@@ -70,14 +76,16 @@ class BaseRepository {
     final res = await remoteCall.call();
     if (saveRemoteDataFunction != null) {
       if (res.isFailure) {
-        log('<BaseRepository>: Could not save because network call did not go well');
+        logger.e(
+            '<BaseRepository>: Could not save because network call did not go well');
       } else if (res.data != null) {
         final saveResult = await saveRemoteDataFunction.call(res.data as T);
         if (saveResult.isFailure) {
-          log('<BaseRepository>: Could not save in database because ${saveResult.failure}');
+          logger.e(
+              '<BaseRepository>: Could not save in database because ${saveResult.failure}');
           onCacheFailure?.call(saveResult.failure!);
         } else {
-          log('<BaseRepository>: Inserted rows count: ${saveResult.data}');
+          logger.i('<BaseRepository>: Inserted rows count: ${saveResult.data}');
           onCacheSuccess?.call(saveResult.data!);
         }
       }

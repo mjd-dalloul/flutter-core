@@ -5,6 +5,7 @@ import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/extensions/map_ext.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logger/logger.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -14,10 +15,11 @@ import 'remote_data_source_test.mocks.dart';
 @GenerateMocks([Dio])
 void main() {
   final dio = MockDio();
+  final logger = Logger();
   TestModel testModel = const TestModel(id: 1, body: 'test');
   group('Http requests', () {
     final BaseRemoteDataSource baseRemoteDataSourceImpl =
-        BaseRemoteDataSource(dio);
+        BaseRemoteDataSource(dio, logger);
     final options = Options(
       headers: null,
       extra: <String, dynamic>{}.useAuthenticationToken(true),
@@ -171,7 +173,7 @@ void main() {
   });
   group('Http failures', () {
     final BaseRemoteDataSource baseRemoteDataSourceImpl =
-        BaseRemoteDataSource(dio);
+        BaseRemoteDataSource(dio, logger);
     test('un authentication exception', () async {
       final options = Options(
         headers: null,

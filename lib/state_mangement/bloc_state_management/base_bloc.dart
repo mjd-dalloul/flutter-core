@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,13 +6,16 @@ import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
+import 'package:logger/logger.dart';
 
 /// BaseBloc
 /// every bloc should extend this bloc, will add helper function to fast the development process.
 class BaseBloc<E, S> extends Bloc<E, S> {
-  BaseBloc(super.initialState) {
+  BaseBloc(super.initialState, this.logger) {
     helperBloc = HelperBloc();
   }
+
+  final Logger logger;
 
   late final HelperBloc helperBloc;
   BaseFailure? _failure;
@@ -45,8 +46,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       } else {
         onFailure?.call(res);
       }
-    } catch (e) {
-      log('Error in FutureWrapper2 ${e}');
+    } catch (e, st) {
+      logger.e('Error in FutureWrapper2', e, st);
       unknownError?.call(e);
     }
   }
@@ -121,7 +122,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         onSuccess?.call(data);
       }
       return res;
-    } catch (e) {
+    } catch (e, st) {
+      logger.e('Error in FutureWrapper', e, st);
       loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);

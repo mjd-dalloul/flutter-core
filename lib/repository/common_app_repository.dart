@@ -2,7 +2,8 @@ import 'package:flutter_core/datasource/shared_preferences_data_source/base_shar
 import 'package:flutter_core/repository/base_repostiroy.dart';
 
 class CommonAppRepository extends BaseRepository {
-  CommonAppRepository({
+  CommonAppRepository(
+    super.logger, {
     required this.baseSharedPreferencesImpl,
   });
 

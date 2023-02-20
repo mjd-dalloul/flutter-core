@@ -6,12 +6,14 @@ import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/extensions/map_ext.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
+import 'package:logger/logger.dart';
 
 /// this implementation is done by using dio as an http library
 class BaseRemoteDataSource implements IBaseRemoteDataSource {
-  const BaseRemoteDataSource(this.dio);
+  const BaseRemoteDataSource(this.dio, this.logger);
 
   final Dio dio;
+  final Logger logger;
 
   /// [useAuthenticationToken] if the interceptor should attach the access token to the request.
   /// [deserializer] T Function(Map<String, dynamic>) how to deserialize object.
@@ -93,9 +95,11 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
       );
     } on NetworkFailure catch (e) {
       /// our failure we will handle it.
+      logger.e('Network failure happen', e);
       return DataModelWrapper.networkDataFailure(networkFailure: e);
     } catch (e) {
       /// something went wrong.
+      logger.e('error happen in base remote data source', e);
       rethrow;
     }
   }
@@ -206,6 +210,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
       rethrow;
     } catch (e) {
       /// if this happen then it's not a network error, then it must be a bug in the request
+      logger.e('Error happen while requesting to server', e);
       throw NetworkFailure.customFailure(e.toString());
     }
   }
