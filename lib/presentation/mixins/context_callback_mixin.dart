@@ -5,12 +5,12 @@ import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/h
 
 mixin ContextCallbackMixin<S extends StatefulWidget, P extends BaseBloc>
     on State<S> {
-  P get bloc;
+  P get baseBloc;
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<HelperBloc, HelperBlocState>(
-      bloc: bloc.helperBloc,
+      bloc: baseBloc.helperBloc,
       listenWhen: (p, c) => p.contextCallback != c.contextCallback,
       listener: (context, state) => state.contextCallback.call(context),
       child: buildChild(context),
@@ -20,8 +20,7 @@ mixin ContextCallbackMixin<S extends StatefulWidget, P extends BaseBloc>
   @override
   void dispose() {
     super.dispose();
-    bloc.helperBloc.close();
-    bloc.close();
+    baseBloc.helperBloc.close();
   }
 
   Widget buildChild(BuildContext context);
