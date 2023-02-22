@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-abstract class BlocBuilderWidget<B extends StateStreamable<S>, S>
-    extends StatelessWidget {
+@Deprecated('Wrap your widget with BlocBuilder')
+abstract class BlocBuilderWidget<B extends StateStreamable<S>, S> extends StatelessWidget {
   const BlocBuilderWidget({Key? key}) : super(key: key);
 
   @override
@@ -17,6 +17,7 @@ abstract class BlocBuilderWidget<B extends StateStreamable<S>, S>
   bool buildWhen(S p, S c) => true;
 }
 
+@Deprecated('Wrap your widget with BlocProvider')
 abstract class BlocProviderWidget<T extends StateStreamableSource<Object?>>
     extends StatelessWidget {
   const BlocProviderWidget({Key? key}) : super(key: key);
@@ -36,8 +37,8 @@ abstract class BlocProviderWidget<T extends StateStreamableSource<Object?>>
   Widget buildChild(context);
 }
 
-abstract class BlocListenerWidget<B extends StateStreamable<S>, S>
-    extends StatelessWidget {
+@Deprecated('Wrap your widget with BlocListener')
+abstract class BlocListenerWidget<B extends StateStreamable<S>, S> extends StatelessWidget {
   const BlocListenerWidget({Key? key}) : super(key: key);
 
   @override
@@ -56,8 +57,8 @@ abstract class BlocListenerWidget<B extends StateStreamable<S>, S>
   bool listenWhen(S p, S c) => true;
 }
 
-abstract class BlocConsumerWidget<B extends StateStreamable<S>, S>
-    extends StatelessWidget {
+@Deprecated('Wrap your widget with BlocConsumer')
+abstract class BlocConsumerWidget<B extends StateStreamable<S>, S> extends StatelessWidget {
   const BlocConsumerWidget({Key? key}) : super(key: key);
 
   @override
