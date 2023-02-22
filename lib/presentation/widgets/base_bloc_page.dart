@@ -93,7 +93,14 @@ abstract class BaseBlocGetItPage<P extends StatefulWidget, B extends BaseBloc>
 }
 
 abstract class BaseBlocProviderPage<P extends StatefulWidget,
-B extends BaseBloc> extends _BaseBlocPageState<P, B> {
+    B extends BaseBloc> extends _BaseBlocPageState<P, B> {
   @override
-  B get bloc => context.read<B>();
+  B get bloc => _bloc;
+  late final B _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = context.read<B>();
+  }
 }
