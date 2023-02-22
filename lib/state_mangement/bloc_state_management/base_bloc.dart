@@ -22,6 +22,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
   late final HelperBloc helperBloc;
   BaseFailure? _failure;
 
+  @Deprecated('use futureWrapper instead')
   Future<void> futureWrapper2<T>({
     required AsyncValueGetter<T?> futureCall,
     required bool Function(T?) validateFuture,
@@ -69,7 +70,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     FutureOr<void> Function(bool)? loadingChanged,
     FutureOr<void> Function(T?)? onSuccess,
     FutureOr<void> Function()? beforeFutureStarted,
-    FutureOr<void> Function(BaseFailure?)? onFailure,
+    FutureOr<void> Function(BaseFailure)? onFailure,
     FutureOr<void> Function(dynamic)? unknownError,
   }) async =>
       _errorHandlingWrapper(
@@ -94,7 +95,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     FutureOr<void> Function(bool)? loadingChanged,
     FutureOr<void> Function(T?)? onSuccess,
     FutureOr<void> Function()? beforeFutureStarted,
-    FutureOr<void> Function(BaseFailure?)? onFailure,
+    FutureOr<void> Function(BaseFailure)? onFailure,
     FutureOr<void> Function(dynamic)? unknownError,
   }) async {
     try {
