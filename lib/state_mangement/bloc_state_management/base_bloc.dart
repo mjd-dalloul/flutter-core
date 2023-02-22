@@ -106,10 +106,6 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       await loadingChanged?.call(true);
       await beforeFutureStarted?.call();
       final res = await futureCall();
-      await loadingChanged?.call(false);
-      if (useBaseBlocLoader) {
-        _isLoadingChanged(false);
-      }
       if (res.isFailure) {
         _failure = res.failure;
         if (showUIErrorMessage) {
@@ -123,6 +119,10 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       if (res.isSuccess) {
         T? data = res.data;
         await onSuccess?.call(data);
+      }
+      await loadingChanged?.call(false);
+      if (useBaseBlocLoader) {
+        _isLoadingChanged(false);
       }
       return res;
     } catch (e, st) {
