@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,31 +26,31 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     required AsyncValueGetter<T?> futureCall,
     required bool Function(T?) validateFuture,
     bool useBaseBlocLoader = false,
-    ValueSetter<bool>? loadingChanged,
-    ValueSetter<T?>? onSuccess,
-    VoidCallback? beforeFutureStarted,
-    ValueSetter<T?>? onFailure,
-    ValueSetter<dynamic>? unknownError,
+    FutureOr<void> Function(bool)? loadingChanged,
+    FutureOr<void> Function(T?)? onSuccess,
+    FutureOr<void> Function()? beforeFutureStarted,
+    FutureOr<void> Function(T?)? onFailure,
+    FutureOr<void> Function(dynamic)? unknownError,
   }) async {
     try {
       if (useBaseBlocLoader) {
         _isLoadingChanged(true);
       }
-      loadingChanged?.call(true);
-      beforeFutureStarted?.call();
+      await loadingChanged?.call(true);
+      await beforeFutureStarted?.call();
       final res = await futureCall();
-      loadingChanged?.call(false);
+      await loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
       if (validateFuture.call(res)) {
-        onSuccess?.call(res);
+        await onSuccess?.call(res);
       } else {
-        onFailure?.call(res);
+        await onFailure?.call(res);
       }
     } catch (e, st) {
       logger.e('Error in FutureWrapper2', e, st);
-      unknownError?.call(e);
+      await unknownError?.call(e);
     }
   }
 
@@ -64,11 +66,11 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     bool showUIErrorMessage = true,
     bool onFailureDefaultHandler = false,
     bool onUnknownErrorDefaultHandler = false,
-    VoidCallback? beforeFutureStarted,
-    ValueSetter<bool>? loadingChanged,
-    ValueSetter<T?>? onSuccess,
-    ValueSetter<BaseFailure>? onFailure,
-    ValueSetter<dynamic>? unknownError,
+    FutureOr<void> Function(bool)? loadingChanged,
+    FutureOr<void> Function(T?)? onSuccess,
+    FutureOr<void> Function()? beforeFutureStarted,
+    FutureOr<void> Function(BaseFailure?)? onFailure,
+    FutureOr<void> Function(dynamic)? unknownError,
   }) async =>
       _errorHandlingWrapper(
         futureCall: futureCall,
@@ -89,21 +91,21 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     required bool showUIErrorMessage,
     required bool onFailureDefaultHandler,
     required bool onUnknownErrorDefaultHandler,
-    VoidCallback? beforeFutureStarted,
-    ValueSetter<bool>? loadingChanged,
-    ValueSetter<T?>? onSuccess,
-    ValueSetter<BaseFailure>? onFailure,
-    ValueSetter<dynamic>? unknownError,
+    FutureOr<void> Function(bool)? loadingChanged,
+    FutureOr<void> Function(T?)? onSuccess,
+    FutureOr<void> Function()? beforeFutureStarted,
+    FutureOr<void> Function(BaseFailure?)? onFailure,
+    FutureOr<void> Function(dynamic)? unknownError,
   }) async {
     try {
       helperBloc.add(const HelperBlocEvent.failureCleared());
       if (useBaseBlocLoader) {
         _isLoadingChanged(true);
       }
-      loadingChanged?.call(true);
-      beforeFutureStarted?.call();
+      await loadingChanged?.call(true);
+      await beforeFutureStarted?.call();
       final res = await futureCall();
-      loadingChanged?.call(false);
+      await loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
@@ -112,23 +114,23 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         if (showUIErrorMessage) {
           _handleApiError(_failure!);
         }
-        onFailure?.call(_failure!);
+        await onFailure?.call(_failure!);
         if (onFailureDefaultHandler) {
           helperBloc.add(HelperBlocEvent.failureHappened(_failure!));
         }
       }
       if (res.isSuccess) {
         T? data = res.data;
-        onSuccess?.call(data);
+        await onSuccess?.call(data);
       }
       return res;
     } catch (e, st) {
       logger.e('Error in FutureWrapper', e, st);
-      loadingChanged?.call(false);
+      await loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
       }
-      unknownError?.call(e);
+      await unknownError?.call(e);
       if (onUnknownErrorDefaultHandler) {
         helperBloc.add(HelperBlocEvent.unknownErrorHappened(e));
       }
@@ -145,12 +147,12 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       helperBloc.add(HelperBlocEvent.loadingChanged(isLoading));
 
   void _handleApiError(BaseFailure failure) => helperBloc.add(
-        HelperBlocEvent.contextCallbackTriggered(
+    HelperBlocEvent.contextCallbackTriggered(
           (context) {
-            errorHandler(failure, context);
-          },
-        ),
-      );
+        errorHandler(failure, context);
+      },
+    ),
+  );
 
   void errorHandler(BaseFailure failure, BuildContext context) =>
       ScaffoldMessenger.of(context).showSnackBar(
