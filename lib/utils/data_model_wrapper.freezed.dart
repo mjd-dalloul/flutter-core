@@ -24,7 +24,6 @@ mixin _$DataModelWrapper<T> {
     required TResult Function(T? data) localData,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? networkData,
@@ -33,7 +32,6 @@ mixin _$DataModelWrapper<T> {
     TResult? Function(T? data)? localData,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? networkData,
@@ -43,7 +41,6 @@ mixin _$DataModelWrapper<T> {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkData<T> value) networkData,
@@ -52,7 +49,6 @@ mixin _$DataModelWrapper<T> {
     required TResult Function(LocalData<T> value) localData,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkData<T> value)? networkData,
@@ -61,7 +57,6 @@ mixin _$DataModelWrapper<T> {
     TResult? Function(LocalData<T> value)? localData,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkData<T> value)? networkData,
@@ -87,7 +82,6 @@ class _$DataModelWrapperCopyWithImpl<T, $Res, $Val extends DataModelWrapper<T>>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 }
@@ -97,7 +91,6 @@ abstract class _$$NetworkDataCopyWith<T, $Res> {
   factory _$$NetworkDataCopyWith(
           _$NetworkData<T> value, $Res Function(_$NetworkData<T>) then) =
       __$$NetworkDataCopyWithImpl<T, $Res>;
-
   @useResult
   $Res call({T? data});
 }
@@ -227,11 +220,9 @@ class _$NetworkData<T> extends NetworkData<T> {
 
 abstract class NetworkData<T> extends DataModelWrapper<T> {
   const factory NetworkData({final T? data}) = _$NetworkData<T>;
-
   const NetworkData._() : super._();
 
   T? get data;
-
   @JsonKey(ignore: true)
   _$$NetworkDataCopyWith<T, _$NetworkData<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -242,7 +233,6 @@ abstract class _$$NetworkDataFailureCopyWith<T, $Res> {
   factory _$$NetworkDataFailureCopyWith(_$NetworkDataFailure<T> value,
           $Res Function(_$NetworkDataFailure<T>) then) =
       __$$NetworkDataFailureCopyWithImpl<T, $Res>;
-
   @useResult
   $Res call({NetworkFailure networkFailure});
 
@@ -384,11 +374,9 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
 abstract class NetworkDataFailure<T> extends DataModelWrapper<T> {
   const factory NetworkDataFailure(
       {required final NetworkFailure networkFailure}) = _$NetworkDataFailure<T>;
-
   const NetworkDataFailure._() : super._();
 
   NetworkFailure get networkFailure;
-
   @JsonKey(ignore: true)
   _$$NetworkDataFailureCopyWith<T, _$NetworkDataFailure<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -399,7 +387,6 @@ abstract class _$$LocalDataFailureCopyWith<T, $Res> {
   factory _$$LocalDataFailureCopyWith(_$LocalDataFailure<T> value,
           $Res Function(_$LocalDataFailure<T>) then) =
       __$$LocalDataFailureCopyWithImpl<T, $Res>;
-
   @useResult
   $Res call({LocalFailure localFailure});
 
@@ -541,11 +528,9 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
 abstract class LocalDataFailure<T> extends DataModelWrapper<T> {
   const factory LocalDataFailure({required final LocalFailure localFailure}) =
       _$LocalDataFailure<T>;
-
   const LocalDataFailure._() : super._();
 
   LocalFailure get localFailure;
-
   @JsonKey(ignore: true)
   _$$LocalDataFailureCopyWith<T, _$LocalDataFailure<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -556,7 +541,6 @@ abstract class _$$LocalDataCopyWith<T, $Res> {
   factory _$$LocalDataCopyWith(
           _$LocalData<T> value, $Res Function(_$LocalData<T>) then) =
       __$$LocalDataCopyWithImpl<T, $Res>;
-
   @useResult
   $Res call({T? data});
 }
@@ -686,11 +670,9 @@ class _$LocalData<T> extends LocalData<T> {
 
 abstract class LocalData<T> extends DataModelWrapper<T> {
   const factory LocalData({final T? data}) = _$LocalData<T>;
-
   const LocalData._() : super._();
 
   T? get data;
-
   @JsonKey(ignore: true)
   _$$LocalDataCopyWith<T, _$LocalData<T>> get copyWith =>
       throw _privateConstructorUsedError;

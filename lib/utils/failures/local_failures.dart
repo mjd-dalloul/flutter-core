@@ -8,12 +8,17 @@ part 'local_failures.freezed.dart';
 class LocalFailure with _$LocalFailure implements Exception, BaseFailure {
   const LocalFailure._();
 
-  const factory LocalFailure.customFailure(String message) = CustomFailure;
+  const factory LocalFailure.customFailure(String message, [dynamic failure]) =
+      CustomFailure;
 
-  const factory LocalFailure.unknownError(dynamic error) = UnknownError;
+  const factory LocalFailure.unknownError(dynamic error, [dynamic failure]) =
+      UnknownError;
 
   @override
   String get failureMessage => _message;
+
+  @override
+  get appFailure => _customFailure;
 }
 
 extension LocalFailureMessage on LocalFailure {
@@ -21,4 +26,7 @@ extension LocalFailureMessage on LocalFailure {
         customFailure: (failure) => failure.message,
         unknownError: (_) => DefaultValues.SOMETHING_WENT_WRONG,
       );
+
+  dynamic get _customFailure =>
+      map(customFailure: (f) => f.failure, unknownError: (err) => err.failure);
 }

@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NetworkFailure {
+  dynamic get failure => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
@@ -26,7 +28,7 @@ mixin _$NetworkFailure {
         noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) =>
       throw _privateConstructorUsedError;
 
@@ -37,7 +39,7 @@ mixin _$NetworkFailure {
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(String? message, dynamic failure)? noInternetFailure,
     TResult? Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
 
@@ -48,7 +50,7 @@ mixin _$NetworkFailure {
     TResult Function(String message, dynamic failure)? customFailure,
     TResult Function(String? message, dynamic failure)? noInternetFailure,
     TResult Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,7 +62,7 @@ mixin _$NetworkFailure {
     required TResult Function(CustomFailure value) customFailure,
     required TResult Function(NoInternetFailure value) noInternetFailure,
     required TResult Function(UnauthenticatedFailure value)
-        unauthenticatedFailure,
+    unauthenticatedFailure,
     required TResult Function(UnknownError value) unknownError,
   }) =>
       throw _privateConstructorUsedError;
@@ -87,6 +89,10 @@ mixin _$NetworkFailure {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $NetworkFailureCopyWith<NetworkFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -94,6 +100,9 @@ abstract class $NetworkFailureCopyWith<$Res> {
   factory $NetworkFailureCopyWith(
           NetworkFailure value, $Res Function(NetworkFailure) then) =
       _$NetworkFailureCopyWithImpl<$Res, NetworkFailure>;
+
+  @useResult
+  $Res call({dynamic failure});
 }
 
 /// @nodoc
@@ -106,14 +115,29 @@ class _$NetworkFailureCopyWithImpl<$Res, $Val extends NetworkFailure>
 
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failure = freezed,
+  }) {
+    return _then(_value.copyWith(
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$ServerFailureCopyWith<$Res> {
+abstract class _$$ServerFailureCopyWith<$Res>
+    implements $NetworkFailureCopyWith<$Res> {
   factory _$$ServerFailureCopyWith(
           _$ServerFailure value, $Res Function(_$ServerFailure) then) =
       __$$ServerFailureCopyWithImpl<$Res>;
 
+  @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
@@ -190,7 +214,7 @@ class _$ServerFailure extends ServerFailure {
         noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
     return serverFailure(message, failure);
   }
@@ -203,7 +227,7 @@ class _$ServerFailure extends ServerFailure {
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(String? message, dynamic failure)? noInternetFailure,
     TResult? Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
     return serverFailure?.call(message, failure);
   }
@@ -216,7 +240,7 @@ class _$ServerFailure extends ServerFailure {
     TResult Function(String message, dynamic failure)? customFailure,
     TResult Function(String? message, dynamic failure)? noInternetFailure,
     TResult Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -273,24 +297,27 @@ class _$ServerFailure extends ServerFailure {
 abstract class ServerFailure extends NetworkFailure {
   const factory ServerFailure([final String? message, final dynamic failure]) =
       _$ServerFailure;
-
   const ServerFailure._() : super._();
 
   String? get message;
 
+  @override
   dynamic get failure;
 
+  @override
   @JsonKey(ignore: true)
   _$$ServerFailureCopyWith<_$ServerFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RequestCancelledCopyWith<$Res> {
+abstract class _$$RequestCancelledCopyWith<$Res>
+    implements $NetworkFailureCopyWith<$Res> {
   factory _$$RequestCancelledCopyWith(
           _$RequestCancelled value, $Res Function(_$RequestCancelled) then) =
       __$$RequestCancelledCopyWithImpl<$Res>;
 
+  @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
@@ -367,7 +394,7 @@ class _$RequestCancelled extends RequestCancelled {
         noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
     return requestCancelled(message, failure);
   }
@@ -380,7 +407,7 @@ class _$RequestCancelled extends RequestCancelled {
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(String? message, dynamic failure)? noInternetFailure,
     TResult? Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
     return requestCancelled?.call(message, failure);
   }
@@ -393,7 +420,7 @@ class _$RequestCancelled extends RequestCancelled {
     TResult Function(String message, dynamic failure)? customFailure,
     TResult Function(String? message, dynamic failure)? noInternetFailure,
     TResult Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (requestCancelled != null) {
@@ -450,24 +477,27 @@ class _$RequestCancelled extends RequestCancelled {
 abstract class RequestCancelled extends NetworkFailure {
   const factory RequestCancelled(
       [final String? message, final dynamic failure]) = _$RequestCancelled;
-
   const RequestCancelled._() : super._();
 
   String? get message;
 
+  @override
   dynamic get failure;
 
+  @override
   @JsonKey(ignore: true)
   _$$RequestCancelledCopyWith<_$RequestCancelled> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CustomFailureCopyWith<$Res> {
+abstract class _$$CustomFailureCopyWith<$Res>
+    implements $NetworkFailureCopyWith<$Res> {
   factory _$$CustomFailureCopyWith(
           _$CustomFailure value, $Res Function(_$CustomFailure) then) =
       __$$CustomFailureCopyWithImpl<$Res>;
 
+  @override
   @useResult
   $Res call({String message, dynamic failure});
 }
@@ -544,7 +574,7 @@ class _$CustomFailure extends CustomFailure {
         noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
     return customFailure(message, failure);
   }
@@ -557,7 +587,7 @@ class _$CustomFailure extends CustomFailure {
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(String? message, dynamic failure)? noInternetFailure,
     TResult? Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
     return customFailure?.call(message, failure);
   }
@@ -570,7 +600,7 @@ class _$CustomFailure extends CustomFailure {
     TResult Function(String message, dynamic failure)? customFailure,
     TResult Function(String? message, dynamic failure)? noInternetFailure,
     TResult Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (customFailure != null) {
@@ -627,24 +657,27 @@ class _$CustomFailure extends CustomFailure {
 abstract class CustomFailure extends NetworkFailure {
   const factory CustomFailure(final String message, [final dynamic failure]) =
       _$CustomFailure;
-
   const CustomFailure._() : super._();
 
   String get message;
 
+  @override
   dynamic get failure;
 
+  @override
   @JsonKey(ignore: true)
   _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$NoInternetFailureCopyWith<$Res> {
+abstract class _$$NoInternetFailureCopyWith<$Res>
+    implements $NetworkFailureCopyWith<$Res> {
   factory _$$NoInternetFailureCopyWith(
           _$NoInternetFailure value, $Res Function(_$NoInternetFailure) then) =
       __$$NoInternetFailureCopyWithImpl<$Res>;
 
+  @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
@@ -721,7 +754,7 @@ class _$NoInternetFailure extends NoInternetFailure {
         noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
     return noInternetFailure(message, failure);
   }
@@ -734,7 +767,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(String? message, dynamic failure)? noInternetFailure,
     TResult? Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
     return noInternetFailure?.call(message, failure);
   }
@@ -747,7 +780,7 @@ class _$NoInternetFailure extends NoInternetFailure {
     TResult Function(String message, dynamic failure)? customFailure,
     TResult Function(String? message, dynamic failure)? noInternetFailure,
     TResult Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (noInternetFailure != null) {
@@ -804,24 +837,27 @@ class _$NoInternetFailure extends NoInternetFailure {
 abstract class NoInternetFailure extends NetworkFailure {
   const factory NoInternetFailure(
       [final String? message, final dynamic failure]) = _$NoInternetFailure;
-
   const NoInternetFailure._() : super._();
 
   String? get message;
 
+  @override
   dynamic get failure;
 
+  @override
   @JsonKey(ignore: true)
   _$$NoInternetFailureCopyWith<_$NoInternetFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnauthenticatedFailureCopyWith<$Res> {
+abstract class _$$UnauthenticatedFailureCopyWith<$Res>
+    implements $NetworkFailureCopyWith<$Res> {
   factory _$$UnauthenticatedFailureCopyWith(_$UnauthenticatedFailure value,
           $Res Function(_$UnauthenticatedFailure) then) =
       __$$UnauthenticatedFailureCopyWithImpl<$Res>;
 
+  @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
@@ -899,7 +935,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
         noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
     return unauthenticatedFailure(message, failure);
   }
@@ -912,7 +948,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(String? message, dynamic failure)? noInternetFailure,
     TResult? Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
     return unauthenticatedFailure?.call(message, failure);
   }
@@ -925,7 +961,7 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
     TResult Function(String message, dynamic failure)? customFailure,
     TResult Function(String? message, dynamic failure)? noInternetFailure,
     TResult Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (unauthenticatedFailure != null) {
@@ -983,26 +1019,29 @@ abstract class UnauthenticatedFailure extends NetworkFailure {
   const factory UnauthenticatedFailure(
       [final String? message,
       final dynamic failure]) = _$UnauthenticatedFailure;
-
   const UnauthenticatedFailure._() : super._();
 
   String? get message;
 
+  @override
   dynamic get failure;
 
+  @override
   @JsonKey(ignore: true)
   _$$UnauthenticatedFailureCopyWith<_$UnauthenticatedFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnknownErrorCopyWith<$Res> {
+abstract class _$$UnknownErrorCopyWith<$Res>
+    implements $NetworkFailureCopyWith<$Res> {
   factory _$$UnknownErrorCopyWith(
           _$UnknownError value, $Res Function(_$UnknownError) then) =
       __$$UnknownErrorCopyWithImpl<$Res>;
 
+  @override
   @useResult
-  $Res call({dynamic error});
+  $Res call({dynamic error, dynamic failure});
 }
 
 /// @nodoc
@@ -1017,11 +1056,16 @@ class __$$UnknownErrorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? error = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_$UnknownError(
       freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ));
   }
@@ -1030,14 +1074,16 @@ class __$$UnknownErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnknownError extends UnknownError {
-  const _$UnknownError(this.error) : super._();
+  const _$UnknownError(this.error, [this.failure]) : super._();
 
   @override
   final dynamic error;
+  @override
+  final dynamic failure;
 
   @override
   String toString() {
-    return 'NetworkFailure.unknownError(error: $error)';
+    return 'NetworkFailure.unknownError(error: $error, failure: $failure)';
   }
 
   @override
@@ -1045,12 +1091,15 @@ class _$UnknownError extends UnknownError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnknownError &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
@@ -1069,9 +1118,9 @@ class _$UnknownError extends UnknownError {
         noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
-    return unknownError(error);
+    return unknownError(error, failure);
   }
 
   @override
@@ -1082,9 +1131,9 @@ class _$UnknownError extends UnknownError {
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(String? message, dynamic failure)? noInternetFailure,
     TResult? Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
-    return unknownError?.call(error);
+    return unknownError?.call(error, failure);
   }
 
   @override
@@ -1095,11 +1144,11 @@ class _$UnknownError extends UnknownError {
     TResult Function(String message, dynamic failure)? customFailure,
     TResult Function(String? message, dynamic failure)? noInternetFailure,
     TResult Function(String? message, dynamic failure)? unauthenticatedFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (unknownError != null) {
-      return unknownError(error);
+      return unknownError(error, failure);
     }
     return orElse();
   }
@@ -1150,12 +1199,17 @@ class _$UnknownError extends UnknownError {
 }
 
 abstract class UnknownError extends NetworkFailure {
-  const factory UnknownError(final dynamic error) = _$UnknownError;
+  const factory UnknownError(final dynamic error, [final dynamic failure]) =
+      _$UnknownError;
 
   const UnknownError._() : super._();
 
   dynamic get error;
 
+  @override
+  dynamic get failure;
+
+  @override
   @JsonKey(ignore: true)
   _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
       throw _privateConstructorUsedError;

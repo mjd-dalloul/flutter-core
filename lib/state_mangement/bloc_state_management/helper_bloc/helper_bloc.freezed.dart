@@ -26,7 +26,6 @@ mixin _$HelperBlocEvent {
         contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isLoading)? loadingChanged,
@@ -37,7 +36,6 @@ mixin _$HelperBlocEvent {
         contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? loadingChanged,
@@ -48,7 +46,6 @@ mixin _$HelperBlocEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadingChanged value) loadingChanged,
@@ -59,7 +56,6 @@ mixin _$HelperBlocEvent {
         contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadingChanged value)? loadingChanged,
@@ -69,7 +65,6 @@ mixin _$HelperBlocEvent {
     TResult? Function(ContextCallbackTriggered value)? contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadingChanged value)? loadingChanged,
@@ -96,7 +91,6 @@ class _$HelperBlocEventCopyWithImpl<$Res, $Val extends HelperBlocEvent>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 }
@@ -106,7 +100,6 @@ abstract class _$$LoadingChangedCopyWith<$Res> {
   factory _$$LoadingChangedCopyWith(
           _$LoadingChanged value, $Res Function(_$LoadingChanged) then) =
       __$$LoadingChangedCopyWithImpl<$Res>;
-
   @useResult
   $Res call({bool isLoading});
 }
@@ -252,7 +245,6 @@ abstract class LoadingChanged implements HelperBlocEvent {
   const factory LoadingChanged(final bool isLoading) = _$LoadingChanged;
 
   bool get isLoading;
-
   @JsonKey(ignore: true)
   _$$LoadingChangedCopyWith<_$LoadingChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -386,7 +378,6 @@ abstract class _$$FailureHappenedCopyWith<$Res> {
   factory _$$FailureHappenedCopyWith(
           _$FailureHappened value, $Res Function(_$FailureHappened) then) =
       __$$FailureHappenedCopyWithImpl<$Res>;
-
   @useResult
   $Res call({BaseFailure failure});
 }
@@ -531,7 +522,6 @@ abstract class FailureHappened implements HelperBlocEvent {
   const factory FailureHappened(final BaseFailure failure) = _$FailureHappened;
 
   BaseFailure get failure;
-
   @JsonKey(ignore: true)
   _$$FailureHappenedCopyWith<_$FailureHappened> get copyWith =>
       throw _privateConstructorUsedError;
@@ -542,7 +532,6 @@ abstract class _$$UnknownErrorHappenedCopyWith<$Res> {
   factory _$$UnknownErrorHappenedCopyWith(_$UnknownErrorHappened value,
           $Res Function(_$UnknownErrorHappened) then) =
       __$$UnknownErrorHappenedCopyWithImpl<$Res>;
-
   @useResult
   $Res call({Object unknownError});
 }
@@ -688,7 +677,6 @@ abstract class UnknownErrorHappened implements HelperBlocEvent {
       _$UnknownErrorHappened;
 
   Object get unknownError;
-
   @JsonKey(ignore: true)
   _$$UnknownErrorHappenedCopyWith<_$UnknownErrorHappened> get copyWith =>
       throw _privateConstructorUsedError;
@@ -699,7 +687,6 @@ abstract class _$$ContextCallbackTriggeredCopyWith<$Res> {
   factory _$$ContextCallbackTriggeredCopyWith(_$ContextCallbackTriggered value,
           $Res Function(_$ContextCallbackTriggered) then) =
       __$$ContextCallbackTriggeredCopyWithImpl<$Res>;
-
   @useResult
   $Res call({ContextCallback contextCallback});
 }
@@ -848,7 +835,6 @@ abstract class ContextCallbackTriggered implements HelperBlocEvent {
       final ContextCallback contextCallback) = _$ContextCallbackTriggered;
 
   ContextCallback get contextCallback;
-
   @JsonKey(ignore: true)
   _$$ContextCallbackTriggeredCopyWith<_$ContextCallbackTriggered>
       get copyWith => throw _privateConstructorUsedError;
@@ -857,11 +843,8 @@ abstract class ContextCallbackTriggered implements HelperBlocEvent {
 /// @nodoc
 mixin _$HelperBlocState {
   bool get isLoading => throw _privateConstructorUsedError;
-
   ContextCallback get contextCallback => throw _privateConstructorUsedError;
-
   BaseFailure? get failure => throw _privateConstructorUsedError;
-
   Object? get unknownError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -874,7 +857,6 @@ abstract class $HelperBlocStateCopyWith<$Res> {
   factory $HelperBlocStateCopyWith(
           HelperBlocState value, $Res Function(HelperBlocState) then) =
       _$HelperBlocStateCopyWithImpl<$Res, HelperBlocState>;
-
   @useResult
   $Res call(
       {bool isLoading,
@@ -890,7 +872,6 @@ class _$HelperBlocStateCopyWithImpl<$Res, $Val extends HelperBlocState>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -927,7 +908,6 @@ abstract class _$$_HelperBlocStateCopyWith<$Res>
   factory _$$_HelperBlocStateCopyWith(
           _$_HelperBlocState value, $Res Function(_$_HelperBlocState) then) =
       __$$_HelperBlocStateCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -1029,16 +1009,12 @@ abstract class _HelperBlocState implements HelperBlocState {
 
   @override
   bool get isLoading;
-
   @override
   ContextCallback get contextCallback;
-
   @override
   BaseFailure? get failure;
-
   @override
   Object? get unknownError;
-
   @override
   @JsonKey(ignore: true)
   _$$_HelperBlocStateCopyWith<_$_HelperBlocState> get copyWith =>

@@ -16,24 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LocalFailure {
+  dynamic get failure => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) customFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(String message, dynamic failure) customFailure,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) =>
       throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? customFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(String message, dynamic failure)? customFailure,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? customFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(String message, dynamic failure)? customFailure,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +61,10 @@ mixin _$LocalFailure {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $LocalFailureCopyWith<LocalFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -66,6 +72,9 @@ abstract class $LocalFailureCopyWith<$Res> {
   factory $LocalFailureCopyWith(
           LocalFailure value, $Res Function(LocalFailure) then) =
       _$LocalFailureCopyWithImpl<$Res, LocalFailure>;
+
+  @useResult
+  $Res call({dynamic failure});
 }
 
 /// @nodoc
@@ -78,16 +87,31 @@ class _$LocalFailureCopyWithImpl<$Res, $Val extends LocalFailure>
 
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failure = freezed,
+  }) {
+    return _then(_value.copyWith(
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$CustomFailureCopyWith<$Res> {
+abstract class _$$CustomFailureCopyWith<$Res>
+    implements $LocalFailureCopyWith<$Res> {
   factory _$$CustomFailureCopyWith(
           _$CustomFailure value, $Res Function(_$CustomFailure) then) =
       __$$CustomFailureCopyWithImpl<$Res>;
 
+  @override
   @useResult
-  $Res call({String message});
+  $Res call({String message, dynamic failure});
 }
 
 /// @nodoc
@@ -102,12 +126,17 @@ class __$$CustomFailureCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? failure = freezed,
   }) {
     return _then(_$CustomFailure(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -115,14 +144,16 @@ class __$$CustomFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CustomFailure extends CustomFailure {
-  const _$CustomFailure(this.message) : super._();
+  const _$CustomFailure(this.message, [this.failure]) : super._();
 
   @override
   final String message;
+  @override
+  final dynamic failure;
 
   @override
   String toString() {
-    return 'LocalFailure.customFailure(message: $message)';
+    return 'LocalFailure.customFailure(message: $message, failure: $failure)';
   }
 
   @override
@@ -130,11 +161,13 @@ class _$CustomFailure extends CustomFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CustomFailure &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(
+      runtimeType, message, const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
@@ -145,30 +178,30 @@ class _$CustomFailure extends CustomFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) customFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(String message, dynamic failure) customFailure,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
-    return customFailure(message);
+    return customFailure(message, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? customFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(String message, dynamic failure)? customFailure,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
-    return customFailure?.call(message);
+    return customFailure?.call(message, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? customFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(String message, dynamic failure)? customFailure,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (customFailure != null) {
-      return customFailure(message);
+      return customFailure(message, failure);
     }
     return orElse();
   }
@@ -206,25 +239,32 @@ class _$CustomFailure extends CustomFailure {
 }
 
 abstract class CustomFailure extends LocalFailure {
-  const factory CustomFailure(final String message) = _$CustomFailure;
+  const factory CustomFailure(final String message, [final dynamic failure]) =
+      _$CustomFailure;
 
   const CustomFailure._() : super._();
 
   String get message;
 
+  @override
+  dynamic get failure;
+
+  @override
   @JsonKey(ignore: true)
   _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnknownErrorCopyWith<$Res> {
+abstract class _$$UnknownErrorCopyWith<$Res>
+    implements $LocalFailureCopyWith<$Res> {
   factory _$$UnknownErrorCopyWith(
           _$UnknownError value, $Res Function(_$UnknownError) then) =
       __$$UnknownErrorCopyWithImpl<$Res>;
 
+  @override
   @useResult
-  $Res call({dynamic error});
+  $Res call({dynamic error, dynamic failure});
 }
 
 /// @nodoc
@@ -239,11 +279,16 @@ class __$$UnknownErrorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? error = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_$UnknownError(
       freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ));
   }
@@ -252,14 +297,16 @@ class __$$UnknownErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnknownError extends UnknownError {
-  const _$UnknownError(this.error) : super._();
+  const _$UnknownError(this.error, [this.failure]) : super._();
 
   @override
   final dynamic error;
+  @override
+  final dynamic failure;
 
   @override
   String toString() {
-    return 'LocalFailure.unknownError(error: $error)';
+    return 'LocalFailure.unknownError(error: $error, failure: $failure)';
   }
 
   @override
@@ -267,12 +314,15 @@ class _$UnknownError extends UnknownError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnknownError &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
@@ -283,30 +333,30 @@ class _$UnknownError extends UnknownError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) customFailure,
-    required TResult Function(dynamic error) unknownError,
+    required TResult Function(String message, dynamic failure) customFailure,
+    required TResult Function(dynamic error, dynamic failure) unknownError,
   }) {
-    return unknownError(error);
+    return unknownError(error, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? customFailure,
-    TResult? Function(dynamic error)? unknownError,
+    TResult? Function(String message, dynamic failure)? customFailure,
+    TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) {
-    return unknownError?.call(error);
+    return unknownError?.call(error, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? customFailure,
-    TResult Function(dynamic error)? unknownError,
+    TResult Function(String message, dynamic failure)? customFailure,
+    TResult Function(dynamic error, dynamic failure)? unknownError,
     required TResult orElse(),
   }) {
     if (unknownError != null) {
-      return unknownError(error);
+      return unknownError(error, failure);
     }
     return orElse();
   }
@@ -344,12 +394,17 @@ class _$UnknownError extends UnknownError {
 }
 
 abstract class UnknownError extends LocalFailure {
-  const factory UnknownError(final dynamic error) = _$UnknownError;
+  const factory UnknownError(final dynamic error, [final dynamic failure]) =
+      _$UnknownError;
 
   const UnknownError._() : super._();
 
   dynamic get error;
 
+  @override
+  dynamic get failure;
+
+  @override
   @JsonKey(ignore: true)
   _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
       throw _privateConstructorUsedError;

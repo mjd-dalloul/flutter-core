@@ -23,10 +23,14 @@ class NetworkFailure with _$NetworkFailure implements Exception, BaseFailure {
   const factory NetworkFailure.unauthenticatedFailure(
       [String? message, dynamic failure]) = UnauthenticatedFailure;
 
-  const factory NetworkFailure.unknownError(dynamic error) = UnknownError;
+  const factory NetworkFailure.unknownError(dynamic error, [dynamic failure]) =
+      UnknownError;
 
   @override
   String get failureMessage => _message;
+
+  @override
+  get appFailure => _customFailure;
 }
 
 extension NetworkFailureMessage on NetworkFailure {
@@ -41,5 +45,14 @@ extension NetworkFailureMessage on NetworkFailure {
         requestCancelled: (failure) =>
             failure.message ?? DefaultValues.REQUEST_CANCELLED,
         unknownError: (_) => DefaultValues.SOMETHING_WENT_WRONG,
+      );
+
+  dynamic get _customFailure => map(
+        serverFailure: (failure) => failure.failure,
+        requestCancelled: (failure) => failure.failure,
+        customFailure: (failure) => failure.failure,
+        noInternetFailure: (failure) => failure.failure,
+        unauthenticatedFailure: (failure) => failure.failure,
+        unknownError: (failure) => failure.failure,
       );
 }
