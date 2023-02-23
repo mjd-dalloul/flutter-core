@@ -48,6 +48,16 @@ class DataModelWrapper<T> with _$DataModelWrapper {
       networkDataFailure: (failure) => failure,
       orElse: () => null);
 
+  NetworkFailure? get networkFailure => maybeWhen(
+        networkDataFailure: (f) => f,
+        orElse: () => null,
+      );
+
+  LocalFailure? get localFailure => maybeWhen(
+        localDataFailure: (f) => f,
+        orElse: () => null,
+      );
+
   @override
   String toString() {
     return maybeWhen(
