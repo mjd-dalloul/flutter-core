@@ -25,6 +25,16 @@ class DataModelWrapper<T> with _$DataModelWrapper {
     T? data,
   }) = LocalData;
 
+  DataModelWrapper<T> transformData(T Function(T) transform) {
+    return maybeMap(
+      networkData: (res) =>
+          DataModelWrapper.networkData(data: transform.call(res.data)),
+      localData: (res) =>
+          DataModelWrapper.localData(data: transform.call(res.data)),
+      orElse: () => this,
+    );
+  }
+
   bool get isSuccess => maybeMap(
         localData: (_) => true,
         networkData: (_) => true,
