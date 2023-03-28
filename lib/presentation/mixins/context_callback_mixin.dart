@@ -7,6 +7,8 @@ mixin ContextCallbackMixin<S extends StatefulWidget, P extends BaseBloc>
     on State<S> {
   P get baseBloc;
 
+  bool get autoDispose => true;
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<HelperBloc, HelperBlocState>(
@@ -20,7 +22,9 @@ mixin ContextCallbackMixin<S extends StatefulWidget, P extends BaseBloc>
   @override
   void dispose() {
     super.dispose();
-    baseBloc.helperBloc.close();
+    if (autoDispose) {
+      baseBloc.helperBloc.close();
+    }
   }
 
   Widget buildChild(BuildContext context);
