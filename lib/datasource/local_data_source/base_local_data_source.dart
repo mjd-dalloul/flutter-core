@@ -184,8 +184,8 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
       Future<T?> Function() databaseCall) async {
     try {
       return DataModelWrapper.localData(data: await databaseCall.call());
-    } catch (e) {
-      logger.e('Error happened in base local data source ', e);
+    } catch (e, stacktrace) {
+      logger.e('Error happened in base local data source ', e, stacktrace);
       return DataModelWrapper.localDataFailure(
           localFailure: LocalFailure.unknownError(e));
     }

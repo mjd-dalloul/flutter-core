@@ -96,13 +96,13 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
 
       /// if we are here then the status code of the request must be 200<=statusCode<=299
       return ret;
-    } on NetworkFailure catch (e) {
+    } on NetworkFailure catch (e, stacktrace) {
       /// our failure we will handle it.
-      logger.e('Network failure happen', e);
+      logger.e('Network failure happen', e, stacktrace);
       return DataModelWrapper.networkDataFailure(networkFailure: e);
-    } catch (e) {
+    } catch (e, stacktrace) {
       /// something went wrong.
-      logger.e('error happen in base remote data source', e);
+      logger.e('error happen in base remote data source', e, stacktrace);
       rethrow;
     }
   }
@@ -153,7 +153,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     void Function(int, int)? onReceiveProgress,
   }) {
     logger.d(
-        'Post request to ${endPoint} with headers ${headers} and params ${params} and data ${data}');
+        'Post request to ${endPoint} with headers ${headers?.headers.toString()} and params ${params.toString()} and data ${data}');
     return wrapRequestWithTryAndCatch(
       dio.post(
         endPoint,
@@ -220,13 +220,14 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
       } else {
         throw mapStatusCodeToFailure(response);
       }
-    } on DioError catch (e) {
+    } on DioError catch (e, stacktrace) {
+      logger.e('Dio Error happened', e, stacktrace);
       throw mapDioErrorToFailure(e);
     } on NetworkFailure {
       rethrow;
-    } catch (e) {
+    } catch (e, stacktrace) {
       /// if this happen then it's not a network error, then it must be a bug in the request
-      logger.e('Error happen while requesting to server', e);
+      logger.e('Error happen while requesting to server', e, stacktrace);
       throw NetworkFailure.customFailure(e.toString());
     }
   }
@@ -290,4 +291,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
   ///or add new field to the data before sending it
   @override
   dynamic wrapBodyWithBaseRequest(data) => data;
+
+  @override
+  String bodyToString(data) => data?.toString() ?? 'null';
 }

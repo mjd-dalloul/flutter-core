@@ -39,4 +39,6 @@ abstract class IBaseRemoteDataSource {
   });
 
   dynamic wrapBodyWithBaseRequest(dynamic data);
+
+  String bodyToString(dynamic data);
 }
