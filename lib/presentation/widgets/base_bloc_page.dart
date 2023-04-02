@@ -12,7 +12,7 @@ abstract class _BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
     extends BaseState<P> {
   B get bloc;
 
-  bool get autoDispose => true;
+  bool get autoDispose;
 
   @override
   void dispose() {

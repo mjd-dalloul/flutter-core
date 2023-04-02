@@ -22,11 +22,11 @@ mixin BlocProviderMixin<S extends StatefulWidget, B extends BaseBloc>
     on State<S> {
   B get provider;
 
-  bool get autoDispose => true;
+  bool get autoBlocDispose;
 
   @override
   void dispose() {
-    if (autoDispose) {
+    if (autoBlocDispose) {
       provider.helperBloc.close();
       provider.close();
     }

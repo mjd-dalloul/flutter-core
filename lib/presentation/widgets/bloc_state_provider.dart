@@ -8,7 +8,7 @@ abstract class BlocStateProvider<P extends StatefulWidget, B extends BaseBloc>
     extends State<P> with ThemeMixin, SizeMixin {
   late final B bloc;
 
-  bool get autoDispose => true;
+  bool get autoDisposeBloc;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ abstract class BlocStateProvider<P extends StatefulWidget, B extends BaseBloc>
 
   @override
   void dispose() {
-    if (autoDispose) {
+    if (autoDisposeBloc) {
       bloc.helperBloc.close();
       bloc.close();
     }
