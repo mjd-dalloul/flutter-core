@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/constant.dart';
 import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/helper_bloc.dart';
 import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
@@ -50,7 +51,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         await onFailure?.call(res);
       }
     } catch (e, st) {
-      logger.e('Error in FutureWrapper2', e, st);
+      logger.e(ErrorLogType.baseBlocError, e, st);
       await unknownError?.call(e);
     }
   }
@@ -126,7 +127,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       }
       return res;
     } catch (e, st) {
-      logger.e('Error in FutureWrapper', e, st);
+      logger.e(ErrorLogType.baseBlocError, e, st);
       await loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);

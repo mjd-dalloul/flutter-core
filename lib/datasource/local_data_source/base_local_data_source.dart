@@ -1,3 +1,4 @@
+import 'package:flutter_core/constant.dart';
 import 'package:flutter_core/datasource/local_data_source/i_base_local_data_source.dart';
 import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
@@ -33,7 +34,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
 
   @override
   Future<void> initializeDatabase(String databaseName, int version,
-          DatabaseSchema databaseSchema) async =>
+      DatabaseSchema databaseSchema) async =>
       openDatabase(
         // Set the path to the database. Note: Using the `join` function from the
         // `path` package is best practice to ensure the path is correctly
@@ -61,7 +62,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
   }) {
     final deleteQuery = whereCondition?.call();
     return _wrapWithTryAndCatch(
-      () => _database.delete(
+          () => _database.delete(
         tableName,
         where: deleteQuery?.item1,
         whereArgs: deleteQuery?.item2,
@@ -175,17 +176,16 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     ConflictAlgorithm? conflictAlgorithm,
   }) async =>
       _wrapWithTryAndCatch(() => _database.insert(
-            tableName,
-            toMap.call(),
-            conflictAlgorithm: conflictAlgorithm ?? ConflictAlgorithm.replace,
-          ));
+        tableName,
+        toMap.call(),
+        conflictAlgorithm: conflictAlgorithm ?? ConflictAlgorithm.replace,
+      ));
 
-  Future<DataModelWrapper<T>> _wrapWithTryAndCatch<T>(
-      Future<T?> Function() databaseCall) async {
+  Future<DataModelWrapper<T>> _wrapWithTryAndCatch<T>(Future<T?> Function() databaseCall) async {
     try {
       return DataModelWrapper.localData(data: await databaseCall.call());
     } catch (e, stacktrace) {
-      logger.e('Error happened in base local data source ', e, stacktrace);
+      logger.e(ErrorLogType.localDatabaseError, e, stacktrace);
       return DataModelWrapper.localDataFailure(
           localFailure: LocalFailure.unknownError(e));
     }

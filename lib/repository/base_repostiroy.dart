@@ -95,16 +95,9 @@ abstract class BaseRepository {
       await onRemoteFailure?.call(res.networkFailure!);
     }
     if (saveRemoteDataFunction != null) {
-      if (res.isFailure) {
-        logger.e(
-            '<BaseRepository>: Could not save because network call did not go well',
-            res.failure);
-      } else if (res.data != null) {
+      if (res.data != null) {
         final saveResult = await saveRemoteDataFunction.call(res.data as T);
         if (saveResult.isFailure) {
-          logger.e(
-              '<BaseRepository>: Could not save in database because ${saveResult.failure}',
-              saveResult.failure);
           onCacheFailure?.call(saveResult.failure!);
         } else {
           logger.i('<BaseRepository>: Inserted rows count: ${saveResult.data}');
