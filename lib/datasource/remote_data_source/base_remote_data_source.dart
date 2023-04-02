@@ -98,6 +98,18 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
       return ret;
     } on NetworkFailure catch (e, stacktrace) {
       /// our failure we will handle it.
+      logger.e(
+        e.map(
+          serverFailure: (_) => ErrorLogType.serverFailure,
+          requestCancelled: (_) => ErrorLogType.requestCancelled,
+          customFailure: (_) => ErrorLogType.customFailure,
+          noInternetFailure: (_) => ErrorLogType.noInternetFailure,
+          unauthenticatedFailure: (_) => ErrorLogType.unauthenticatedFailure,
+          unknownError: (_) => ErrorLogType.unknownError,
+        ),
+        e,
+        stacktrace,
+      );
       return DataModelWrapper.networkDataFailure(networkFailure: e);
     } catch (e, stacktrace) {
       /// something went wrong.
@@ -222,19 +234,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     } on DioError catch (e, stacktrace) {
       logger.e(ErrorLogType.dioError, e, stacktrace);
       throw mapDioErrorToFailure(e);
-    } on NetworkFailure catch (e, stacktrace) {
-      logger.e(
-        e.map(
-          serverFailure: (_) => ErrorLogType.serverFailure,
-          requestCancelled: (_) => ErrorLogType.requestCancelled,
-          customFailure: (_) => ErrorLogType.customFailure,
-          noInternetFailure: (_) => ErrorLogType.noInternetFailure,
-          unauthenticatedFailure: (_) => ErrorLogType.unauthenticatedFailure,
-          unknownError: (_) => ErrorLogType.unknownError,
-        ),
-        e,
-        stacktrace,
-      );
+    } on NetworkFailure {
       rethrow;
     } catch (e, stacktrace) {
       /// if this happen then it's not a network error, then it must be a bug in the request
