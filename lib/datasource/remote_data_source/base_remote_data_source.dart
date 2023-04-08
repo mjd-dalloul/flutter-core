@@ -164,7 +164,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     void Function(int, int)? onReceiveProgress,
   }) {
     logger.d(
-        'Post request to ${endPoint} with headers ${headers?.headers.toString()} and params ${params.toString()} and data ${data}');
+        'Post request to ${endPoint} with headers ${headers?.headers.toString()} and params ${params.toString()} and data ${bodyToString(data)}');
     return wrapRequestWithTryAndCatch(
       dio.post(
         endPoint,
@@ -186,7 +186,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Options? headers,
   }) {
     logger.d(
-        'Put request to ${endPoint} with headers ${headers} and params ${params} and data ${data}');
+        'Put request to ${endPoint} with headers ${headers} and params ${params} and data ${bodyToString(data)}');
     return wrapRequestWithTryAndCatch(
       dio.put(
         endPoint,
@@ -206,7 +206,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     data,
   }) {
     logger.d(
-        'Patch request to ${endPoint} with headers ${headers} and params ${params} and data ${data}');
+        'Patch request to ${endPoint} with headers ${headers} and params ${params} and data ${bodyToString(data)}');
     return wrapRequestWithTryAndCatch(
       dio.patch(
         endPoint,
