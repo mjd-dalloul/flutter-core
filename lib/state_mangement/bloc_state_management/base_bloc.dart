@@ -8,6 +8,7 @@ import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/h
 import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
+import 'package:flutter_core/utils/failures/local_failures.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:logger/logger.dart';
 
@@ -31,10 +32,14 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     FutureOr<void> Function(bool)? loadingChanged,
     FutureOr<void> Function(T?)? onSuccess,
     FutureOr<void> Function()? beforeFutureStarted,
+    FutureOr<bool> Function()? abortOn,
     FutureOr<void> Function(T?)? onFailure,
     FutureOr<void> Function(dynamic)? unknownError,
   }) async {
     try {
+      if (abortOn?.call() == true) {
+        return;
+      }
       if (useBaseBlocLoader) {
         _isLoadingChanged(true);
       }
@@ -71,6 +76,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     FutureOr<void> Function(bool)? loadingChanged,
     FutureOr<void> Function(T?)? onSuccess,
     FutureOr<void> Function()? beforeFutureStarted,
+    FutureOr<bool> Function()? abortOn,
+    FutureOr<void> Function()? onAbort,
     FutureOr<void> Function(BaseFailure)? onFailure,
     FutureOr<void> Function(dynamic)? unknownError,
   }) async =>
@@ -78,6 +85,8 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         futureCall: futureCall,
         onSuccess: onSuccess,
         beforeFutureStarted: beforeFutureStarted,
+        abortOn: abortOn,
+        onAbort: onAbort,
         loadingChanged: loadingChanged,
         useBaseBlocLoader: useBaseBlocLoader,
         showUIErrorMessage: showUIErrorMessage,
@@ -96,10 +105,18 @@ class BaseBloc<E, S> extends Bloc<E, S> {
     FutureOr<void> Function(bool)? loadingChanged,
     FutureOr<void> Function(T?)? onSuccess,
     FutureOr<void> Function()? beforeFutureStarted,
+    FutureOr<bool> Function()? abortOn,
+    FutureOr<void> Function()? onAbort,
     FutureOr<void> Function(BaseFailure)? onFailure,
     FutureOr<void> Function(dynamic)? unknownError,
   }) async {
     try {
+      if (abortOn?.call() == true) {
+        logger.e('Aborting $futureCall call');
+        onAbort?.call();
+        return const DataModelWrapper.localDataFailure(
+            localFailure: LocalFailure.customFailure('Aborted'));
+      }
       helperBloc.add(const HelperBlocEvent.failureCleared());
       if (useBaseBlocLoader) {
         _isLoadingChanged(true);
@@ -148,13 +165,14 @@ class BaseBloc<E, S> extends Bloc<E, S> {
   void _isLoadingChanged(bool isLoading) =>
       helperBloc.add(HelperBlocEvent.loadingChanged(isLoading));
 
-  void _handleApiError(BaseFailure failure) => helperBloc.add(
-    HelperBlocEvent.contextCallbackTriggered(
-          (context) {
-        errorHandler(failure, context);
-      },
-    ),
-  );
+  void _handleApiError(BaseFailure failure) =>
+      helperBloc.add(
+        HelperBlocEvent.contextCallbackTriggered(
+              (context) {
+            errorHandler(failure, context);
+          },
+        ),
+      );
 
   void errorHandler(BaseFailure failure, BuildContext context) =>
       ScaffoldMessenger.of(context).showSnackBar(
