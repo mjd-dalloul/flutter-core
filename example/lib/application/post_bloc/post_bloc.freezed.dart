@@ -17,38 +17,32 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PostEvent {
   bool get fromServer => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool fromServer) postRequested,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool fromServer)? postRequested,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool fromServer)? postRequested,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PostRequested value) postRequested,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(PostRequested value)? postRequested,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PostRequested value)? postRequested,
@@ -65,7 +59,6 @@ mixin _$PostEvent {
 abstract class $PostEventCopyWith<$Res> {
   factory $PostEventCopyWith(PostEvent value, $Res Function(PostEvent) then) =
       _$PostEventCopyWithImpl<$Res, PostEvent>;
-
   @useResult
   $Res call({bool fromServer});
 }
@@ -77,7 +70,6 @@ class _$PostEventCopyWithImpl<$Res, $Val extends PostEvent>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -101,7 +93,6 @@ abstract class _$$PostRequestedCopyWith<$Res>
   factory _$$PostRequestedCopyWith(
           _$PostRequested value, $Res Function(_$PostRequested) then) =
       __$$PostRequestedCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({bool fromServer});
@@ -222,7 +213,6 @@ abstract class PostRequested implements PostEvent {
 
   @override
   bool get fromServer;
-
   @override
   @JsonKey(ignore: true)
   _$$PostRequestedCopyWith<_$PostRequested> get copyWith =>
@@ -242,7 +232,6 @@ mixin _$PostState {
 abstract class $PostStateCopyWith<$Res> {
   factory $PostStateCopyWith(PostState value, $Res Function(PostState) then) =
       _$PostStateCopyWithImpl<$Res, PostState>;
-
   @useResult
   $Res call({List<Post> posts});
 }
@@ -254,7 +243,6 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -277,7 +265,6 @@ abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
   factory _$$_PostStateCopyWith(
           _$_PostState value, $Res Function(_$_PostState) then) =
       __$$_PostStateCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({List<Post> posts});
@@ -311,7 +298,6 @@ class _$_PostState implements _PostState {
   const _$_PostState({required final List<Post> posts}) : _posts = posts;
 
   final List<Post> _posts;
-
   @override
   List<Post> get posts {
     if (_posts is EqualUnmodifiableListView) return _posts;
@@ -348,7 +334,6 @@ abstract class _PostState implements PostState {
 
   @override
   List<Post> get posts;
-
   @override
   @JsonKey(ignore: true)
   _$$_PostStateCopyWith<_$_PostState> get copyWith =>

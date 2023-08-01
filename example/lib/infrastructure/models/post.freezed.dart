@@ -21,15 +21,11 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Post {
   int? get userId => throw _privateConstructorUsedError;
-
   int? get id => throw _privateConstructorUsedError;
-
   String? get title => throw _privateConstructorUsedError;
-
   String? get body => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
 }
@@ -38,7 +34,6 @@ mixin _$Post {
 abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res, Post>;
-
   @useResult
   $Res call({int? userId, int? id, String? title, String? body});
 }
@@ -50,7 +45,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -87,7 +81,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
 abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   factory _$$_PostCopyWith(_$_Post value, $Res Function(_$_Post) then) =
       __$$_PostCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({int? userId, int? id, String? title, String? body});
@@ -184,23 +177,18 @@ abstract class _Post extends Post {
       final int? id,
       final String? title,
       final String? body}) = _$_Post;
-
   const _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
   int? get userId;
-
   @override
   int? get id;
-
   @override
   String? get title;
-
   @override
   String? get body;
-
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;

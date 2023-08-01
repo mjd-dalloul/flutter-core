@@ -23,7 +23,6 @@ mixin _$Failure {
     required TResult Function() unknownFailure,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message)? serverFailure,
@@ -31,7 +30,6 @@ mixin _$Failure {
     TResult? Function()? unknownFailure,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? serverFailure,
@@ -40,7 +38,6 @@ mixin _$Failure {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ServerFailure value) serverFailure,
@@ -49,7 +46,6 @@ mixin _$Failure {
     required TResult Function(UnknownFailure value) unknownFailure,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ServerFailure value)? serverFailure,
@@ -57,7 +53,6 @@ mixin _$Failure {
     TResult? Function(UnknownFailure value)? unknownFailure,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ServerFailure value)? serverFailure,
@@ -81,7 +76,6 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 }
@@ -91,7 +85,6 @@ abstract class _$$ServerFailureCopyWith<$Res> {
   factory _$$ServerFailureCopyWith(
           _$ServerFailure value, $Res Function(_$ServerFailure) then) =
       __$$ServerFailureCopyWithImpl<$Res>;
-
   @useResult
   $Res call({String? message});
 }
@@ -222,7 +215,6 @@ abstract class ServerFailure implements Failure {
   const factory ServerFailure([final String? message]) = _$ServerFailure;
 
   String? get message;
-
   @JsonKey(ignore: true)
   _$$ServerFailureCopyWith<_$ServerFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -233,7 +225,6 @@ abstract class _$$CustomFailureWithMessageCopyWith<$Res> {
   factory _$$CustomFailureWithMessageCopyWith(_$CustomFailureWithMessage value,
           $Res Function(_$CustomFailureWithMessage) then) =
       __$$CustomFailureWithMessageCopyWithImpl<$Res>;
-
   @useResult
   $Res call({String message});
 }
@@ -367,7 +358,6 @@ abstract class CustomFailureWithMessage implements Failure {
       _$CustomFailureWithMessage;
 
   String get message;
-
   @JsonKey(ignore: true)
   _$$CustomFailureWithMessageCopyWith<_$CustomFailureWithMessage>
       get copyWith => throw _privateConstructorUsedError;

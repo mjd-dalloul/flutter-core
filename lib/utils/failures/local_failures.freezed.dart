@@ -17,21 +17,18 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LocalFailure {
   dynamic get failure => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message, dynamic failure) customFailure,
     required TResult Function(dynamic error, dynamic failure) unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String message, dynamic failure)? customFailure,
     TResult? Function(dynamic error, dynamic failure)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message, dynamic failure)? customFailure,
@@ -39,21 +36,18 @@ mixin _$LocalFailure {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CustomFailure value) customFailure,
     required TResult Function(UnknownError value) unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CustomFailure value)? customFailure,
     TResult? Function(UnknownError value)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CustomFailure value)? customFailure,
@@ -72,7 +66,6 @@ abstract class $LocalFailureCopyWith<$Res> {
   factory $LocalFailureCopyWith(
           LocalFailure value, $Res Function(LocalFailure) then) =
       _$LocalFailureCopyWithImpl<$Res, LocalFailure>;
-
   @useResult
   $Res call({dynamic failure});
 }
@@ -84,7 +77,6 @@ class _$LocalFailureCopyWithImpl<$Res, $Val extends LocalFailure>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -108,7 +100,6 @@ abstract class _$$CustomFailureCopyWith<$Res>
   factory _$$CustomFailureCopyWith(
           _$CustomFailure value, $Res Function(_$CustomFailure) then) =
       __$$CustomFailureCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({String message, dynamic failure});
@@ -241,14 +232,11 @@ class _$CustomFailure extends CustomFailure {
 abstract class CustomFailure extends LocalFailure {
   const factory CustomFailure(final String message, [final dynamic failure]) =
       _$CustomFailure;
-
   const CustomFailure._() : super._();
 
   String get message;
-
   @override
   dynamic get failure;
-
   @override
   @JsonKey(ignore: true)
   _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
@@ -261,7 +249,6 @@ abstract class _$$UnknownErrorCopyWith<$Res>
   factory _$$UnknownErrorCopyWith(
           _$UnknownError value, $Res Function(_$UnknownError) then) =
       __$$UnknownErrorCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({dynamic error, dynamic failure});
@@ -396,14 +383,11 @@ class _$UnknownError extends UnknownError {
 abstract class UnknownError extends LocalFailure {
   const factory UnknownError(final dynamic error, [final dynamic failure]) =
       _$UnknownError;
-
   const UnknownError._() : super._();
 
   dynamic get error;
-
   @override
   dynamic get failure;
-
   @override
   @JsonKey(ignore: true)
   _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>

@@ -1,5 +1,5 @@
-extension ObjectExt on Object {
-  Object apply(void Function(Object) blocFunction) {
+extension ObjectExt<T> on T {
+  T apply(void Function(T) blocFunction) {
     blocFunction.call(this);
     return this;
   }
