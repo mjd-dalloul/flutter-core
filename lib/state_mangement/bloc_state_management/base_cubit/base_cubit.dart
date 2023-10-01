@@ -13,7 +13,7 @@ import 'package:flutter_core/utils/failures/local_failures.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:logger/logger.dart';
 
-abstract class BaseCubit extends Cubit<BaseCubitState> {
+abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
   BaseCubit(super.initialState, this.logger);
 
   final Logger logger;
@@ -128,7 +128,7 @@ abstract class BaseCubit extends Cubit<BaseCubitState> {
         await onFailure?.call(_failure!);
         if (onFailureDefaultHandler) {
           emit(
-            state.failureChanged(_failure),
+            state.failureChanged(_failure) as S,
           );
         }
       }
@@ -150,7 +150,7 @@ abstract class BaseCubit extends Cubit<BaseCubitState> {
       await unknownError?.call(e);
       if (onUnknownErrorDefaultHandler) {
         emit(
-          state.unknownErrorChanged(e),
+          state.unknownErrorChanged(e) as S,
         );
       }
       return DataModelWrapper.networkDataFailure(
@@ -160,19 +160,19 @@ abstract class BaseCubit extends Cubit<BaseCubitState> {
 
   /// call this function when you need access to [BuildContext] inside your bloc.
   void runFunctionWithContext(ContextCallback contextCallback) => emit(
-    state.contextCallbackChanged(contextCallback),
+    state.contextCallbackChanged(contextCallback) as S,
       );
 
   void _isLoadingChanged(bool isLoading) => emit(
-        state.isLoadingChanged(
+    state.isLoadingChanged(
           isLoading,
-        ),
+        ) as S,
       );
 
   void _handleApiError(BaseFailure failure) => emit(
-        state.failureChanged(failure).contextCallbackChanged(
+    state.failureChanged(failure).contextCallbackChanged(
               (context) => errorHandler(failure, context),
-            ),
+            ) as S,
       );
 
   void errorHandler(BaseFailure failure, BuildContext context) =>
@@ -183,6 +183,6 @@ abstract class BaseCubit extends Cubit<BaseCubitState> {
       );
 
   void failureCleared() => emit(
-    state.failureChanged(null).unknownErrorChanged(null),
+    state.failureChanged(null).unknownErrorChanged(null) as S,
       );
 }
