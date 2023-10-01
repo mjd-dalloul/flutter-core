@@ -8,13 +8,13 @@ import 'package:flutter_core/state_mangement/bloc_state_management/base_cubit/ba
 import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/helper_bloc.dart';
 import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/data_model_wrapper.dart';
-import 'package:flutter_core/utils/extensions/object_ext.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:flutter_core/utils/failures/local_failures.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:logger/logger.dart';
 
-abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
+abstract class BaseCubit<S extends BaseCubitState>
+    extends Cubit<BaseCubitState> {
   BaseCubit(super.initialState, this.logger);
 
   final Logger logger;
@@ -129,7 +129,7 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
         await onFailure?.call(_failure!);
         if (onFailureDefaultHandler) {
           emit(
-            state.apply((s) => s.failure = _failure),
+            state.failureChanged(_failure),
           );
         }
       }
@@ -151,7 +151,7 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
       await unknownError?.call(e);
       if (onUnknownErrorDefaultHandler) {
         emit(
-          state.apply((s) => s.unknownError = e),
+          state.unknownErrorChanged(e),
         );
       }
       return DataModelWrapper.networkDataFailure(
@@ -161,24 +161,19 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
 
   /// call this function when you need access to [BuildContext] inside your bloc.
   void runFunctionWithContext(ContextCallback contextCallback) => emit(
-        state.apply(
-          (s) => s.contextCallback = contextCallback,
-        ),
+    state.contextCallbackChanged(contextCallback),
       );
 
   void _isLoadingChanged(bool isLoading) => emit(
-        state.apply(
-          (state) => state.isLoading = isLoading,
+        state.isLoadingChanged(
+          isLoading,
         ),
       );
 
   void _handleApiError(BaseFailure failure) => emit(
-        state.apply(
-          (state) {
-            state.failure = failure;
-            state.contextCallback = (context) => errorHandler(failure, context);
-          },
-        ),
+        state.failureChanged(failure).contextCallbackChanged(
+              (context) => errorHandler(failure, context),
+            ),
       );
 
   void errorHandler(BaseFailure failure, BuildContext context) =>
@@ -189,11 +184,6 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
       );
 
   void failureCleared() => emit(
-        state.apply(
-          (state) {
-            state.unknownError = null;
-            state.failure = null;
-          },
-        ),
+    state.failureChanged(null).unknownErrorChanged(null),
       );
 }

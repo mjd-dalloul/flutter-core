@@ -2,19 +2,19 @@ import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 
 abstract class BaseCubitState {
-  bool get isLoading;
+  bool getIsLoading();
 
-  ContextCallback get contextCallback;
+  ContextCallback? getContextCallback();
 
-  set isLoading(bool isLoading);
+  BaseCubitState isLoadingChanged(bool isLoading);
 
-  set contextCallback(ContextCallback contextCallback);
+  BaseCubitState contextCallbackChanged(ContextCallback? contextCallback);
 
-  BaseFailure? get failure;
+  BaseFailure? getFailure();
 
-  set failure(BaseFailure? failure);
+  BaseCubitState failureChanged(BaseFailure? failure);
 
-  Object? get unknownError;
+  Object? getUnknownError();
 
-  set unknownError(Object? unknownError);
+  BaseCubitState unknownErrorChanged(Object? unknownError);
 }

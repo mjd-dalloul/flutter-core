@@ -42,9 +42,9 @@ mixin CubitContextCallbackMixin<S extends StatefulWidget> on State<S> {
     return BlocListener(
       bloc: baseCubit,
       listenWhen: (BaseCubitState p, BaseCubitState c) =>
-          p.contextCallback != c.contextCallback,
+          p.getContextCallback() != c.getContextCallback(),
       listener: (context, BaseCubitState state) =>
-          state.contextCallback.call(context),
+          state.getContextCallback()?.call(context),
       child: buildChild(context),
     );
   }
