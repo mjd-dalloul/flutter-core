@@ -2,6 +2,8 @@ import 'package:flutter_core/type_defs.dart';
 import 'package:flutter_core/utils/failures/base_failure.dart';
 
 abstract class BaseCubitState {
+  const BaseCubitState();
+
   bool getIsLoading();
 
   ContextCallback? getContextCallback();

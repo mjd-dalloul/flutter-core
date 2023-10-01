@@ -33,7 +33,7 @@ mixin ContextCallbackMixin<S extends StatefulWidget, P extends BaseBloc>
 }
 
 mixin CubitContextCallbackMixin<S extends StatefulWidget> on State<S> {
-  BaseCubit<BaseCubitState> get baseCubit;
+  BaseCubit get baseCubit;
 
   bool get autoDisposeForHelperBloc => false;
 

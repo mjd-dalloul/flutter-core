@@ -13,8 +13,7 @@ import 'package:flutter_core/utils/failures/local_failures.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:logger/logger.dart';
 
-abstract class BaseCubit<S extends BaseCubitState>
-    extends Cubit<BaseCubitState> {
+abstract class BaseCubit extends Cubit<BaseCubitState> {
   BaseCubit(super.initialState, this.logger);
 
   final Logger logger;
