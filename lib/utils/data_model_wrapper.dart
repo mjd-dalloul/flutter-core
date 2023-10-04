@@ -13,6 +13,12 @@ class DataModelWrapper<T> with _$DataModelWrapper {
     T? data,
   }) = NetworkData;
 
+  const factory DataModelWrapper.empty() = Empty;
+
+  const factory DataModelWrapper.isLoading({
+    required bool isLoading,
+  }) = IsLoading;
+
   const factory DataModelWrapper.networkDataFailure({
     required NetworkFailure networkFailure,
   }) = NetworkDataFailure;
@@ -66,6 +72,16 @@ class DataModelWrapper<T> with _$DataModelWrapper {
   LocalFailure? get localFailure => maybeWhen(
         localDataFailure: (f) => f,
         orElse: () => null,
+      );
+
+  bool get isLoading => maybeWhen(
+        isLoading: (isLoading) => isLoading,
+        orElse: () => false,
+      );
+
+  bool get isEmpty => maybeWhen(
+        empty: () => true,
+        orElse: () => false,
       );
 
   @override

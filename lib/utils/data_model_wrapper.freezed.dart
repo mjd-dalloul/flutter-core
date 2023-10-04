@@ -19,6 +19,8 @@ mixin _$DataModelWrapper<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) networkData,
+    required TResult Function() empty,
+    required TResult Function(bool isLoading) isLoading,
     required TResult Function(NetworkFailure networkFailure) networkDataFailure,
     required TResult Function(LocalFailure localFailure) localDataFailure,
     required TResult Function(T? data) localData,
@@ -27,6 +29,8 @@ mixin _$DataModelWrapper<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? networkData,
+    TResult? Function()? empty,
+    TResult? Function(bool isLoading)? isLoading,
     TResult? Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult? Function(LocalFailure localFailure)? localDataFailure,
     TResult? Function(T? data)? localData,
@@ -35,6 +39,8 @@ mixin _$DataModelWrapper<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? networkData,
+    TResult Function()? empty,
+    TResult Function(bool isLoading)? isLoading,
     TResult Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult Function(LocalFailure localFailure)? localDataFailure,
     TResult Function(T? data)? localData,
@@ -44,6 +50,8 @@ mixin _$DataModelWrapper<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkData<T> value) networkData,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(IsLoading<T> value) isLoading,
     required TResult Function(NetworkDataFailure<T> value) networkDataFailure,
     required TResult Function(LocalDataFailure<T> value) localDataFailure,
     required TResult Function(LocalData<T> value) localData,
@@ -52,6 +60,8 @@ mixin _$DataModelWrapper<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkData<T> value)? networkData,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(IsLoading<T> value)? isLoading,
     TResult? Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult? Function(LocalDataFailure<T> value)? localDataFailure,
     TResult? Function(LocalData<T> value)? localData,
@@ -60,6 +70,8 @@ mixin _$DataModelWrapper<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkData<T> value)? networkData,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(IsLoading<T> value)? isLoading,
     TResult Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult Function(LocalDataFailure<T> value)? localDataFailure,
     TResult Function(LocalData<T> value)? localData,
@@ -147,6 +159,8 @@ class _$NetworkData<T> extends NetworkData<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) networkData,
+    required TResult Function() empty,
+    required TResult Function(bool isLoading) isLoading,
     required TResult Function(NetworkFailure networkFailure) networkDataFailure,
     required TResult Function(LocalFailure localFailure) localDataFailure,
     required TResult Function(T? data) localData,
@@ -158,6 +172,8 @@ class _$NetworkData<T> extends NetworkData<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? networkData,
+    TResult? Function()? empty,
+    TResult? Function(bool isLoading)? isLoading,
     TResult? Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult? Function(LocalFailure localFailure)? localDataFailure,
     TResult? Function(T? data)? localData,
@@ -169,6 +185,8 @@ class _$NetworkData<T> extends NetworkData<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? networkData,
+    TResult Function()? empty,
+    TResult Function(bool isLoading)? isLoading,
     TResult Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult Function(LocalFailure localFailure)? localDataFailure,
     TResult Function(T? data)? localData,
@@ -184,6 +202,8 @@ class _$NetworkData<T> extends NetworkData<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkData<T> value) networkData,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(IsLoading<T> value) isLoading,
     required TResult Function(NetworkDataFailure<T> value) networkDataFailure,
     required TResult Function(LocalDataFailure<T> value) localDataFailure,
     required TResult Function(LocalData<T> value) localData,
@@ -195,6 +215,8 @@ class _$NetworkData<T> extends NetworkData<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkData<T> value)? networkData,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(IsLoading<T> value)? isLoading,
     TResult? Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult? Function(LocalDataFailure<T> value)? localDataFailure,
     TResult? Function(LocalData<T> value)? localData,
@@ -206,6 +228,8 @@ class _$NetworkData<T> extends NetworkData<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkData<T> value)? networkData,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(IsLoading<T> value)? isLoading,
     TResult Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult Function(LocalDataFailure<T> value)? localDataFailure,
     TResult Function(LocalData<T> value)? localData,
@@ -220,11 +244,291 @@ class _$NetworkData<T> extends NetworkData<T> {
 
 abstract class NetworkData<T> extends DataModelWrapper<T> {
   const factory NetworkData({final T? data}) = _$NetworkData<T>;
+
   const NetworkData._() : super._();
 
   T? get data;
+
   @JsonKey(ignore: true)
   _$$NetworkDataCopyWith<T, _$NetworkData<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EmptyCopyWith<T, $Res> {
+  factory _$$EmptyCopyWith(_$Empty<T> value, $Res Function(_$Empty<T>) then) =
+      __$$EmptyCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$EmptyCopyWithImpl<T, $Res>
+    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$Empty<T>>
+    implements _$$EmptyCopyWith<T, $Res> {
+  __$$EmptyCopyWithImpl(_$Empty<T> _value, $Res Function(_$Empty<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$Empty<T> extends Empty<T> {
+  const _$Empty() : super._();
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Empty<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T? data) networkData,
+    required TResult Function() empty,
+    required TResult Function(bool isLoading) isLoading,
+    required TResult Function(NetworkFailure networkFailure) networkDataFailure,
+    required TResult Function(LocalFailure localFailure) localDataFailure,
+    required TResult Function(T? data) localData,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(T? data)? networkData,
+    TResult? Function()? empty,
+    TResult? Function(bool isLoading)? isLoading,
+    TResult? Function(NetworkFailure networkFailure)? networkDataFailure,
+    TResult? Function(LocalFailure localFailure)? localDataFailure,
+    TResult? Function(T? data)? localData,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T? data)? networkData,
+    TResult Function()? empty,
+    TResult Function(bool isLoading)? isLoading,
+    TResult Function(NetworkFailure networkFailure)? networkDataFailure,
+    TResult Function(LocalFailure localFailure)? localDataFailure,
+    TResult Function(T? data)? localData,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkData<T> value) networkData,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(IsLoading<T> value) isLoading,
+    required TResult Function(NetworkDataFailure<T> value) networkDataFailure,
+    required TResult Function(LocalDataFailure<T> value) localDataFailure,
+    required TResult Function(LocalData<T> value) localData,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkData<T> value)? networkData,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(IsLoading<T> value)? isLoading,
+    TResult? Function(NetworkDataFailure<T> value)? networkDataFailure,
+    TResult? Function(LocalDataFailure<T> value)? localDataFailure,
+    TResult? Function(LocalData<T> value)? localData,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkData<T> value)? networkData,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(IsLoading<T> value)? isLoading,
+    TResult Function(NetworkDataFailure<T> value)? networkDataFailure,
+    TResult Function(LocalDataFailure<T> value)? localDataFailure,
+    TResult Function(LocalData<T> value)? localData,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Empty<T> extends DataModelWrapper<T> {
+  const factory Empty() = _$Empty<T>;
+
+  const Empty._() : super._();
+}
+
+/// @nodoc
+abstract class _$$IsLoadingCopyWith<T, $Res> {
+  factory _$$IsLoadingCopyWith(
+          _$IsLoading<T> value, $Res Function(_$IsLoading<T>) then) =
+      __$$IsLoadingCopyWithImpl<T, $Res>;
+
+  @useResult
+  $Res call({bool isLoading});
+}
+
+/// @nodoc
+class __$$IsLoadingCopyWithImpl<T, $Res>
+    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$IsLoading<T>>
+    implements _$$IsLoadingCopyWith<T, $Res> {
+  __$$IsLoadingCopyWithImpl(
+      _$IsLoading<T> _value, $Res Function(_$IsLoading<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+  }) {
+    return _then(_$IsLoading<T>(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$IsLoading<T> extends IsLoading<T> {
+  const _$IsLoading({required this.isLoading}) : super._();
+
+  @override
+  final bool isLoading;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$IsLoading<T> &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isLoading);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$IsLoadingCopyWith<T, _$IsLoading<T>> get copyWith =>
+      __$$IsLoadingCopyWithImpl<T, _$IsLoading<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T? data) networkData,
+    required TResult Function() empty,
+    required TResult Function(bool isLoading) isLoading,
+    required TResult Function(NetworkFailure networkFailure) networkDataFailure,
+    required TResult Function(LocalFailure localFailure) localDataFailure,
+    required TResult Function(T? data) localData,
+  }) {
+    return isLoading(this.isLoading);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(T? data)? networkData,
+    TResult? Function()? empty,
+    TResult? Function(bool isLoading)? isLoading,
+    TResult? Function(NetworkFailure networkFailure)? networkDataFailure,
+    TResult? Function(LocalFailure localFailure)? localDataFailure,
+    TResult? Function(T? data)? localData,
+  }) {
+    return isLoading?.call(this.isLoading);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T? data)? networkData,
+    TResult Function()? empty,
+    TResult Function(bool isLoading)? isLoading,
+    TResult Function(NetworkFailure networkFailure)? networkDataFailure,
+    TResult Function(LocalFailure localFailure)? localDataFailure,
+    TResult Function(T? data)? localData,
+    required TResult orElse(),
+  }) {
+    if (isLoading != null) {
+      return isLoading(this.isLoading);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkData<T> value) networkData,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(IsLoading<T> value) isLoading,
+    required TResult Function(NetworkDataFailure<T> value) networkDataFailure,
+    required TResult Function(LocalDataFailure<T> value) localDataFailure,
+    required TResult Function(LocalData<T> value) localData,
+  }) {
+    return isLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkData<T> value)? networkData,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(IsLoading<T> value)? isLoading,
+    TResult? Function(NetworkDataFailure<T> value)? networkDataFailure,
+    TResult? Function(LocalDataFailure<T> value)? localDataFailure,
+    TResult? Function(LocalData<T> value)? localData,
+  }) {
+    return isLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkData<T> value)? networkData,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(IsLoading<T> value)? isLoading,
+    TResult Function(NetworkDataFailure<T> value)? networkDataFailure,
+    TResult Function(LocalDataFailure<T> value)? localDataFailure,
+    TResult Function(LocalData<T> value)? localData,
+    required TResult orElse(),
+  }) {
+    if (isLoading != null) {
+      return isLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class IsLoading<T> extends DataModelWrapper<T> {
+  const factory IsLoading({required final bool isLoading}) = _$IsLoading<T>;
+
+  const IsLoading._() : super._();
+
+  bool get isLoading;
+
+  @JsonKey(ignore: true)
+  _$$IsLoadingCopyWith<T, _$IsLoading<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -233,6 +537,7 @@ abstract class _$$NetworkDataFailureCopyWith<T, $Res> {
   factory _$$NetworkDataFailureCopyWith(_$NetworkDataFailure<T> value,
           $Res Function(_$NetworkDataFailure<T>) then) =
       __$$NetworkDataFailureCopyWithImpl<T, $Res>;
+
   @useResult
   $Res call({NetworkFailure networkFailure});
 
@@ -300,6 +605,8 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) networkData,
+    required TResult Function() empty,
+    required TResult Function(bool isLoading) isLoading,
     required TResult Function(NetworkFailure networkFailure) networkDataFailure,
     required TResult Function(LocalFailure localFailure) localDataFailure,
     required TResult Function(T? data) localData,
@@ -311,6 +618,8 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? networkData,
+    TResult? Function()? empty,
+    TResult? Function(bool isLoading)? isLoading,
     TResult? Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult? Function(LocalFailure localFailure)? localDataFailure,
     TResult? Function(T? data)? localData,
@@ -322,6 +631,8 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? networkData,
+    TResult Function()? empty,
+    TResult Function(bool isLoading)? isLoading,
     TResult Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult Function(LocalFailure localFailure)? localDataFailure,
     TResult Function(T? data)? localData,
@@ -337,6 +648,8 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkData<T> value) networkData,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(IsLoading<T> value) isLoading,
     required TResult Function(NetworkDataFailure<T> value) networkDataFailure,
     required TResult Function(LocalDataFailure<T> value) localDataFailure,
     required TResult Function(LocalData<T> value) localData,
@@ -348,6 +661,8 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkData<T> value)? networkData,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(IsLoading<T> value)? isLoading,
     TResult? Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult? Function(LocalDataFailure<T> value)? localDataFailure,
     TResult? Function(LocalData<T> value)? localData,
@@ -359,6 +674,8 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkData<T> value)? networkData,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(IsLoading<T> value)? isLoading,
     TResult Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult Function(LocalDataFailure<T> value)? localDataFailure,
     TResult Function(LocalData<T> value)? localData,
@@ -454,6 +771,8 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) networkData,
+    required TResult Function() empty,
+    required TResult Function(bool isLoading) isLoading,
     required TResult Function(NetworkFailure networkFailure) networkDataFailure,
     required TResult Function(LocalFailure localFailure) localDataFailure,
     required TResult Function(T? data) localData,
@@ -465,6 +784,8 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? networkData,
+    TResult? Function()? empty,
+    TResult? Function(bool isLoading)? isLoading,
     TResult? Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult? Function(LocalFailure localFailure)? localDataFailure,
     TResult? Function(T? data)? localData,
@@ -476,6 +797,8 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? networkData,
+    TResult Function()? empty,
+    TResult Function(bool isLoading)? isLoading,
     TResult Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult Function(LocalFailure localFailure)? localDataFailure,
     TResult Function(T? data)? localData,
@@ -491,6 +814,8 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkData<T> value) networkData,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(IsLoading<T> value) isLoading,
     required TResult Function(NetworkDataFailure<T> value) networkDataFailure,
     required TResult Function(LocalDataFailure<T> value) localDataFailure,
     required TResult Function(LocalData<T> value) localData,
@@ -502,6 +827,8 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkData<T> value)? networkData,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(IsLoading<T> value)? isLoading,
     TResult? Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult? Function(LocalDataFailure<T> value)? localDataFailure,
     TResult? Function(LocalData<T> value)? localData,
@@ -513,6 +840,8 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkData<T> value)? networkData,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(IsLoading<T> value)? isLoading,
     TResult Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult Function(LocalDataFailure<T> value)? localDataFailure,
     TResult Function(LocalData<T> value)? localData,
@@ -597,6 +926,8 @@ class _$LocalData<T> extends LocalData<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T? data) networkData,
+    required TResult Function() empty,
+    required TResult Function(bool isLoading) isLoading,
     required TResult Function(NetworkFailure networkFailure) networkDataFailure,
     required TResult Function(LocalFailure localFailure) localDataFailure,
     required TResult Function(T? data) localData,
@@ -608,6 +939,8 @@ class _$LocalData<T> extends LocalData<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T? data)? networkData,
+    TResult? Function()? empty,
+    TResult? Function(bool isLoading)? isLoading,
     TResult? Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult? Function(LocalFailure localFailure)? localDataFailure,
     TResult? Function(T? data)? localData,
@@ -619,6 +952,8 @@ class _$LocalData<T> extends LocalData<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? data)? networkData,
+    TResult Function()? empty,
+    TResult Function(bool isLoading)? isLoading,
     TResult Function(NetworkFailure networkFailure)? networkDataFailure,
     TResult Function(LocalFailure localFailure)? localDataFailure,
     TResult Function(T? data)? localData,
@@ -634,6 +969,8 @@ class _$LocalData<T> extends LocalData<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkData<T> value) networkData,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(IsLoading<T> value) isLoading,
     required TResult Function(NetworkDataFailure<T> value) networkDataFailure,
     required TResult Function(LocalDataFailure<T> value) localDataFailure,
     required TResult Function(LocalData<T> value) localData,
@@ -645,6 +982,8 @@ class _$LocalData<T> extends LocalData<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkData<T> value)? networkData,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(IsLoading<T> value)? isLoading,
     TResult? Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult? Function(LocalDataFailure<T> value)? localDataFailure,
     TResult? Function(LocalData<T> value)? localData,
@@ -656,6 +995,8 @@ class _$LocalData<T> extends LocalData<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkData<T> value)? networkData,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(IsLoading<T> value)? isLoading,
     TResult Function(NetworkDataFailure<T> value)? networkDataFailure,
     TResult Function(LocalDataFailure<T> value)? localDataFailure,
     TResult Function(LocalData<T> value)? localData,
