@@ -70,7 +70,8 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
     bool onFailureDefaultHandler = false,
     bool onUnknownErrorDefaultHandler = false,
     FutureOr<void> Function(bool)? loadingChanged,
-    FutureOr<void> Function(T?)? onSuccess,
+    FutureOr<void> Function(T?)? onSuccess2,
+    FutureOr<void> Function(DataModelWrapper<T>?)? onSuccess,
     FutureOr<void> Function()? beforeFutureStarted,
     FutureOr<bool> Function()? abortOn,
     FutureOr<void> Function()? onAbort,
@@ -80,6 +81,7 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
       _errorHandlingWrapper(
         futureCall: futureCall,
         onSuccess: onSuccess,
+        onSuccess2: onSuccess2,
         beforeFutureStarted: beforeFutureStarted,
         abortOn: abortOn,
         onAbort: onAbort,
@@ -99,7 +101,8 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
     required bool onFailureDefaultHandler,
     required bool onUnknownErrorDefaultHandler,
     FutureOr<void> Function(bool)? loadingChanged,
-    FutureOr<void> Function(T?)? onSuccess,
+    FutureOr<void> Function(T?)? onSuccess2,
+    FutureOr<void> Function(DataModelWrapper<T>?)? onSuccess,
     FutureOr<void> Function()? beforeFutureStarted,
     FutureOr<bool> Function()? abortOn,
     FutureOr<void> Function()? onAbort,
@@ -134,7 +137,8 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
       }
       if (res.isSuccess) {
         T? data = res.data;
-        await onSuccess?.call(data);
+        await onSuccess?.call(res);
+        await onSuccess2?.call(data);
       }
       await loadingChanged?.call(false);
       if (useBaseBlocLoader) {
