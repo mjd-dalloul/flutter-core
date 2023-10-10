@@ -135,14 +135,14 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
           );
         }
       }
+      await loadingChanged?.call(false);
+      if (useBaseBlocLoader) {
+        _isLoadingChanged(false);
+      }
       if (res.isSuccess) {
         T? data = res.data;
         await onSuccess?.call(res);
         await onSuccess2?.call(data);
-      }
-      await loadingChanged?.call(false);
-      if (useBaseBlocLoader) {
-        _isLoadingChanged(false);
       }
       return res;
     } catch (e, st) {
