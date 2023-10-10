@@ -11,7 +11,7 @@ class TokenInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final attachAuthenticationToken =
-        options.headers[TokenConstants.ATTACH_AUTHENTICATION];
+        options.extra[TokenConstants.ATTACH_AUTHENTICATION];
     if (attachAuthenticationToken != null &&
         attachAuthenticationToken == true) {
       options.headers['authentication'] =
