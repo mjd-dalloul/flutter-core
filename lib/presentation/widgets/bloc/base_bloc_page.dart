@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_core/presentation/widgets/base_state_widget.dart';
+import 'package:flutter_core/presentation/widgets/bloc/base_state_widget.dart';
 import 'package:flutter_core/state_mangement/bloc_state_management/base_bloc.dart';
 import 'package:flutter_core/state_mangement/bloc_state_management/helper_bloc/helper_bloc.dart';
 import 'package:flutter_core/utils/extensions/int_ext.dart';

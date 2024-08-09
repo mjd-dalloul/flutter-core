@@ -244,11 +244,9 @@ class _$NetworkData<T> extends NetworkData<T> {
 
 abstract class NetworkData<T> extends DataModelWrapper<T> {
   const factory NetworkData({final T? data}) = _$NetworkData<T>;
-
   const NetworkData._() : super._();
 
   T? get data;
-
   @JsonKey(ignore: true)
   _$$NetworkDataCopyWith<T, _$NetworkData<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -371,7 +369,6 @@ class _$Empty<T> extends Empty<T> {
 
 abstract class Empty<T> extends DataModelWrapper<T> {
   const factory Empty() = _$Empty<T>;
-
   const Empty._() : super._();
 }
 
@@ -380,7 +377,6 @@ abstract class _$$IsLoadingCopyWith<T, $Res> {
   factory _$$IsLoadingCopyWith(
           _$IsLoading<T> value, $Res Function(_$IsLoading<T>) then) =
       __$$IsLoadingCopyWithImpl<T, $Res>;
-
   @useResult
   $Res call({bool isLoading});
 }
@@ -522,11 +518,9 @@ class _$IsLoading<T> extends IsLoading<T> {
 
 abstract class IsLoading<T> extends DataModelWrapper<T> {
   const factory IsLoading({required final bool isLoading}) = _$IsLoading<T>;
-
   const IsLoading._() : super._();
 
   bool get isLoading;
-
   @JsonKey(ignore: true)
   _$$IsLoadingCopyWith<T, _$IsLoading<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -537,7 +531,6 @@ abstract class _$$NetworkDataFailureCopyWith<T, $Res> {
   factory _$$NetworkDataFailureCopyWith(_$NetworkDataFailure<T> value,
           $Res Function(_$NetworkDataFailure<T>) then) =
       __$$NetworkDataFailureCopyWithImpl<T, $Res>;
-
   @useResult
   $Res call({NetworkFailure networkFailure});
 

@@ -21,12 +21,15 @@ dependencies:
   connectivity_plus: ^3.0.2
   infinite_scroll_pagination: ^3.2.0
   logger: ^1.1.0
+  flutter_mobx: ^2.0.6+4
+  fluttertoast:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner: ^2.2.1
+  mobx_codegen: ^2.0.6
   freezed: ^2.1.1
   mockito: ^5.3.2
   json_serializable:

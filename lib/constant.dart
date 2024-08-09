@@ -45,5 +45,6 @@ enum ErrorLogType {
   unknownError,
   unknownServerError,
   baseBlocError,
+  baseViewModelError,
   localDatabaseError,
 }
