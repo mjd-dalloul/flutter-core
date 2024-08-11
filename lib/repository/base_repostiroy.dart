@@ -19,7 +19,7 @@ abstract class BaseRepository {
   /// [onCacheSuccess] callback when cache happened successfully
   /// [onCacheFailure] callback when cache failed
   Future<DataModelWrapper<T>> requestData<T>({
-    required Future<DataModelWrapper<T>> Function() remoteCall,
+    Future<DataModelWrapper<T>> Function()? remoteCall,
     FutureOr<void> Function(DataModelWrapper<T> remoteRes)? onRemoteSuccess,
     FutureOr<void> Function(NetworkFailure networkFailure)? onRemoteFailure,
     Future<DataModelWrapper<int>> Function(T data)? saveRemoteDataFunction,
@@ -30,14 +30,13 @@ abstract class BaseRepository {
     void Function(BaseFailure failure)? onCacheFailure,
   }) async {
     DataModelWrapper<T>? ret;
-    final connectivityResult = checkForConnectivity
-        ? await (Connectivity().checkConnectivity())
-        : null;
-    forceUpdate |= (connectivityResult != ConnectivityResult.none);
+    final connectivityResult =
+        checkForConnectivity ? await (Connectivity().checkConnectivity()) : null;
+    forceUpdate |= (connectivityResult != ConnectivityResult.none) && remoteCall != null;
     if (forceUpdate) {
       logger.d('Requesting to remote datasource $remoteCall');
       ret = await _getFromRemoteDataSource(
-        remoteCall: remoteCall,
+        remoteCall: remoteCall!,
         saveRemoteDataFunction: saveRemoteDataFunction,
         onCacheFailure: onCacheFailure,
         onCacheSuccess: onCacheSuccess,
@@ -47,10 +46,10 @@ abstract class BaseRepository {
     } else {
       logger.d('Requesting to local datasource $localCall');
       ret = await _localObjectWrapper(localCall: localCall);
-      if (ret == null || ret.isFailure) {
+      if (ret == null || ret.isFailure && remoteCall != null) {
         logger.d('since $localCall failed trying to get it from remote call');
         ret = await _getFromRemoteDataSource(
-          remoteCall: remoteCall,
+          remoteCall: remoteCall!,
           saveRemoteDataFunction: saveRemoteDataFunction,
           onCacheFailure: onCacheFailure,
           onCacheSuccess: onCacheSuccess,
