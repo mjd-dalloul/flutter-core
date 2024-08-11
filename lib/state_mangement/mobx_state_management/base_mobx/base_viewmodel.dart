@@ -100,6 +100,43 @@ abstract class _BaseViewmodelBase with Store {
     });
   }
 
+  ObservableFuture<T> futureWrapper2<T>(
+    Future<T> Function() block, {
+    void Function(BaseFailure)? onFailure,
+    void Function(dynamic)? unknownError,
+    bool useLoader = false,
+  }) {
+    if (useLoader) {
+      startLoading();
+    }
+    return ObservableFuture(_wrapError2<T>(
+      block(),
+      onFailure: onFailure,
+      unknownError: unknownError,
+    ).whenComplete(() {
+      if (useLoader) {
+        stopLoading();
+      }
+    }));
+  }
+
+  Future<T> _wrapError2<T>(
+    Future<T> future, {
+    void Function(BaseFailure)? onFailure,
+    void Function(dynamic)? unknownError,
+  }) =>
+      future.catchError((error) {
+        if (error is BaseFailure) {
+          onFailure?.call(error);
+          errorHandler(error);
+        } else {
+          unknownError?.call(error);
+          unknownErrorHandler();
+        }
+        logger.e(ErrorLogType.baseViewModelError, error);
+        throw error;
+      });
+
   void errorHandler(BaseFailure failure) {
     getContext((context) {
       ScaffoldMessenger.of(context).showSnackBar(
