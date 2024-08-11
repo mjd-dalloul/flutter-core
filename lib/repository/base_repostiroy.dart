@@ -7,7 +7,7 @@ import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:logger/logger.dart';
 
 abstract class BaseRepository {
-  BaseRepository(this.logger);
+  const BaseRepository(this.logger);
 
   final Logger logger;
 
