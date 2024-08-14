@@ -43,7 +43,7 @@ abstract class _BaseViewmodelBase with Store {
     isLoading = false;
   }
 
-  void unknownErrorHandler() {
+  void unknownErrorHandler(dynamic error) {
     getContext((context) {
       Fluttertoast.showToast(
         msg: context.translate('msg_something_wrong'),
@@ -93,7 +93,7 @@ abstract class _BaseViewmodelBase with Store {
         errorHandler(error);
       } else {
         unknownError?.call(error);
-        unknownErrorHandler();
+        unknownErrorHandler(error);
       }
       logger.e(ErrorLogType.baseViewModelError, error);
       throw error;
@@ -131,7 +131,7 @@ abstract class _BaseViewmodelBase with Store {
           errorHandler(error);
         } else {
           unknownError?.call(error);
-          unknownErrorHandler();
+          unknownErrorHandler(error);
         }
         logger.e(ErrorLogType.baseViewModelError, error);
         throw error;
