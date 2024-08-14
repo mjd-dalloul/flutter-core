@@ -33,10 +33,8 @@ class DataModelWrapper<T> with _$DataModelWrapper {
 
   DataModelWrapper<T> transformData(T Function(T) transform) {
     return maybeMap(
-      networkData: (res) =>
-          DataModelWrapper.networkData(data: transform.call(res.data)),
-      localData: (res) =>
-          DataModelWrapper.localData(data: transform.call(res.data)),
+      networkData: (res) => DataModelWrapper.networkData(data: transform.call(res.data)),
+      localData: (res) => DataModelWrapper.localData(data: transform.call(res.data)),
       orElse: () => this,
     );
   }
@@ -53,16 +51,22 @@ class DataModelWrapper<T> with _$DataModelWrapper {
         orElse: () => false,
       );
 
+  T getOrThrow() {
+    if (this.isFailure) {
+      throw this.failure!;
+    } else {
+      return this.data!;
+    }
+  }
+
   T? get data => maybeWhen(
         localData: (data) => data,
         networkData: (data) => data,
         orElse: () => null,
       );
 
-  BaseFailure? get failure => maybeWhen(
-      localDataFailure: (failure) => failure,
-      networkDataFailure: (failure) => failure,
-      orElse: () => null);
+  BaseFailure? get failure =>
+      maybeWhen(localDataFailure: (failure) => failure, networkDataFailure: (failure) => failure, orElse: () => null);
 
   NetworkFailure? get networkFailure => maybeWhen(
         networkDataFailure: (f) => f,
@@ -88,14 +92,10 @@ class DataModelWrapper<T> with _$DataModelWrapper {
   String toString() {
     return maybeWhen(
       orElse: () => '',
-      networkData: (data) =>
-          'DataModelWrapper.networkData with data ${data.toString()}',
-      localData: (data) =>
-          'DataModelWrapper.localData with data ${data.toString()}',
-      networkDataFailure: (failure) =>
-          'DataModelWrapper.networkFailure with failure ${failure.toString()}',
-      localDataFailure: (failure) =>
-          'DataModelWrapper.localFailure with failure ${failure.toString()}',
+      networkData: (data) => 'DataModelWrapper.networkData with data ${data.toString()}',
+      localData: (data) => 'DataModelWrapper.localData with data ${data.toString()}',
+      networkDataFailure: (failure) => 'DataModelWrapper.networkFailure with failure ${failure.toString()}',
+      localDataFailure: (failure) => 'DataModelWrapper.localFailure with failure ${failure.toString()}',
     );
   }
 }
