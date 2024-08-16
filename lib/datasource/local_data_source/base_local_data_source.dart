@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_core/constant.dart';
 import 'package:flutter_core/datasource/local_data_source/i_base_local_data_source.dart';
 import 'package:flutter_core/type_defs.dart';
@@ -13,9 +15,11 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     required int version,
     required DatabaseSchema databaseSchema,
     required this.logger,
+    this.onUpgrade,
+    this.onDowngrade,
+    this.onOpen,
   }) {
-    databaseInitializer =
-        initializeDatabase(databaseName, version, databaseSchema);
+    databaseInitializer = initializeDatabase(databaseName, version, databaseSchema);
   }
 
   /// create [BaseLocalDataSource] with custom database object.
@@ -31,15 +35,20 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
   late final Future<void> databaseInitializer;
   late final Database _database;
   final Logger logger;
+  FutureOr<void> Function(Database, int, int)? onUpgrade;
+  FutureOr<void> Function(Database, int, int)? onDowngrade;
+  FutureOr<void> Function(Database)? onOpen;
 
   @override
-  Future<void> initializeDatabase(String databaseName, int version,
-      DatabaseSchema databaseSchema) async =>
+  Future<void> initializeDatabase(String databaseName, int version, DatabaseSchema databaseSchema) async =>
       openDatabase(
         // Set the path to the database. Note: Using the `join` function from the
         // `path` package is best practice to ensure the path is correctly
         // constructed for each platform.
         join(await getDatabasesPath(), databaseName),
+        onUpgrade: onUpgrade,
+        onDowngrade: onDowngrade,
+        onOpen: onOpen,
         onCreate: (database, version) async {
           for (final createTableQuery in databaseSchema) {
             await database.execute(createTableQuery);
@@ -84,8 +93,8 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     SqlQuery? whereCondition,
   }) {
     final deleteQuery = whereCondition?.call();
-    return _wrapWithTryAndCatch(() => _database.update(tableName, toMap.call(),
-        where: deleteQuery?.item1, whereArgs: deleteQuery?.item2));
+    return _wrapWithTryAndCatch(
+        () => _database.update(tableName, toMap.call(), where: deleteQuery?.item1, whereArgs: deleteQuery?.item2));
   }
 
   /// get object from database
@@ -176,18 +185,17 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     ConflictAlgorithm? conflictAlgorithm,
   }) async =>
       _wrapWithTryAndCatch(() => _database.insert(
-        tableName,
-        toMap.call(),
-        conflictAlgorithm: conflictAlgorithm ?? ConflictAlgorithm.replace,
-      ));
+            tableName,
+            toMap.call(),
+            conflictAlgorithm: conflictAlgorithm ?? ConflictAlgorithm.replace,
+          ));
 
   Future<DataModelWrapper<T>> _wrapWithTryAndCatch<T>(Future<T?> Function() databaseCall) async {
     try {
       return DataModelWrapper.localData(data: await databaseCall.call());
     } catch (e, stacktrace) {
       logger.e(ErrorLogType.localDatabaseError, e, stacktrace);
-      return DataModelWrapper.localDataFailure(
-          localFailure: LocalFailure.unknownError(e));
+      return DataModelWrapper.localDataFailure(localFailure: LocalFailure.unknownError(e));
     }
   }
 }
