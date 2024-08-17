@@ -39,6 +39,8 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
   FutureOr<void> Function(Database, int, int)? onDowngrade;
   FutureOr<void> Function(Database)? onOpen;
 
+  Database get database => _database;
+
   @override
   Future<void> initializeDatabase(String databaseName, int version, DatabaseSchema databaseSchema) async =>
       openDatabase(
