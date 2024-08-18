@@ -9,6 +9,7 @@ class MobxLoadingPage<T extends BaseViewmodel> extends StatelessWidget {
     required this.child,
     this.loadingWidget = const Center(child: CircularProgressIndicator()),
     this.barrierColor = const Color(0xFFc7c7c7),
+    this.useStack = false,
     this.animationDuration = const Duration(milliseconds: 400),
   }) : super(key: key);
 
@@ -20,29 +21,41 @@ class MobxLoadingPage<T extends BaseViewmodel> extends StatelessWidget {
   final Color barrierColor;
 
   final Duration animationDuration;
+  final bool useStack;
 
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => Stack(
-        children: [
-          AbsorbPointer(absorbing: viewModel.isLoading, child: child),
-          Positioned.fill(
-            child: AnimatedSwitcher(
+      builder: (_) => !useStack
+          ? AnimatedSwitcher(
               duration: animationDuration,
               child: viewModel.isLoading
                   ? Container(
                       width: double.infinity,
                       height: double.infinity,
-                      decoration:
-                          BoxDecoration(color: barrierColor.withOpacity(0.3)),
+                      decoration: BoxDecoration(color: barrierColor.withOpacity(0.3)),
                       child: loadingWidget,
                     )
-                  : const SizedBox.shrink(),
+                  : child,
+            )
+          : Stack(
+              children: [
+                AbsorbPointer(absorbing: viewModel.isLoading, child: child),
+                Positioned.fill(
+                  child: AnimatedSwitcher(
+                    duration: animationDuration,
+                    child: viewModel.isLoading
+                        ? Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: BoxDecoration(color: barrierColor.withOpacity(0.3)),
+                            child: loadingWidget,
+                          )
+                        : const SizedBox.shrink(),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
