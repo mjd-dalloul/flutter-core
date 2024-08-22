@@ -28,10 +28,10 @@ abstract class BaseRepository {
     Future<DataModelWrapper<T>> Function()? localCall,
     void Function(int insertedRow)? onCacheSuccess,
     void Function(BaseFailure failure)? onCacheFailure,
+    bool tryLocalIfRemoteFails = false,
   }) async {
     DataModelWrapper<T>? ret;
-    final connectivityResult =
-        checkForConnectivity ? await (Connectivity().checkConnectivity()) : null;
+    final connectivityResult = checkForConnectivity ? await (Connectivity().checkConnectivity()) : null;
     forceUpdate |= (connectivityResult != ConnectivityResult.none) && remoteCall != null;
     if (forceUpdate) {
       logger.d('Requesting to remote datasource $remoteCall');
@@ -43,6 +43,15 @@ abstract class BaseRepository {
         onRemoteSuccess: onRemoteSuccess,
         onRemoteFailure: onRemoteFailure,
       );
+      if (tryLocalIfRemoteFails &&
+          ret.isFailure &&
+          localCall != null &&
+          ret.networkFailure!.maybeMap(orElse: () => false, noInternetFailure: (_) => true)) {
+        final localResult = await _localObjectWrapper(localCall: localCall);
+        if (localResult != null && localResult.isSuccess) {
+          ret = localResult;
+        }
+      }
     } else {
       logger.d('Requesting to local datasource $localCall');
       ret = await _localObjectWrapper(localCall: localCall);
