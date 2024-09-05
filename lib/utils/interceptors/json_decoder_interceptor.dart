@@ -1,15 +1,22 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
+Future<dynamic> decodeJson(String? jsonString) {
+  return jsonString == null ? null : jsonDecode(jsonString);
+}
 
-/// interceptor to decode json
 class JsonDecoderInterceptor extends Interceptor {
   @override
-  void onResponse(
-      Response<dynamic> response, ResponseInterceptorHandler handler) {
+  void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) async {
+    final decodedData = await compute(
+      decodeJson,
+      response.data != null ? response.data as String : null,
+    );
+
     handler.next(
       Response(
-        data: response.data != null ? jsonDecode(response.data) : null,
+        data: decodedData,
         headers: response.headers,
         requestOptions: response.requestOptions,
         isRedirect: response.isRedirect,
@@ -22,24 +29,28 @@ class JsonDecoderInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    final decodedErrorData = await compute(
+      decodeJson,
+      err.response?.data != null ? err.response!.data as String : null,
+    );
+
     handler.next(
       DioError(
-          response: Response(
-            data: err.response?.data != null
-                ? jsonDecode(err.response!.data)
-                : null,
-            headers: err.response?.headers,
-            requestOptions: err.requestOptions,
-            isRedirect: err.response?.isRedirect,
-            statusCode: err.response?.statusCode,
-            statusMessage: err.response?.statusMessage,
-            redirects: err.response?.redirects,
-            extra: err.response?.extra,
-          ),
-          error: err.error,
-          type: err.type,
-          requestOptions: err.requestOptions),
+        response: Response(
+          data: decodedErrorData,
+          headers: err.response?.headers,
+          requestOptions: err.requestOptions,
+          isRedirect: err.response?.isRedirect,
+          statusCode: err.response?.statusCode,
+          statusMessage: err.response?.statusMessage,
+          redirects: err.response?.redirects,
+          extra: err.response?.extra,
+        ),
+        error: err.error,
+        type: err.type,
+        requestOptions: err.requestOptions,
+      ),
     );
   }
 }

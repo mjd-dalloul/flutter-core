@@ -7,7 +7,16 @@ import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/extensions/map_ext.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:logger/logger.dart';
+import 'package:flutter/foundation.dart';
 
+DataModelWrapper<T> processData<T>(dynamic responseData,
+    Deserializer<T?>? deserializer,
+    MapDeserializer<T?>? mapDeserializer,) {
+  return DataModelWrapper.networkData(
+    data: deserializer?.call(responseData) ??
+        mapDeserializer?.call(responseData),
+  );
+}
 /// this implementation is done by using dio as an http library
 class BaseRemoteDataSource implements IBaseRemoteDataSource {
   const BaseRemoteDataSource(this.dio, this.logger);
@@ -87,9 +96,9 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
           );
           break;
       }
-      final ret = DataModelWrapper.networkData(
-        data: deserializer?.call(response.data) ??
-            mapDeserializer?.call(response.data),
+      final ret = await compute(
+            (args) => processData<T>(args[0], args[1], args[2]),
+        [response.data, deserializer, mapDeserializer],
       );
       logger.d('response data as json ${response.data}');
       logger.d('response data as object ${ret}');
