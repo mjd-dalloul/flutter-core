@@ -32,7 +32,7 @@ abstract class BaseRepository {
   }) async {
     DataModelWrapper<T>? ret;
     final connectivityResult = checkForConnectivity ? await (Connectivity().checkConnectivity()) : null;
-    forceUpdate |= (connectivityResult != ConnectivityResult.none) && remoteCall != null;
+    forceUpdate |= (connectivityResult?.first != ConnectivityResult.none) && remoteCall != null;
     if (forceUpdate) {
       logger.d('Requesting to remote datasource $remoteCall');
       ret = await _getFromRemoteDataSource(

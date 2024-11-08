@@ -52,7 +52,7 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
         await onFailure?.call(res);
       }
     } catch (e, st) {
-      logger.e(ErrorLogType.baseBlocError, e, st);
+      logger.e(ErrorLogType.baseBlocError, error: e, stackTrace: st);
       await unknownError?.call(e);
     }
   }
@@ -146,7 +146,7 @@ abstract class BaseCubit<S extends BaseCubitState> extends Cubit<S> {
       }
       return res;
     } catch (e, st) {
-      logger.e(ErrorLogType.baseBlocError, e, st);
+      logger.e(ErrorLogType.baseBlocError, error: e, stackTrace: st);
       await loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);

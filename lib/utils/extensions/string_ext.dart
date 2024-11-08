@@ -32,7 +32,7 @@ extension StringExt on String? {
           text: this!.replaceAll('\n', ''),
           style: style,
         ),
-        textScaleFactor: textScaleFactor,
+        textScaler: TextScaler.linear(textScaleFactor),
         textDirection: textDirection,
       )..layout())
           .size;

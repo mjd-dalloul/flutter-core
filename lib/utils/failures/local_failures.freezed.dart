@@ -12,11 +12,12 @@ part of 'local_failures.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LocalFailure {
   dynamic get failure => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String message, dynamic failure) customFailure,
@@ -56,15 +57,15 @@ mixin _$LocalFailure {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $LocalFailureCopyWith<LocalFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $LocalFailureCopyWith<LocalFailure> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LocalFailureCopyWith<$Res> {
-  factory $LocalFailureCopyWith(
-          LocalFailure value, $Res Function(LocalFailure) then) =
+  factory $LocalFailureCopyWith(LocalFailure value, $Res Function(LocalFailure) then) =
       _$LocalFailureCopyWithImpl<$Res, LocalFailure>;
   @useResult
   $Res call({dynamic failure});
@@ -75,11 +76,13 @@ class _$LocalFailureCopyWithImpl<$Res, $Val extends LocalFailure>
     implements $LocalFailureCopyWith<$Res> {
   _$LocalFailureCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -95,31 +98,29 @@ class _$LocalFailureCopyWithImpl<$Res, $Val extends LocalFailure>
 }
 
 /// @nodoc
-abstract class _$$CustomFailureCopyWith<$Res>
-    implements $LocalFailureCopyWith<$Res> {
-  factory _$$CustomFailureCopyWith(
-          _$CustomFailure value, $Res Function(_$CustomFailure) then) =
-      __$$CustomFailureCopyWithImpl<$Res>;
+abstract class _$$CustomFailureImplCopyWith<$Res> implements $LocalFailureCopyWith<$Res> {
+  factory _$$CustomFailureImplCopyWith(_$CustomFailureImpl value, $Res Function(_$CustomFailureImpl) then) =
+      __$$CustomFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, dynamic failure});
 }
 
 /// @nodoc
-class __$$CustomFailureCopyWithImpl<$Res>
-    extends _$LocalFailureCopyWithImpl<$Res, _$CustomFailure>
-    implements _$$CustomFailureCopyWith<$Res> {
-  __$$CustomFailureCopyWithImpl(
-      _$CustomFailure _value, $Res Function(_$CustomFailure) _then)
+class __$$CustomFailureImplCopyWithImpl<$Res> extends _$LocalFailureCopyWithImpl<$Res, _$CustomFailureImpl>
+    implements _$$CustomFailureImplCopyWith<$Res> {
+  __$$CustomFailureImplCopyWithImpl(_$CustomFailureImpl _value, $Res Function(_$CustomFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = null,
     Object? failure = freezed,
   }) {
-    return _then(_$CustomFailure(
+    return _then(_$CustomFailureImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -134,8 +135,8 @@ class __$$CustomFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CustomFailure extends CustomFailure {
-  const _$CustomFailure(this.message, [this.failure]) : super._();
+class _$CustomFailureImpl extends CustomFailure {
+  const _$CustomFailureImpl(this.message, [this.failure]) : super._();
 
   @override
   final String message;
@@ -148,23 +149,24 @@ class _$CustomFailure extends CustomFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CustomFailure &&
+            other is _$CustomFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(runtimeType, message, const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
-      __$$CustomFailureCopyWithImpl<_$CustomFailure>(this, _$identity);
+  _$$CustomFailureImplCopyWith<_$CustomFailureImpl> get copyWith =>
+      __$$CustomFailureImplCopyWithImpl<_$CustomFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -230,45 +232,44 @@ class _$CustomFailure extends CustomFailure {
 }
 
 abstract class CustomFailure extends LocalFailure {
-  const factory CustomFailure(final String message, [final dynamic failure]) =
-      _$CustomFailure;
+  const factory CustomFailure(final String message, [final dynamic failure]) = _$CustomFailureImpl;
   const CustomFailure._() : super._();
 
   String get message;
   @override
   dynamic get failure;
+
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CustomFailureImplCopyWith<_$CustomFailureImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnknownErrorCopyWith<$Res>
-    implements $LocalFailureCopyWith<$Res> {
-  factory _$$UnknownErrorCopyWith(
-          _$UnknownError value, $Res Function(_$UnknownError) then) =
-      __$$UnknownErrorCopyWithImpl<$Res>;
+abstract class _$$UnknownErrorImplCopyWith<$Res> implements $LocalFailureCopyWith<$Res> {
+  factory _$$UnknownErrorImplCopyWith(_$UnknownErrorImpl value, $Res Function(_$UnknownErrorImpl) then) =
+      __$$UnknownErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic error, dynamic failure});
 }
 
 /// @nodoc
-class __$$UnknownErrorCopyWithImpl<$Res>
-    extends _$LocalFailureCopyWithImpl<$Res, _$UnknownError>
-    implements _$$UnknownErrorCopyWith<$Res> {
-  __$$UnknownErrorCopyWithImpl(
-      _$UnknownError _value, $Res Function(_$UnknownError) _then)
+class __$$UnknownErrorImplCopyWithImpl<$Res> extends _$LocalFailureCopyWithImpl<$Res, _$UnknownErrorImpl>
+    implements _$$UnknownErrorImplCopyWith<$Res> {
+  __$$UnknownErrorImplCopyWithImpl(_$UnknownErrorImpl _value, $Res Function(_$UnknownErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_$UnknownError(
+    return _then(_$UnknownErrorImpl(
       freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -283,8 +284,8 @@ class __$$UnknownErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnknownError extends UnknownError {
-  const _$UnknownError(this.error, [this.failure]) : super._();
+class _$UnknownErrorImpl extends UnknownError {
+  const _$UnknownErrorImpl(this.error, [this.failure]) : super._();
 
   @override
   final dynamic error;
@@ -297,25 +298,25 @@ class _$UnknownError extends UnknownError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnknownError &&
+            other is _$UnknownErrorImpl &&
             const DeepCollectionEquality().equals(other.error, error) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(error),
-      const DeepCollectionEquality().hash(failure));
+      runtimeType, const DeepCollectionEquality().hash(error), const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
-      __$$UnknownErrorCopyWithImpl<_$UnknownError>(this, _$identity);
+  _$$UnknownErrorImplCopyWith<_$UnknownErrorImpl> get copyWith =>
+      __$$UnknownErrorImplCopyWithImpl<_$UnknownErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -381,15 +382,16 @@ class _$UnknownError extends UnknownError {
 }
 
 abstract class UnknownError extends LocalFailure {
-  const factory UnknownError(final dynamic error, [final dynamic failure]) =
-      _$UnknownError;
+  const factory UnknownError(final dynamic error, [final dynamic failure]) = _$UnknownErrorImpl;
   const UnknownError._() : super._();
 
   dynamic get error;
   @override
   dynamic get failure;
+
+  /// Create a copy of LocalFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnknownErrorImplCopyWith<_$UnknownErrorImpl> get copyWith => throw _privateConstructorUsedError;
 }

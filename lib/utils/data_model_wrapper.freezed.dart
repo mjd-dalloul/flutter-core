@@ -12,7 +12,7 @@ part of 'data_model_wrapper.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DataModelWrapper<T> {
@@ -92,35 +92,37 @@ class _$DataModelWrapperCopyWithImpl<T, $Res, $Val extends DataModelWrapper<T>>
     implements $DataModelWrapperCopyWith<T, $Res> {
   _$DataModelWrapperCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$NetworkDataCopyWith<T, $Res> {
-  factory _$$NetworkDataCopyWith(
-          _$NetworkData<T> value, $Res Function(_$NetworkData<T>) then) =
-      __$$NetworkDataCopyWithImpl<T, $Res>;
+abstract class _$$NetworkDataImplCopyWith<T, $Res> {
+  factory _$$NetworkDataImplCopyWith(_$NetworkDataImpl<T> value, $Res Function(_$NetworkDataImpl<T>) then) =
+      __$$NetworkDataImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({T? data});
 }
 
 /// @nodoc
-class __$$NetworkDataCopyWithImpl<T, $Res>
-    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$NetworkData<T>>
-    implements _$$NetworkDataCopyWith<T, $Res> {
-  __$$NetworkDataCopyWithImpl(
-      _$NetworkData<T> _value, $Res Function(_$NetworkData<T>) _then)
+class __$$NetworkDataImplCopyWithImpl<T, $Res> extends _$DataModelWrapperCopyWithImpl<T, $Res, _$NetworkDataImpl<T>>
+    implements _$$NetworkDataImplCopyWith<T, $Res> {
+  __$$NetworkDataImplCopyWithImpl(_$NetworkDataImpl<T> _value, $Res Function(_$NetworkDataImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$NetworkData<T>(
+    return _then(_$NetworkDataImpl<T>(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -131,29 +133,30 @@ class __$$NetworkDataCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$NetworkData<T> extends NetworkData<T> {
-  const _$NetworkData({this.data}) : super._();
+class _$NetworkDataImpl<T> extends NetworkData<T> {
+  const _$NetworkDataImpl({this.data}) : super._();
 
   @override
   final T? data;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NetworkData<T> &&
+            other is _$NetworkDataImpl<T> &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$NetworkDataCopyWith<T, _$NetworkData<T>> get copyWith =>
-      __$$NetworkDataCopyWithImpl<T, _$NetworkData<T>>(this, _$identity);
+  _$$NetworkDataImplCopyWith<T, _$NetworkDataImpl<T>> get copyWith =>
+      __$$NetworkDataImplCopyWithImpl<T, _$NetworkDataImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -243,38 +246,40 @@ class _$NetworkData<T> extends NetworkData<T> {
 }
 
 abstract class NetworkData<T> extends DataModelWrapper<T> {
-  const factory NetworkData({final T? data}) = _$NetworkData<T>;
+  const factory NetworkData({final T? data}) = _$NetworkDataImpl<T>;
   const NetworkData._() : super._();
 
   T? get data;
-  @JsonKey(ignore: true)
-  _$$NetworkDataCopyWith<T, _$NetworkData<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NetworkDataImplCopyWith<T, _$NetworkDataImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$EmptyCopyWith<T, $Res> {
-  factory _$$EmptyCopyWith(_$Empty<T> value, $Res Function(_$Empty<T>) then) =
-      __$$EmptyCopyWithImpl<T, $Res>;
+abstract class _$$EmptyImplCopyWith<T, $Res> {
+  factory _$$EmptyImplCopyWith(_$EmptyImpl<T> value, $Res Function(_$EmptyImpl<T>) then) =
+      __$$EmptyImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$EmptyCopyWithImpl<T, $Res>
-    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$Empty<T>>
-    implements _$$EmptyCopyWith<T, $Res> {
-  __$$EmptyCopyWithImpl(_$Empty<T> _value, $Res Function(_$Empty<T>) _then)
-      : super(_value, _then);
+class __$$EmptyImplCopyWithImpl<T, $Res> extends _$DataModelWrapperCopyWithImpl<T, $Res, _$EmptyImpl<T>>
+    implements _$$EmptyImplCopyWith<T, $Res> {
+  __$$EmptyImplCopyWithImpl(_$EmptyImpl<T> _value, $Res Function(_$EmptyImpl<T>) _then) : super(_value, _then);
+
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$Empty<T> extends Empty<T> {
-  const _$Empty() : super._();
+class _$EmptyImpl<T> extends Empty<T> {
+  const _$EmptyImpl() : super._();
 
   @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Empty<T>);
+  bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$EmptyImpl<T>);
   }
 
   @override
@@ -368,33 +373,32 @@ class _$Empty<T> extends Empty<T> {
 }
 
 abstract class Empty<T> extends DataModelWrapper<T> {
-  const factory Empty() = _$Empty<T>;
+  const factory Empty() = _$EmptyImpl<T>;
   const Empty._() : super._();
 }
 
 /// @nodoc
-abstract class _$$IsLoadingCopyWith<T, $Res> {
-  factory _$$IsLoadingCopyWith(
-          _$IsLoading<T> value, $Res Function(_$IsLoading<T>) then) =
-      __$$IsLoadingCopyWithImpl<T, $Res>;
+abstract class _$$IsLoadingImplCopyWith<T, $Res> {
+  factory _$$IsLoadingImplCopyWith(_$IsLoadingImpl<T> value, $Res Function(_$IsLoadingImpl<T>) then) =
+      __$$IsLoadingImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({bool isLoading});
 }
 
 /// @nodoc
-class __$$IsLoadingCopyWithImpl<T, $Res>
-    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$IsLoading<T>>
-    implements _$$IsLoadingCopyWith<T, $Res> {
-  __$$IsLoadingCopyWithImpl(
-      _$IsLoading<T> _value, $Res Function(_$IsLoading<T>) _then)
+class __$$IsLoadingImplCopyWithImpl<T, $Res> extends _$DataModelWrapperCopyWithImpl<T, $Res, _$IsLoadingImpl<T>>
+    implements _$$IsLoadingImplCopyWith<T, $Res> {
+  __$$IsLoadingImplCopyWithImpl(_$IsLoadingImpl<T> _value, $Res Function(_$IsLoadingImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLoading = null,
   }) {
-    return _then(_$IsLoading<T>(
+    return _then(_$IsLoadingImpl<T>(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -405,29 +409,30 @@ class __$$IsLoadingCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$IsLoading<T> extends IsLoading<T> {
-  const _$IsLoading({required this.isLoading}) : super._();
+class _$IsLoadingImpl<T> extends IsLoading<T> {
+  const _$IsLoadingImpl({required this.isLoading}) : super._();
 
   @override
   final bool isLoading;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$IsLoading<T> &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+            other is _$IsLoadingImpl<T> &&
+            (identical(other.isLoading, isLoading) || other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$IsLoadingCopyWith<T, _$IsLoading<T>> get copyWith =>
-      __$$IsLoadingCopyWithImpl<T, _$IsLoading<T>>(this, _$identity);
+  _$$IsLoadingImplCopyWith<T, _$IsLoadingImpl<T>> get copyWith =>
+      __$$IsLoadingImplCopyWithImpl<T, _$IsLoadingImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -517,20 +522,22 @@ class _$IsLoading<T> extends IsLoading<T> {
 }
 
 abstract class IsLoading<T> extends DataModelWrapper<T> {
-  const factory IsLoading({required final bool isLoading}) = _$IsLoading<T>;
+  const factory IsLoading({required final bool isLoading}) = _$IsLoadingImpl<T>;
   const IsLoading._() : super._();
 
   bool get isLoading;
-  @JsonKey(ignore: true)
-  _$$IsLoadingCopyWith<T, _$IsLoading<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$IsLoadingImplCopyWith<T, _$IsLoadingImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$NetworkDataFailureCopyWith<T, $Res> {
-  factory _$$NetworkDataFailureCopyWith(_$NetworkDataFailure<T> value,
-          $Res Function(_$NetworkDataFailure<T>) then) =
-      __$$NetworkDataFailureCopyWithImpl<T, $Res>;
+abstract class _$$NetworkDataFailureImplCopyWith<T, $Res> {
+  factory _$$NetworkDataFailureImplCopyWith(
+          _$NetworkDataFailureImpl<T> value, $Res Function(_$NetworkDataFailureImpl<T>) then) =
+      __$$NetworkDataFailureImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({NetworkFailure networkFailure});
 
@@ -538,19 +545,21 @@ abstract class _$$NetworkDataFailureCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class __$$NetworkDataFailureCopyWithImpl<T, $Res>
-    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$NetworkDataFailure<T>>
-    implements _$$NetworkDataFailureCopyWith<T, $Res> {
-  __$$NetworkDataFailureCopyWithImpl(_$NetworkDataFailure<T> _value,
-      $Res Function(_$NetworkDataFailure<T>) _then)
+class __$$NetworkDataFailureImplCopyWithImpl<T, $Res>
+    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$NetworkDataFailureImpl<T>>
+    implements _$$NetworkDataFailureImplCopyWith<T, $Res> {
+  __$$NetworkDataFailureImplCopyWithImpl(
+      _$NetworkDataFailureImpl<T> _value, $Res Function(_$NetworkDataFailureImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? networkFailure = null,
   }) {
-    return _then(_$NetworkDataFailure<T>(
+    return _then(_$NetworkDataFailureImpl<T>(
       networkFailure: null == networkFailure
           ? _value.networkFailure
           : networkFailure // ignore: cast_nullable_to_non_nullable
@@ -558,6 +567,8 @@ class __$$NetworkDataFailureCopyWithImpl<T, $Res>
     ));
   }
 
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NetworkFailureCopyWith<$Res> get networkFailure {
@@ -569,30 +580,30 @@ class __$$NetworkDataFailureCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
-  const _$NetworkDataFailure({required this.networkFailure}) : super._();
+class _$NetworkDataFailureImpl<T> extends NetworkDataFailure<T> {
+  const _$NetworkDataFailureImpl({required this.networkFailure}) : super._();
 
   @override
   final NetworkFailure networkFailure;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NetworkDataFailure<T> &&
-            (identical(other.networkFailure, networkFailure) ||
-                other.networkFailure == networkFailure));
+            other is _$NetworkDataFailureImpl<T> &&
+            (identical(other.networkFailure, networkFailure) || other.networkFailure == networkFailure));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, networkFailure);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$NetworkDataFailureCopyWith<T, _$NetworkDataFailure<T>> get copyWith =>
-      __$$NetworkDataFailureCopyWithImpl<T, _$NetworkDataFailure<T>>(
-          this, _$identity);
+  _$$NetworkDataFailureImplCopyWith<T, _$NetworkDataFailureImpl<T>> get copyWith =>
+      __$$NetworkDataFailureImplCopyWithImpl<T, _$NetworkDataFailureImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -682,21 +693,22 @@ class _$NetworkDataFailure<T> extends NetworkDataFailure<T> {
 }
 
 abstract class NetworkDataFailure<T> extends DataModelWrapper<T> {
-  const factory NetworkDataFailure(
-      {required final NetworkFailure networkFailure}) = _$NetworkDataFailure<T>;
+  const factory NetworkDataFailure({required final NetworkFailure networkFailure}) = _$NetworkDataFailureImpl<T>;
   const NetworkDataFailure._() : super._();
 
   NetworkFailure get networkFailure;
-  @JsonKey(ignore: true)
-  _$$NetworkDataFailureCopyWith<T, _$NetworkDataFailure<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NetworkDataFailureImplCopyWith<T, _$NetworkDataFailureImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LocalDataFailureCopyWith<T, $Res> {
-  factory _$$LocalDataFailureCopyWith(_$LocalDataFailure<T> value,
-          $Res Function(_$LocalDataFailure<T>) then) =
-      __$$LocalDataFailureCopyWithImpl<T, $Res>;
+abstract class _$$LocalDataFailureImplCopyWith<T, $Res> {
+  factory _$$LocalDataFailureImplCopyWith(
+          _$LocalDataFailureImpl<T> value, $Res Function(_$LocalDataFailureImpl<T>) then) =
+      __$$LocalDataFailureImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({LocalFailure localFailure});
 
@@ -704,19 +716,20 @@ abstract class _$$LocalDataFailureCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class __$$LocalDataFailureCopyWithImpl<T, $Res>
-    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$LocalDataFailure<T>>
-    implements _$$LocalDataFailureCopyWith<T, $Res> {
-  __$$LocalDataFailureCopyWithImpl(
-      _$LocalDataFailure<T> _value, $Res Function(_$LocalDataFailure<T>) _then)
+class __$$LocalDataFailureImplCopyWithImpl<T, $Res>
+    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$LocalDataFailureImpl<T>>
+    implements _$$LocalDataFailureImplCopyWith<T, $Res> {
+  __$$LocalDataFailureImplCopyWithImpl(_$LocalDataFailureImpl<T> _value, $Res Function(_$LocalDataFailureImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? localFailure = null,
   }) {
-    return _then(_$LocalDataFailure<T>(
+    return _then(_$LocalDataFailureImpl<T>(
       localFailure: null == localFailure
           ? _value.localFailure
           : localFailure // ignore: cast_nullable_to_non_nullable
@@ -724,6 +737,8 @@ class __$$LocalDataFailureCopyWithImpl<T, $Res>
     ));
   }
 
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LocalFailureCopyWith<$Res> get localFailure {
@@ -735,30 +750,30 @@ class __$$LocalDataFailureCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$LocalDataFailure<T> extends LocalDataFailure<T> {
-  const _$LocalDataFailure({required this.localFailure}) : super._();
+class _$LocalDataFailureImpl<T> extends LocalDataFailure<T> {
+  const _$LocalDataFailureImpl({required this.localFailure}) : super._();
 
   @override
   final LocalFailure localFailure;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocalDataFailure<T> &&
-            (identical(other.localFailure, localFailure) ||
-                other.localFailure == localFailure));
+            other is _$LocalDataFailureImpl<T> &&
+            (identical(other.localFailure, localFailure) || other.localFailure == localFailure));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, localFailure);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LocalDataFailureCopyWith<T, _$LocalDataFailure<T>> get copyWith =>
-      __$$LocalDataFailureCopyWithImpl<T, _$LocalDataFailure<T>>(
-          this, _$identity);
+  _$$LocalDataFailureImplCopyWith<T, _$LocalDataFailureImpl<T>> get copyWith =>
+      __$$LocalDataFailureImplCopyWithImpl<T, _$LocalDataFailureImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -848,39 +863,39 @@ class _$LocalDataFailure<T> extends LocalDataFailure<T> {
 }
 
 abstract class LocalDataFailure<T> extends DataModelWrapper<T> {
-  const factory LocalDataFailure({required final LocalFailure localFailure}) =
-      _$LocalDataFailure<T>;
+  const factory LocalDataFailure({required final LocalFailure localFailure}) = _$LocalDataFailureImpl<T>;
   const LocalDataFailure._() : super._();
 
   LocalFailure get localFailure;
-  @JsonKey(ignore: true)
-  _$$LocalDataFailureCopyWith<T, _$LocalDataFailure<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LocalDataFailureImplCopyWith<T, _$LocalDataFailureImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LocalDataCopyWith<T, $Res> {
-  factory _$$LocalDataCopyWith(
-          _$LocalData<T> value, $Res Function(_$LocalData<T>) then) =
-      __$$LocalDataCopyWithImpl<T, $Res>;
+abstract class _$$LocalDataImplCopyWith<T, $Res> {
+  factory _$$LocalDataImplCopyWith(_$LocalDataImpl<T> value, $Res Function(_$LocalDataImpl<T>) then) =
+      __$$LocalDataImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({T? data});
 }
 
 /// @nodoc
-class __$$LocalDataCopyWithImpl<T, $Res>
-    extends _$DataModelWrapperCopyWithImpl<T, $Res, _$LocalData<T>>
-    implements _$$LocalDataCopyWith<T, $Res> {
-  __$$LocalDataCopyWithImpl(
-      _$LocalData<T> _value, $Res Function(_$LocalData<T>) _then)
+class __$$LocalDataImplCopyWithImpl<T, $Res> extends _$DataModelWrapperCopyWithImpl<T, $Res, _$LocalDataImpl<T>>
+    implements _$$LocalDataImplCopyWith<T, $Res> {
+  __$$LocalDataImplCopyWithImpl(_$LocalDataImpl<T> _value, $Res Function(_$LocalDataImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$LocalData<T>(
+    return _then(_$LocalDataImpl<T>(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -891,29 +906,30 @@ class __$$LocalDataCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$LocalData<T> extends LocalData<T> {
-  const _$LocalData({this.data}) : super._();
+class _$LocalDataImpl<T> extends LocalData<T> {
+  const _$LocalDataImpl({this.data}) : super._();
 
   @override
   final T? data;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocalData<T> &&
+            other is _$LocalDataImpl<T> &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LocalDataCopyWith<T, _$LocalData<T>> get copyWith =>
-      __$$LocalDataCopyWithImpl<T, _$LocalData<T>>(this, _$identity);
+  _$$LocalDataImplCopyWith<T, _$LocalDataImpl<T>> get copyWith =>
+      __$$LocalDataImplCopyWithImpl<T, _$LocalDataImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1003,11 +1019,13 @@ class _$LocalData<T> extends LocalData<T> {
 }
 
 abstract class LocalData<T> extends DataModelWrapper<T> {
-  const factory LocalData({final T? data}) = _$LocalData<T>;
+  const factory LocalData({final T? data}) = _$LocalDataImpl<T>;
   const LocalData._() : super._();
 
   T? get data;
-  @JsonKey(ignore: true)
-  _$$LocalDataCopyWith<T, _$LocalData<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DataModelWrapper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LocalDataImplCopyWith<T, _$LocalDataImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }

@@ -4,9 +4,7 @@ import 'package:flutter_core/utils/failures/base_failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'helper_bloc.freezed.dart';
-
 part 'helper_bloc_event.dart';
-
 part 'helper_bloc_state.dart';
 
 class HelperBloc extends Bloc<HelperBlocEvent, HelperBlocState> {

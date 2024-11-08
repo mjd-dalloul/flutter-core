@@ -1,5 +1,5 @@
-/// Created by Majd Dalloul 6/10/2022
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_core/constant.dart';
 import 'package:flutter_core/datasource/remote_data_source/i_base_remote_data_source.dart';
 import 'package:flutter_core/type_defs.dart';
@@ -7,8 +7,7 @@ import 'package:flutter_core/utils/data_model_wrapper.dart';
 import 'package:flutter_core/utils/extensions/map_ext.dart';
 import 'package:flutter_core/utils/failures/network_failures.dart';
 import 'package:logger/logger.dart';
-import 'package:flutter/foundation.dart';
-
+/// Created by Majd Dalloul 6/10/2022
 DataModelWrapper<T> processData<T>(dynamic responseData,
     Deserializer<T?>? deserializer,
     MapDeserializer<T?>? mapDeserializer,) {
@@ -97,11 +96,11 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
           break;
       }
       final ret = await compute(
-            (args) => processData<T>(args[0], args[1], args[2]),
+        (args) => processData<T>(args[0], args[1], args[2]),
         [response.data, deserializer, mapDeserializer],
       );
       logger.d('response data as json ${response.data}');
-      logger.d('response data as object ${ret}');
+      logger.d('response data as object $ret');
 
       /// if we are here then the status code of the request must be 200<=statusCode<=299
       return ret;
@@ -116,13 +115,13 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
           unauthenticatedFailure: (_) => ErrorLogType.unauthenticatedFailure,
           unknownError: (_) => ErrorLogType.unknownError,
         ),
-        e,
-        stacktrace,
+        error: e,
+        stackTrace: stacktrace,
       );
       return DataModelWrapper.networkDataFailure(networkFailure: e);
     } catch (e, stacktrace) {
       /// something went wrong.
-      logger.e(ErrorLogType.unknownServerError, e, stacktrace);
+      logger.e(ErrorLogType.unknownServerError, error: e, stackTrace: stacktrace);
       rethrow;
     }
   }
@@ -150,8 +149,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Options? headers,
     void Function(int, int)? onReceiveProgress,
   }) {
-    logger.d(
-        'Get request to ${endPoint} with headers ${headers} and params ${params}');
+    logger.d('Get request to $endPoint with headers $headers and params $params');
     return wrapRequestWithTryAndCatch(
       dio.get(
         endPoint,
@@ -173,7 +171,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     void Function(int, int)? onReceiveProgress,
   }) {
     logger.d(
-        'Post request to ${endPoint} with headers ${headers?.headers.toString()} and params ${params.toString()} and data ${bodyToString(data)}');
+        'Post request to $endPoint with headers ${headers?.headers.toString()} and params ${params.toString()} and data ${bodyToString(data)}');
     return wrapRequestWithTryAndCatch(
       dio.post(
         endPoint,
@@ -194,8 +192,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Map<String, dynamic>? params,
     Options? headers,
   }) {
-    logger.d(
-        'Put request to ${endPoint} with headers ${headers} and params ${params} and data ${bodyToString(data)}');
+    logger.d('Put request to $endPoint with headers $headers and params $params and data ${bodyToString(data)}');
     return wrapRequestWithTryAndCatch(
       dio.put(
         endPoint,
@@ -214,8 +211,7 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     Options? headers,
     data,
   }) {
-    logger.d(
-        'Patch request to ${endPoint} with headers ${headers} and params ${params} and data ${bodyToString(data)}');
+    logger.d('Patch request to $endPoint with headers $headers and params $params and data ${bodyToString(data)}');
     return wrapRequestWithTryAndCatch(
       dio.patch(
         endPoint,
@@ -240,14 +236,14 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
       } else {
         throw mapStatusCodeToFailure(response);
       }
-    } on DioError catch (e, stacktrace) {
-      logger.e(ErrorLogType.dioError, e, stacktrace);
+    } on DioException catch (e, stacktrace) {
+      logger.e(ErrorLogType.dioError, error: e, stackTrace: stacktrace);
       throw mapDioErrorToFailure(e);
     } on NetworkFailure {
       rethrow;
     } catch (e, stacktrace) {
       /// if this happen then it's not a network error, then it must be a bug in the request
-      logger.e(ErrorLogType.unknownServerError, e, stacktrace);
+      logger.e(ErrorLogType.unknownServerError, error: e, stackTrace: stacktrace);
       throw NetworkFailure.customFailure(e.toString());
     }
   }
@@ -255,19 +251,23 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
   bool responseIsOk(Response response) => response.statusCode! ~/ 100 == 2;
 
   /// mapping dio errors to proper failure
-  NetworkFailure mapDioErrorToFailure(DioError error) {
+  NetworkFailure mapDioErrorToFailure(DioException error) {
     switch (error.type) {
-      case DioErrorType.connectTimeout:
+      case DioExceptionType.connectionTimeout:
         return const NetworkFailure.noInternetFailure('Connection timeout');
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         return const NetworkFailure.noInternetFailure('Send timeout');
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         return const NetworkFailure.noInternetFailure('Receive timeout');
-      case DioErrorType.other:
+      case DioExceptionType.unknown:
         return const NetworkFailure.noInternetFailure('Something went wrong');
-      case DioErrorType.cancel:
+      case DioExceptionType.connectionError:
+        return const NetworkFailure.noInternetFailure('Send timeout');
+      case DioExceptionType.cancel:
         return const NetworkFailure.requestCancelled();
-      case DioErrorType.response:
+      case DioExceptionType.badCertificate:
+        return const NetworkFailure.noInternetFailure('Bad Certificate');
+      case DioExceptionType.badResponse:
         return mapStatusCodeToFailure(error.response);
     }
   }

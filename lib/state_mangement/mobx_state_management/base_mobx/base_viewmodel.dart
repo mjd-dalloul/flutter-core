@@ -13,7 +13,7 @@ import 'package:mobx/mobx.dart';
 part 'base_viewmodel.g.dart';
 
 abstract class BaseViewmodel extends _BaseViewmodelBase with _$BaseViewmodel {
-  BaseViewmodel(Logger logger) : super(logger);
+  BaseViewmodel(super.logger);
 }
 
 abstract class _BaseViewmodelBase with Store {
@@ -95,7 +95,7 @@ abstract class _BaseViewmodelBase with Store {
         unknownError?.call(error);
         unknownErrorHandler(error);
       }
-      logger.e(ErrorLogType.baseViewModelError, error);
+      logger.e(ErrorLogType.baseViewModelError, error: error);
       throw error;
     });
   }
@@ -133,7 +133,7 @@ abstract class _BaseViewmodelBase with Store {
           unknownError?.call(error);
           unknownErrorHandler(error);
         }
-        logger.e(ErrorLogType.baseViewModelError, error);
+        logger.e(ErrorLogType.baseViewModelError, error: error);
         throw error;
       });
 

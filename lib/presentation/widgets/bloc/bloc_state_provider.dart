@@ -16,10 +16,6 @@ abstract class BlocStateProvider<P extends StatefulWidget, B extends BaseBloc>
     bloc = context.read<B>();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
 
   @override
   void dispose() {

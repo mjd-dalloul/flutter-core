@@ -12,7 +12,7 @@ part of 'helper_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$HelperBlocEvent {
@@ -22,8 +22,7 @@ mixin _$HelperBlocEvent {
     required TResult Function() failureCleared,
     required TResult Function(BaseFailure failure) failureHappened,
     required TResult Function(Object unknownError) unknownErrorHappened,
-    required TResult Function(ContextCallback contextCallback)
-        contextCallbackTriggered,
+    required TResult Function(ContextCallback contextCallback) contextCallbackTriggered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,35 +88,37 @@ class _$HelperBlocEventCopyWithImpl<$Res, $Val extends HelperBlocEvent>
     implements $HelperBlocEventCopyWith<$Res> {
   _$HelperBlocEventCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$LoadingChangedCopyWith<$Res> {
-  factory _$$LoadingChangedCopyWith(
-          _$LoadingChanged value, $Res Function(_$LoadingChanged) then) =
-      __$$LoadingChangedCopyWithImpl<$Res>;
+abstract class _$$LoadingChangedImplCopyWith<$Res> {
+  factory _$$LoadingChangedImplCopyWith(_$LoadingChangedImpl value, $Res Function(_$LoadingChangedImpl) then) =
+      __$$LoadingChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool isLoading});
 }
 
 /// @nodoc
-class __$$LoadingChangedCopyWithImpl<$Res>
-    extends _$HelperBlocEventCopyWithImpl<$Res, _$LoadingChanged>
-    implements _$$LoadingChangedCopyWith<$Res> {
-  __$$LoadingChangedCopyWithImpl(
-      _$LoadingChanged _value, $Res Function(_$LoadingChanged) _then)
+class __$$LoadingChangedImplCopyWithImpl<$Res> extends _$HelperBlocEventCopyWithImpl<$Res, _$LoadingChangedImpl>
+    implements _$$LoadingChangedImplCopyWith<$Res> {
+  __$$LoadingChangedImplCopyWithImpl(_$LoadingChangedImpl _value, $Res Function(_$LoadingChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLoading = null,
   }) {
-    return _then(_$LoadingChanged(
+    return _then(_$LoadingChangedImpl(
       null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -128,8 +129,8 @@ class __$$LoadingChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingChanged implements LoadingChanged {
-  const _$LoadingChanged(this.isLoading);
+class _$LoadingChangedImpl implements LoadingChanged {
+  const _$LoadingChangedImpl(this.isLoading);
 
   @override
   final bool isLoading;
@@ -140,22 +141,23 @@ class _$LoadingChanged implements LoadingChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadingChanged &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+            other is _$LoadingChangedImpl &&
+            (identical(other.isLoading, isLoading) || other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadingChangedCopyWith<_$LoadingChanged> get copyWith =>
-      __$$LoadingChangedCopyWithImpl<_$LoadingChanged>(this, _$identity);
+  _$$LoadingChangedImplCopyWith<_$LoadingChangedImpl> get copyWith =>
+      __$$LoadingChangedImplCopyWithImpl<_$LoadingChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -164,8 +166,7 @@ class _$LoadingChanged implements LoadingChanged {
     required TResult Function() failureCleared,
     required TResult Function(BaseFailure failure) failureHappened,
     required TResult Function(Object unknownError) unknownErrorHappened,
-    required TResult Function(ContextCallback contextCallback)
-        contextCallbackTriggered,
+    required TResult Function(ContextCallback contextCallback) contextCallbackTriggered,
   }) {
     return loadingChanged(isLoading);
   }
@@ -242,34 +243,36 @@ class _$LoadingChanged implements LoadingChanged {
 }
 
 abstract class LoadingChanged implements HelperBlocEvent {
-  const factory LoadingChanged(final bool isLoading) = _$LoadingChanged;
+  const factory LoadingChanged(final bool isLoading) = _$LoadingChangedImpl;
 
   bool get isLoading;
-  @JsonKey(ignore: true)
-  _$$LoadingChangedCopyWith<_$LoadingChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadingChangedImplCopyWith<_$LoadingChangedImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FailureClearedCopyWith<$Res> {
-  factory _$$FailureClearedCopyWith(
-          _$FailureCleared value, $Res Function(_$FailureCleared) then) =
-      __$$FailureClearedCopyWithImpl<$Res>;
+abstract class _$$FailureClearedImplCopyWith<$Res> {
+  factory _$$FailureClearedImplCopyWith(_$FailureClearedImpl value, $Res Function(_$FailureClearedImpl) then) =
+      __$$FailureClearedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FailureClearedCopyWithImpl<$Res>
-    extends _$HelperBlocEventCopyWithImpl<$Res, _$FailureCleared>
-    implements _$$FailureClearedCopyWith<$Res> {
-  __$$FailureClearedCopyWithImpl(
-      _$FailureCleared _value, $Res Function(_$FailureCleared) _then)
+class __$$FailureClearedImplCopyWithImpl<$Res> extends _$HelperBlocEventCopyWithImpl<$Res, _$FailureClearedImpl>
+    implements _$$FailureClearedImplCopyWith<$Res> {
+  __$$FailureClearedImplCopyWithImpl(_$FailureClearedImpl _value, $Res Function(_$FailureClearedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$FailureCleared implements FailureCleared {
-  const _$FailureCleared();
+class _$FailureClearedImpl implements FailureCleared {
+  const _$FailureClearedImpl();
 
   @override
   String toString() {
@@ -277,9 +280,8 @@ class _$FailureCleared implements FailureCleared {
   }
 
   @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FailureCleared);
+  bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$FailureClearedImpl);
   }
 
   @override
@@ -370,32 +372,31 @@ class _$FailureCleared implements FailureCleared {
 }
 
 abstract class FailureCleared implements HelperBlocEvent {
-  const factory FailureCleared() = _$FailureCleared;
+  const factory FailureCleared() = _$FailureClearedImpl;
 }
 
 /// @nodoc
-abstract class _$$FailureHappenedCopyWith<$Res> {
-  factory _$$FailureHappenedCopyWith(
-          _$FailureHappened value, $Res Function(_$FailureHappened) then) =
-      __$$FailureHappenedCopyWithImpl<$Res>;
+abstract class _$$FailureHappenedImplCopyWith<$Res> {
+  factory _$$FailureHappenedImplCopyWith(_$FailureHappenedImpl value, $Res Function(_$FailureHappenedImpl) then) =
+      __$$FailureHappenedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({BaseFailure failure});
 }
 
 /// @nodoc
-class __$$FailureHappenedCopyWithImpl<$Res>
-    extends _$HelperBlocEventCopyWithImpl<$Res, _$FailureHappened>
-    implements _$$FailureHappenedCopyWith<$Res> {
-  __$$FailureHappenedCopyWithImpl(
-      _$FailureHappened _value, $Res Function(_$FailureHappened) _then)
+class __$$FailureHappenedImplCopyWithImpl<$Res> extends _$HelperBlocEventCopyWithImpl<$Res, _$FailureHappenedImpl>
+    implements _$$FailureHappenedImplCopyWith<$Res> {
+  __$$FailureHappenedImplCopyWithImpl(_$FailureHappenedImpl _value, $Res Function(_$FailureHappenedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? failure = null,
   }) {
-    return _then(_$FailureHappened(
+    return _then(_$FailureHappenedImpl(
       null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -406,8 +407,8 @@ class __$$FailureHappenedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FailureHappened implements FailureHappened {
-  const _$FailureHappened(this.failure);
+class _$FailureHappenedImpl implements FailureHappened {
+  const _$FailureHappenedImpl(this.failure);
 
   @override
   final BaseFailure failure;
@@ -418,21 +419,23 @@ class _$FailureHappened implements FailureHappened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FailureHappened &&
+            other is _$FailureHappenedImpl &&
             (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FailureHappenedCopyWith<_$FailureHappened> get copyWith =>
-      __$$FailureHappenedCopyWithImpl<_$FailureHappened>(this, _$identity);
+  _$$FailureHappenedImplCopyWith<_$FailureHappenedImpl> get copyWith =>
+      __$$FailureHappenedImplCopyWithImpl<_$FailureHappenedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -441,8 +444,7 @@ class _$FailureHappened implements FailureHappened {
     required TResult Function() failureCleared,
     required TResult Function(BaseFailure failure) failureHappened,
     required TResult Function(Object unknownError) unknownErrorHappened,
-    required TResult Function(ContextCallback contextCallback)
-        contextCallbackTriggered,
+    required TResult Function(ContextCallback contextCallback) contextCallbackTriggered,
   }) {
     return failureHappened(failure);
   }
@@ -519,37 +521,41 @@ class _$FailureHappened implements FailureHappened {
 }
 
 abstract class FailureHappened implements HelperBlocEvent {
-  const factory FailureHappened(final BaseFailure failure) = _$FailureHappened;
+  const factory FailureHappened(final BaseFailure failure) = _$FailureHappenedImpl;
 
   BaseFailure get failure;
-  @JsonKey(ignore: true)
-  _$$FailureHappenedCopyWith<_$FailureHappened> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FailureHappenedImplCopyWith<_$FailureHappenedImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnknownErrorHappenedCopyWith<$Res> {
-  factory _$$UnknownErrorHappenedCopyWith(_$UnknownErrorHappened value,
-          $Res Function(_$UnknownErrorHappened) then) =
-      __$$UnknownErrorHappenedCopyWithImpl<$Res>;
+abstract class _$$UnknownErrorHappenedImplCopyWith<$Res> {
+  factory _$$UnknownErrorHappenedImplCopyWith(
+          _$UnknownErrorHappenedImpl value, $Res Function(_$UnknownErrorHappenedImpl) then) =
+      __$$UnknownErrorHappenedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Object unknownError});
 }
 
 /// @nodoc
-class __$$UnknownErrorHappenedCopyWithImpl<$Res>
-    extends _$HelperBlocEventCopyWithImpl<$Res, _$UnknownErrorHappened>
-    implements _$$UnknownErrorHappenedCopyWith<$Res> {
-  __$$UnknownErrorHappenedCopyWithImpl(_$UnknownErrorHappened _value,
-      $Res Function(_$UnknownErrorHappened) _then)
+class __$$UnknownErrorHappenedImplCopyWithImpl<$Res>
+    extends _$HelperBlocEventCopyWithImpl<$Res, _$UnknownErrorHappenedImpl>
+    implements _$$UnknownErrorHappenedImplCopyWith<$Res> {
+  __$$UnknownErrorHappenedImplCopyWithImpl(
+      _$UnknownErrorHappenedImpl _value, $Res Function(_$UnknownErrorHappenedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? unknownError = null,
   }) {
-    return _then(_$UnknownErrorHappened(
+    return _then(_$UnknownErrorHappenedImpl(
       null == unknownError ? _value.unknownError : unknownError,
     ));
   }
@@ -557,8 +563,8 @@ class __$$UnknownErrorHappenedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnknownErrorHappened implements UnknownErrorHappened {
-  const _$UnknownErrorHappened(this.unknownError);
+class _$UnknownErrorHappenedImpl implements UnknownErrorHappened {
+  const _$UnknownErrorHappenedImpl(this.unknownError);
 
   @override
   final Object unknownError;
@@ -569,24 +575,23 @@ class _$UnknownErrorHappened implements UnknownErrorHappened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnknownErrorHappened &&
-            const DeepCollectionEquality()
-                .equals(other.unknownError, unknownError));
+            other is _$UnknownErrorHappenedImpl &&
+            const DeepCollectionEquality().equals(other.unknownError, unknownError));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(unknownError));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(unknownError));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UnknownErrorHappenedCopyWith<_$UnknownErrorHappened> get copyWith =>
-      __$$UnknownErrorHappenedCopyWithImpl<_$UnknownErrorHappened>(
-          this, _$identity);
+  _$$UnknownErrorHappenedImplCopyWith<_$UnknownErrorHappenedImpl> get copyWith =>
+      __$$UnknownErrorHappenedImplCopyWithImpl<_$UnknownErrorHappenedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -595,8 +600,7 @@ class _$UnknownErrorHappened implements UnknownErrorHappened {
     required TResult Function() failureCleared,
     required TResult Function(BaseFailure failure) failureHappened,
     required TResult Function(Object unknownError) unknownErrorHappened,
-    required TResult Function(ContextCallback contextCallback)
-        contextCallbackTriggered,
+    required TResult Function(ContextCallback contextCallback) contextCallbackTriggered,
   }) {
     return unknownErrorHappened(unknownError);
   }
@@ -673,38 +677,41 @@ class _$UnknownErrorHappened implements UnknownErrorHappened {
 }
 
 abstract class UnknownErrorHappened implements HelperBlocEvent {
-  const factory UnknownErrorHappened(final Object unknownError) =
-      _$UnknownErrorHappened;
+  const factory UnknownErrorHappened(final Object unknownError) = _$UnknownErrorHappenedImpl;
 
   Object get unknownError;
-  @JsonKey(ignore: true)
-  _$$UnknownErrorHappenedCopyWith<_$UnknownErrorHappened> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnknownErrorHappenedImplCopyWith<_$UnknownErrorHappenedImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ContextCallbackTriggeredCopyWith<$Res> {
-  factory _$$ContextCallbackTriggeredCopyWith(_$ContextCallbackTriggered value,
-          $Res Function(_$ContextCallbackTriggered) then) =
-      __$$ContextCallbackTriggeredCopyWithImpl<$Res>;
+abstract class _$$ContextCallbackTriggeredImplCopyWith<$Res> {
+  factory _$$ContextCallbackTriggeredImplCopyWith(
+          _$ContextCallbackTriggeredImpl value, $Res Function(_$ContextCallbackTriggeredImpl) then) =
+      __$$ContextCallbackTriggeredImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ContextCallback contextCallback});
 }
 
 /// @nodoc
-class __$$ContextCallbackTriggeredCopyWithImpl<$Res>
-    extends _$HelperBlocEventCopyWithImpl<$Res, _$ContextCallbackTriggered>
-    implements _$$ContextCallbackTriggeredCopyWith<$Res> {
-  __$$ContextCallbackTriggeredCopyWithImpl(_$ContextCallbackTriggered _value,
-      $Res Function(_$ContextCallbackTriggered) _then)
+class __$$ContextCallbackTriggeredImplCopyWithImpl<$Res>
+    extends _$HelperBlocEventCopyWithImpl<$Res, _$ContextCallbackTriggeredImpl>
+    implements _$$ContextCallbackTriggeredImplCopyWith<$Res> {
+  __$$ContextCallbackTriggeredImplCopyWithImpl(
+      _$ContextCallbackTriggeredImpl _value, $Res Function(_$ContextCallbackTriggeredImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? contextCallback = null,
   }) {
-    return _then(_$ContextCallbackTriggered(
+    return _then(_$ContextCallbackTriggeredImpl(
       null == contextCallback
           ? _value.contextCallback
           : contextCallback // ignore: cast_nullable_to_non_nullable
@@ -715,8 +722,8 @@ class __$$ContextCallbackTriggeredCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ContextCallbackTriggered implements ContextCallbackTriggered {
-  const _$ContextCallbackTriggered(this.contextCallback);
+class _$ContextCallbackTriggeredImpl implements ContextCallbackTriggered {
+  const _$ContextCallbackTriggeredImpl(this.contextCallback);
 
   @override
   final ContextCallback contextCallback;
@@ -727,24 +734,23 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ContextCallbackTriggered &&
-            (identical(other.contextCallback, contextCallback) ||
-                other.contextCallback == contextCallback));
+            other is _$ContextCallbackTriggeredImpl &&
+            (identical(other.contextCallback, contextCallback) || other.contextCallback == contextCallback));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, contextCallback);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ContextCallbackTriggeredCopyWith<_$ContextCallbackTriggered>
-      get copyWith =>
-          __$$ContextCallbackTriggeredCopyWithImpl<_$ContextCallbackTriggered>(
-              this, _$identity);
+  _$$ContextCallbackTriggeredImplCopyWith<_$ContextCallbackTriggeredImpl> get copyWith =>
+      __$$ContextCallbackTriggeredImplCopyWithImpl<_$ContextCallbackTriggeredImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -753,8 +759,7 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
     required TResult Function() failureCleared,
     required TResult Function(BaseFailure failure) failureHappened,
     required TResult Function(Object unknownError) unknownErrorHappened,
-    required TResult Function(ContextCallback contextCallback)
-        contextCallbackTriggered,
+    required TResult Function(ContextCallback contextCallback) contextCallbackTriggered,
   }) {
     return contextCallbackTriggered(contextCallback);
   }
@@ -831,13 +836,15 @@ class _$ContextCallbackTriggered implements ContextCallbackTriggered {
 }
 
 abstract class ContextCallbackTriggered implements HelperBlocEvent {
-  const factory ContextCallbackTriggered(
-      final ContextCallback contextCallback) = _$ContextCallbackTriggered;
+  const factory ContextCallbackTriggered(final ContextCallback contextCallback) = _$ContextCallbackTriggeredImpl;
 
   ContextCallback get contextCallback;
-  @JsonKey(ignore: true)
-  _$$ContextCallbackTriggeredCopyWith<_$ContextCallbackTriggered>
-      get copyWith => throw _privateConstructorUsedError;
+
+  /// Create a copy of HelperBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ContextCallbackTriggeredImplCopyWith<_$ContextCallbackTriggeredImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -847,9 +854,10 @@ mixin _$HelperBlocState {
   BaseFailure? get failure => throw _privateConstructorUsedError;
   Object? get unknownError => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $HelperBlocStateCopyWith<HelperBlocState> get copyWith =>
-      throw _privateConstructorUsedError;
+  /// Create a copy of HelperBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $HelperBlocStateCopyWith<HelperBlocState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -870,11 +878,13 @@ class _$HelperBlocStateCopyWithImpl<$Res, $Val extends HelperBlocState>
     implements $HelperBlocStateCopyWith<$Res> {
   _$HelperBlocStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HelperBlocState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -896,35 +906,28 @@ class _$HelperBlocStateCopyWithImpl<$Res, $Val extends HelperBlocState>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as BaseFailure?,
-      unknownError:
-          freezed == unknownError ? _value.unknownError : unknownError,
+      unknownError: freezed == unknownError ? _value.unknownError : unknownError,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_HelperBlocStateCopyWith<$Res>
-    implements $HelperBlocStateCopyWith<$Res> {
-  factory _$$_HelperBlocStateCopyWith(
-          _$_HelperBlocState value, $Res Function(_$_HelperBlocState) then) =
-      __$$_HelperBlocStateCopyWithImpl<$Res>;
+abstract class _$$HelperBlocStateImplCopyWith<$Res> implements $HelperBlocStateCopyWith<$Res> {
+  factory _$$HelperBlocStateImplCopyWith(_$HelperBlocStateImpl value, $Res Function(_$HelperBlocStateImpl) then) =
+      __$$HelperBlocStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool isLoading,
-      ContextCallback contextCallback,
-      BaseFailure? failure,
-      Object? unknownError});
+  $Res call({bool isLoading, ContextCallback contextCallback, BaseFailure? failure, Object? unknownError});
 }
 
 /// @nodoc
-class __$$_HelperBlocStateCopyWithImpl<$Res>
-    extends _$HelperBlocStateCopyWithImpl<$Res, _$_HelperBlocState>
-    implements _$$_HelperBlocStateCopyWith<$Res> {
-  __$$_HelperBlocStateCopyWithImpl(
-      _$_HelperBlocState _value, $Res Function(_$_HelperBlocState) _then)
+class __$$HelperBlocStateImplCopyWithImpl<$Res> extends _$HelperBlocStateCopyWithImpl<$Res, _$HelperBlocStateImpl>
+    implements _$$HelperBlocStateImplCopyWith<$Res> {
+  __$$HelperBlocStateImplCopyWithImpl(_$HelperBlocStateImpl _value, $Res Function(_$HelperBlocStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HelperBlocState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -933,7 +936,7 @@ class __$$_HelperBlocStateCopyWithImpl<$Res>
     Object? failure = freezed,
     Object? unknownError = freezed,
   }) {
-    return _then(_$_HelperBlocState(
+    return _then(_$HelperBlocStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -946,20 +949,16 @@ class __$$_HelperBlocStateCopyWithImpl<$Res>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as BaseFailure?,
-      unknownError:
-          freezed == unknownError ? _value.unknownError : unknownError,
+      unknownError: freezed == unknownError ? _value.unknownError : unknownError,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_HelperBlocState implements _HelperBlocState {
-  const _$_HelperBlocState(
-      {required this.isLoading,
-      required this.contextCallback,
-      this.failure,
-      this.unknownError});
+class _$HelperBlocStateImpl implements _HelperBlocState {
+  const _$HelperBlocStateImpl(
+      {required this.isLoading, required this.contextCallback, this.failure, this.unknownError});
 
   @override
   final bool isLoading;
@@ -967,56 +966,62 @@ class _$_HelperBlocState implements _HelperBlocState {
   final ContextCallback contextCallback;
   @override
   final BaseFailure? failure;
-  @override
-  final Object? unknownError;
+@override
+final Object? unknownError;
 
-  @override
-  String toString() {
-    return 'HelperBlocState(isLoading: $isLoading, contextCallback: $contextCallback, failure: $failure, unknownError: $unknownError)';
-  }
+@override
+String toString() {
+return 'HelperBlocState(isLoading: $isLoading, contextCallback: $contextCallback, failure: $failure, unknownError: $unknownError)';
+}
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_HelperBlocState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.contextCallback, contextCallback) ||
-                other.contextCallback == contextCallback) &&
-            (identical(other.failure, failure) || other.failure == failure) &&
-            const DeepCollectionEquality()
-                .equals(other.unknownError, unknownError));
-  }
+@override
+bool operator ==(Object other) {
+return identical(this, other) ||
+(other.runtimeType == runtimeType &&
+other is _$HelperBlocStateImpl &&
+(identical(other.isLoading, isLoading) ||
+other.isLoading == isLoading) &&
+(identical(other.contextCallback, contextCallback) ||
+other.contextCallback == contextCallback) &&
+(identical(other.failure, failure) || other.failure == failure) &&
+const DeepCollectionEquality()
+    .equals(other.unknownError, unknownError));
+}
 
-  @override
-  int get hashCode => Object.hash(runtimeType, isLoading, contextCallback,
-      failure, const DeepCollectionEquality().hash(unknownError));
+@override
+int get hashCode => Object.hash(runtimeType, isLoading, contextCallback,
+failure, const DeepCollectionEquality().hash(unknownError));
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_HelperBlocStateCopyWith<_$_HelperBlocState> get copyWith =>
-      __$$_HelperBlocStateCopyWithImpl<_$_HelperBlocState>(this, _$identity);
+/// Create a copy of HelperBlocState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+@pragma('vm:prefer-inline')
+_$$HelperBlocStateImplCopyWith<_$HelperBlocStateImpl> get copyWith =>
+__$$HelperBlocStateImplCopyWithImpl<_$HelperBlocStateImpl>(
+this, _$identity);
 }
 
 abstract class _HelperBlocState implements HelperBlocState {
-  const factory _HelperBlocState(
-      {required final bool isLoading,
-      required final ContextCallback contextCallback,
-      final BaseFailure? failure,
-      final Object? unknownError}) = _$_HelperBlocState;
+const factory _HelperBlocState(
+{required final bool isLoading,
+required final ContextCallback contextCallback,
+final BaseFailure? failure,
+final Object? unknownError}) = _$HelperBlocStateImpl;
 
-  @override
-  bool get isLoading;
-  @override
-  ContextCallback get contextCallback;
-  @override
-  BaseFailure? get failure;
-  @override
-  Object? get unknownError;
-  @override
-  @JsonKey(ignore: true)
-  _$$_HelperBlocStateCopyWith<_$_HelperBlocState> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool get isLoading;
+@override
+ContextCallback get contextCallback;
+@override
+BaseFailure? get failure;
+@override
+Object? get unknownError;
+
+/// Create a copy of HelperBlocState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@JsonKey(includeFromJson: false, includeToJson: false)
+_$$HelperBlocStateImplCopyWith<_$HelperBlocStateImpl> get copyWith =>
+throw _privateConstructorUsedError;
 }

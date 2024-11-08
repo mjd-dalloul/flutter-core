@@ -196,7 +196,7 @@ class BaseLocalDataSource implements IBaseLocalDataSource {
     try {
       return DataModelWrapper.localData(data: await databaseCall.call());
     } catch (e, stacktrace) {
-      logger.e(ErrorLogType.localDatabaseError, e, stacktrace);
+      logger.e(ErrorLogType.localDatabaseError, error: e, stackTrace: stacktrace);
       return DataModelWrapper.localDataFailure(localFailure: LocalFailure.unknownError(e));
     }
   }

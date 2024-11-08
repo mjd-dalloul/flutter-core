@@ -34,7 +34,7 @@ mixin ThemeMixin<S extends StatefulWidget> on State<S> {
     _colorScheme = Theme.of(context).colorScheme;
     _errorColor = Theme.of(context).colorScheme.error;
     _primaryColor = Theme.of(context).primaryColor;
-    _backgroundColor = Theme.of(context).colorScheme.background;
+    _backgroundColor = Theme.of(context).colorScheme.surface;
     _scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
     _bottomAppBarColor = Theme.of(context).bottomSheetTheme.backgroundColor;
   }

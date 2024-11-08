@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:convert';
 
 Future<dynamic> decodeJson(String? jsonString) {
   return jsonString == null ? null : jsonDecode(jsonString);
@@ -29,22 +30,22 @@ class JsonDecoderInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     final decodedErrorData = await compute(
       decodeJson,
       err.response?.data != null ? err.response!.data as String : null,
     );
 
     handler.next(
-      DioError(
+      DioException(
         response: Response(
           data: decodedErrorData,
           headers: err.response?.headers,
           requestOptions: err.requestOptions,
-          isRedirect: err.response?.isRedirect,
+          isRedirect: err.response?.isRedirect ?? false,
           statusCode: err.response?.statusCode,
           statusMessage: err.response?.statusMessage,
-          redirects: err.response?.redirects,
+          redirects: err.response?.redirects ?? [],
           extra: err.response?.extra,
         ),
         error: err.error,

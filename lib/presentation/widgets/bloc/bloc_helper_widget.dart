@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @Deprecated('Wrap your widget with BlocBuilder')
 abstract class BlocBuilderWidget<B extends StateStreamable<S>, S> extends StatelessWidget {
-  const BlocBuilderWidget({Key? key}) : super(key: key);
+  const BlocBuilderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ abstract class BlocBuilderWidget<B extends StateStreamable<S>, S> extends Statel
 @Deprecated('Wrap your widget with BlocProvider')
 abstract class BlocProviderWidget<T extends StateStreamableSource<Object?>>
     extends StatelessWidget {
-  const BlocProviderWidget({Key? key}) : super(key: key);
+  const BlocProviderWidget({super.key});
 
   T get bloc;
 
@@ -39,7 +39,7 @@ abstract class BlocProviderWidget<T extends StateStreamableSource<Object?>>
 
 @Deprecated('Wrap your widget with BlocListener')
 abstract class BlocListenerWidget<B extends StateStreamable<S>, S> extends StatelessWidget {
-  const BlocListenerWidget({Key? key}) : super(key: key);
+  const BlocListenerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ abstract class BlocListenerWidget<B extends StateStreamable<S>, S> extends State
 
 @Deprecated('Wrap your widget with BlocConsumer')
 abstract class BlocConsumerWidget<B extends StateStreamable<S>, S> extends StatelessWidget {
-  const BlocConsumerWidget({Key? key}) : super(key: key);
+  const BlocConsumerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

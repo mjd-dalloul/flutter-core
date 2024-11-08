@@ -1,4 +1,4 @@
-library flutter_core;
+library;
 
 /// A Calculator.
 class Calculator {

@@ -4,4 +4,6 @@ include: package:flutter_lints/flutter.yaml
 # https://dart.dev/guides/language/analysis-options
 analyzer:
   language:
-    strict-raw-types: true
+    strict-raw-types: false
+  errors:
+    invalid_annotation_target: ignore

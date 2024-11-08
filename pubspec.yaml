@@ -4,35 +4,36 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: ">=2.19.0 <3.0.0"
-  flutter: ">=3.7.0"
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.24.4"
 
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.0.15
-  freezed_annotation: ^2.1.0
-  dio: ^4.0.6
-  flutter_bloc: ^8.1.1
-  intl: ^0.17.0
-  sqflite: ^2.2.0+3
-  tuple: ^2.0.1
-  get_it: ^7.2.0
-  connectivity_plus: ^3.0.2
-  infinite_scroll_pagination: ^3.2.0
-  logger: ^1.1.0
-  flutter_mobx: ^2.0.6+4
+  shared_preferences: ^2.3.2
+  freezed_annotation: ^2.4.4
+  dio: ^5.7.0
+  flutter_bloc: ^8.1.6
+  intl: ^0.19.0
+  sqflite: ^2.4.1
+  tuple: ^2.0.2
+  get_it: ^8.0.2
+  connectivity_plus: ^6.1.0
+  infinite_scroll_pagination: ^4.0.0
+  logger: ^2.4.0
+  flutter_mobx: ^2.2.1+1
+  json_annotation: ^4.9.0
   fluttertoast:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  build_runner: ^2.2.1
-  mobx_codegen: ^2.0.6
-  freezed: ^2.1.1
-  mockito: ^5.3.2
-  json_serializable:
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.13
+  mobx_codegen: ^2.6.2
+  freezed: ^2.5.7
+  mockito: ^5.4.4
+  json_serializable: ^6.8.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

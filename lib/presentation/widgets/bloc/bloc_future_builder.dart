@@ -5,7 +5,7 @@ import 'package:flutter_core/utils/failures/base_failure.dart';
 
 class BlocFutureBuilder<T extends Bloc, D> extends StatelessWidget {
   const BlocFutureBuilder({
-    Key? key,
+    super.key,
     required this.bloc,
     required this.isLoading,
     required this.futureResult,
@@ -13,7 +13,7 @@ class BlocFutureBuilder<T extends Bloc, D> extends StatelessWidget {
     required this.errorWidget,
     required this.onSuccess,
     required this.hasError,
-  }) : super(key: key);
+  });
 
   final T bloc;
   final ValueGetter<bool> isLoading;
@@ -43,14 +43,14 @@ class BlocFutureBuilder<T extends Bloc, D> extends StatelessWidget {
 
 class FutureDataModelWrapperBuilder<T extends Bloc, D> extends StatelessWidget {
   const FutureDataModelWrapperBuilder({
-    Key? key,
+    super.key,
     required this.bloc,
     required this.isLoading,
     required this.dataResult,
     required this.loadingWidget,
     required this.errorWidget,
     required this.onSuccess,
-  }) : super(key: key);
+  });
 
   final T bloc;
   final ValueGetter<bool> isLoading;

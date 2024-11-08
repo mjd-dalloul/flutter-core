@@ -12,16 +12,16 @@ part of 'network_failures.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NetworkFailure {
   dynamic get failure => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
-    required TResult Function(String? message, dynamic failure)
-        requestCancelled,
+    required TResult Function(String? message, dynamic failure) requestCancelled,
     required TResult Function(String message, dynamic failure) customFailure,
     required TResult Function(String? message, dynamic failure)
         noInternetFailure,
@@ -84,15 +84,15 @@ mixin _$NetworkFailure {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $NetworkFailureCopyWith<NetworkFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $NetworkFailureCopyWith<NetworkFailure> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NetworkFailureCopyWith<$Res> {
-  factory $NetworkFailureCopyWith(
-          NetworkFailure value, $Res Function(NetworkFailure) then) =
+  factory $NetworkFailureCopyWith(NetworkFailure value, $Res Function(NetworkFailure) then) =
       _$NetworkFailureCopyWithImpl<$Res, NetworkFailure>;
   @useResult
   $Res call({dynamic failure});
@@ -103,11 +103,13 @@ class _$NetworkFailureCopyWithImpl<$Res, $Val extends NetworkFailure>
     implements $NetworkFailureCopyWith<$Res> {
   _$NetworkFailureCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,31 +125,29 @@ class _$NetworkFailureCopyWithImpl<$Res, $Val extends NetworkFailure>
 }
 
 /// @nodoc
-abstract class _$$ServerFailureCopyWith<$Res>
-    implements $NetworkFailureCopyWith<$Res> {
-  factory _$$ServerFailureCopyWith(
-          _$ServerFailure value, $Res Function(_$ServerFailure) then) =
-      __$$ServerFailureCopyWithImpl<$Res>;
+abstract class _$$ServerFailureImplCopyWith<$Res> implements $NetworkFailureCopyWith<$Res> {
+  factory _$$ServerFailureImplCopyWith(_$ServerFailureImpl value, $Res Function(_$ServerFailureImpl) then) =
+      __$$ServerFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
 
 /// @nodoc
-class __$$ServerFailureCopyWithImpl<$Res>
-    extends _$NetworkFailureCopyWithImpl<$Res, _$ServerFailure>
-    implements _$$ServerFailureCopyWith<$Res> {
-  __$$ServerFailureCopyWithImpl(
-      _$ServerFailure _value, $Res Function(_$ServerFailure) _then)
+class __$$ServerFailureImplCopyWithImpl<$Res> extends _$NetworkFailureCopyWithImpl<$Res, _$ServerFailureImpl>
+    implements _$$ServerFailureImplCopyWith<$Res> {
+  __$$ServerFailureImplCopyWithImpl(_$ServerFailureImpl _value, $Res Function(_$ServerFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_$ServerFailure(
+    return _then(_$ServerFailureImpl(
       freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -162,8 +162,8 @@ class __$$ServerFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ServerFailure extends ServerFailure {
-  const _$ServerFailure([this.message, this.failure]) : super._();
+class _$ServerFailureImpl extends ServerFailure {
+  const _$ServerFailureImpl([this.message, this.failure]) : super._();
 
   @override
   final String? message;
@@ -176,33 +176,32 @@ class _$ServerFailure extends ServerFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ServerFailure &&
+            other is _$ServerFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(runtimeType, message, const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ServerFailureCopyWith<_$ServerFailure> get copyWith =>
-      __$$ServerFailureCopyWithImpl<_$ServerFailure>(this, _$identity);
+  _$$ServerFailureImplCopyWith<_$ServerFailureImpl> get copyWith =>
+      __$$ServerFailureImplCopyWithImpl<_$ServerFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
-    required TResult Function(String? message, dynamic failure)
-        requestCancelled,
+    required TResult Function(String? message, dynamic failure) requestCancelled,
     required TResult Function(String message, dynamic failure) customFailure,
-    required TResult Function(String? message, dynamic failure)
-        noInternetFailure,
+    required TResult Function(String? message, dynamic failure) noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
     required TResult Function(dynamic error, dynamic failure) unknownError,
@@ -286,45 +285,44 @@ class _$ServerFailure extends ServerFailure {
 }
 
 abstract class ServerFailure extends NetworkFailure {
-  const factory ServerFailure([final String? message, final dynamic failure]) =
-      _$ServerFailure;
+  const factory ServerFailure([final String? message, final dynamic failure]) = _$ServerFailureImpl;
   const ServerFailure._() : super._();
 
   String? get message;
   @override
   dynamic get failure;
+
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$ServerFailureCopyWith<_$ServerFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ServerFailureImplCopyWith<_$ServerFailureImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RequestCancelledCopyWith<$Res>
-    implements $NetworkFailureCopyWith<$Res> {
-  factory _$$RequestCancelledCopyWith(
-          _$RequestCancelled value, $Res Function(_$RequestCancelled) then) =
-      __$$RequestCancelledCopyWithImpl<$Res>;
+abstract class _$$RequestCancelledImplCopyWith<$Res> implements $NetworkFailureCopyWith<$Res> {
+  factory _$$RequestCancelledImplCopyWith(_$RequestCancelledImpl value, $Res Function(_$RequestCancelledImpl) then) =
+      __$$RequestCancelledImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
 
 /// @nodoc
-class __$$RequestCancelledCopyWithImpl<$Res>
-    extends _$NetworkFailureCopyWithImpl<$Res, _$RequestCancelled>
-    implements _$$RequestCancelledCopyWith<$Res> {
-  __$$RequestCancelledCopyWithImpl(
-      _$RequestCancelled _value, $Res Function(_$RequestCancelled) _then)
+class __$$RequestCancelledImplCopyWithImpl<$Res> extends _$NetworkFailureCopyWithImpl<$Res, _$RequestCancelledImpl>
+    implements _$$RequestCancelledImplCopyWith<$Res> {
+  __$$RequestCancelledImplCopyWithImpl(_$RequestCancelledImpl _value, $Res Function(_$RequestCancelledImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_$RequestCancelled(
+    return _then(_$RequestCancelledImpl(
       freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -339,8 +337,8 @@ class __$$RequestCancelledCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RequestCancelled extends RequestCancelled {
-  const _$RequestCancelled([this.message, this.failure]) : super._();
+class _$RequestCancelledImpl extends RequestCancelled {
+  const _$RequestCancelledImpl([this.message, this.failure]) : super._();
 
   @override
   final String? message;
@@ -353,33 +351,32 @@ class _$RequestCancelled extends RequestCancelled {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestCancelled &&
+            other is _$RequestCancelledImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(runtimeType, message, const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RequestCancelledCopyWith<_$RequestCancelled> get copyWith =>
-      __$$RequestCancelledCopyWithImpl<_$RequestCancelled>(this, _$identity);
+  _$$RequestCancelledImplCopyWith<_$RequestCancelledImpl> get copyWith =>
+      __$$RequestCancelledImplCopyWithImpl<_$RequestCancelledImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
-    required TResult Function(String? message, dynamic failure)
-        requestCancelled,
+    required TResult Function(String? message, dynamic failure) requestCancelled,
     required TResult Function(String message, dynamic failure) customFailure,
-    required TResult Function(String? message, dynamic failure)
-        noInternetFailure,
+    required TResult Function(String? message, dynamic failure) noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
     required TResult Function(dynamic error, dynamic failure) unknownError,
@@ -463,45 +460,44 @@ class _$RequestCancelled extends RequestCancelled {
 }
 
 abstract class RequestCancelled extends NetworkFailure {
-  const factory RequestCancelled(
-      [final String? message, final dynamic failure]) = _$RequestCancelled;
+  const factory RequestCancelled([final String? message, final dynamic failure]) = _$RequestCancelledImpl;
   const RequestCancelled._() : super._();
 
   String? get message;
   @override
   dynamic get failure;
+
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$RequestCancelledCopyWith<_$RequestCancelled> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RequestCancelledImplCopyWith<_$RequestCancelledImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CustomFailureCopyWith<$Res>
-    implements $NetworkFailureCopyWith<$Res> {
-  factory _$$CustomFailureCopyWith(
-          _$CustomFailure value, $Res Function(_$CustomFailure) then) =
-      __$$CustomFailureCopyWithImpl<$Res>;
+abstract class _$$CustomFailureImplCopyWith<$Res> implements $NetworkFailureCopyWith<$Res> {
+  factory _$$CustomFailureImplCopyWith(_$CustomFailureImpl value, $Res Function(_$CustomFailureImpl) then) =
+      __$$CustomFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, dynamic failure});
 }
 
 /// @nodoc
-class __$$CustomFailureCopyWithImpl<$Res>
-    extends _$NetworkFailureCopyWithImpl<$Res, _$CustomFailure>
-    implements _$$CustomFailureCopyWith<$Res> {
-  __$$CustomFailureCopyWithImpl(
-      _$CustomFailure _value, $Res Function(_$CustomFailure) _then)
+class __$$CustomFailureImplCopyWithImpl<$Res> extends _$NetworkFailureCopyWithImpl<$Res, _$CustomFailureImpl>
+    implements _$$CustomFailureImplCopyWith<$Res> {
+  __$$CustomFailureImplCopyWithImpl(_$CustomFailureImpl _value, $Res Function(_$CustomFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = null,
     Object? failure = freezed,
   }) {
-    return _then(_$CustomFailure(
+    return _then(_$CustomFailureImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -516,8 +512,8 @@ class __$$CustomFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CustomFailure extends CustomFailure {
-  const _$CustomFailure(this.message, [this.failure]) : super._();
+class _$CustomFailureImpl extends CustomFailure {
+  const _$CustomFailureImpl(this.message, [this.failure]) : super._();
 
   @override
   final String message;
@@ -530,33 +526,32 @@ class _$CustomFailure extends CustomFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CustomFailure &&
+            other is _$CustomFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(runtimeType, message, const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
-      __$$CustomFailureCopyWithImpl<_$CustomFailure>(this, _$identity);
+  _$$CustomFailureImplCopyWith<_$CustomFailureImpl> get copyWith =>
+      __$$CustomFailureImplCopyWithImpl<_$CustomFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
-    required TResult Function(String? message, dynamic failure)
-        requestCancelled,
+    required TResult Function(String? message, dynamic failure) requestCancelled,
     required TResult Function(String message, dynamic failure) customFailure,
-    required TResult Function(String? message, dynamic failure)
-        noInternetFailure,
+    required TResult Function(String? message, dynamic failure) noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
     required TResult Function(dynamic error, dynamic failure) unknownError,
@@ -640,45 +635,44 @@ class _$CustomFailure extends CustomFailure {
 }
 
 abstract class CustomFailure extends NetworkFailure {
-  const factory CustomFailure(final String message, [final dynamic failure]) =
-      _$CustomFailure;
+  const factory CustomFailure(final String message, [final dynamic failure]) = _$CustomFailureImpl;
   const CustomFailure._() : super._();
 
   String get message;
   @override
   dynamic get failure;
+
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$CustomFailureCopyWith<_$CustomFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CustomFailureImplCopyWith<_$CustomFailureImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$NoInternetFailureCopyWith<$Res>
-    implements $NetworkFailureCopyWith<$Res> {
-  factory _$$NoInternetFailureCopyWith(
-          _$NoInternetFailure value, $Res Function(_$NoInternetFailure) then) =
-      __$$NoInternetFailureCopyWithImpl<$Res>;
+abstract class _$$NoInternetFailureImplCopyWith<$Res> implements $NetworkFailureCopyWith<$Res> {
+  factory _$$NoInternetFailureImplCopyWith(_$NoInternetFailureImpl value, $Res Function(_$NoInternetFailureImpl) then) =
+      __$$NoInternetFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
 
 /// @nodoc
-class __$$NoInternetFailureCopyWithImpl<$Res>
-    extends _$NetworkFailureCopyWithImpl<$Res, _$NoInternetFailure>
-    implements _$$NoInternetFailureCopyWith<$Res> {
-  __$$NoInternetFailureCopyWithImpl(
-      _$NoInternetFailure _value, $Res Function(_$NoInternetFailure) _then)
+class __$$NoInternetFailureImplCopyWithImpl<$Res> extends _$NetworkFailureCopyWithImpl<$Res, _$NoInternetFailureImpl>
+    implements _$$NoInternetFailureImplCopyWith<$Res> {
+  __$$NoInternetFailureImplCopyWithImpl(_$NoInternetFailureImpl _value, $Res Function(_$NoInternetFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_$NoInternetFailure(
+    return _then(_$NoInternetFailureImpl(
       freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -693,8 +687,8 @@ class __$$NoInternetFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NoInternetFailure extends NoInternetFailure {
-  const _$NoInternetFailure([this.message, this.failure]) : super._();
+class _$NoInternetFailureImpl extends NoInternetFailure {
+  const _$NoInternetFailureImpl([this.message, this.failure]) : super._();
 
   @override
   final String? message;
@@ -707,33 +701,32 @@ class _$NoInternetFailure extends NoInternetFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NoInternetFailure &&
+            other is _$NoInternetFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(runtimeType, message, const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$NoInternetFailureCopyWith<_$NoInternetFailure> get copyWith =>
-      __$$NoInternetFailureCopyWithImpl<_$NoInternetFailure>(this, _$identity);
+  _$$NoInternetFailureImplCopyWith<_$NoInternetFailureImpl> get copyWith =>
+      __$$NoInternetFailureImplCopyWithImpl<_$NoInternetFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
-    required TResult Function(String? message, dynamic failure)
-        requestCancelled,
+    required TResult Function(String? message, dynamic failure) requestCancelled,
     required TResult Function(String message, dynamic failure) customFailure,
-    required TResult Function(String? message, dynamic failure)
-        noInternetFailure,
+    required TResult Function(String? message, dynamic failure) noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
     required TResult Function(dynamic error, dynamic failure) unknownError,
@@ -817,45 +810,47 @@ class _$NoInternetFailure extends NoInternetFailure {
 }
 
 abstract class NoInternetFailure extends NetworkFailure {
-  const factory NoInternetFailure(
-      [final String? message, final dynamic failure]) = _$NoInternetFailure;
+  const factory NoInternetFailure([final String? message, final dynamic failure]) = _$NoInternetFailureImpl;
   const NoInternetFailure._() : super._();
 
   String? get message;
   @override
   dynamic get failure;
+
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$NoInternetFailureCopyWith<_$NoInternetFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NoInternetFailureImplCopyWith<_$NoInternetFailureImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnauthenticatedFailureCopyWith<$Res>
-    implements $NetworkFailureCopyWith<$Res> {
-  factory _$$UnauthenticatedFailureCopyWith(_$UnauthenticatedFailure value,
-          $Res Function(_$UnauthenticatedFailure) then) =
-      __$$UnauthenticatedFailureCopyWithImpl<$Res>;
+abstract class _$$UnauthenticatedFailureImplCopyWith<$Res> implements $NetworkFailureCopyWith<$Res> {
+  factory _$$UnauthenticatedFailureImplCopyWith(
+          _$UnauthenticatedFailureImpl value, $Res Function(_$UnauthenticatedFailureImpl) then) =
+      __$$UnauthenticatedFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? message, dynamic failure});
 }
 
 /// @nodoc
-class __$$UnauthenticatedFailureCopyWithImpl<$Res>
-    extends _$NetworkFailureCopyWithImpl<$Res, _$UnauthenticatedFailure>
-    implements _$$UnauthenticatedFailureCopyWith<$Res> {
-  __$$UnauthenticatedFailureCopyWithImpl(_$UnauthenticatedFailure _value,
-      $Res Function(_$UnauthenticatedFailure) _then)
+class __$$UnauthenticatedFailureImplCopyWithImpl<$Res>
+    extends _$NetworkFailureCopyWithImpl<$Res, _$UnauthenticatedFailureImpl>
+    implements _$$UnauthenticatedFailureImplCopyWith<$Res> {
+  __$$UnauthenticatedFailureImplCopyWithImpl(
+      _$UnauthenticatedFailureImpl _value, $Res Function(_$UnauthenticatedFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_$UnauthenticatedFailure(
+    return _then(_$UnauthenticatedFailureImpl(
       freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -870,8 +865,8 @@ class __$$UnauthenticatedFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnauthenticatedFailure extends UnauthenticatedFailure {
-  const _$UnauthenticatedFailure([this.message, this.failure]) : super._();
+class _$UnauthenticatedFailureImpl extends UnauthenticatedFailure {
+  const _$UnauthenticatedFailureImpl([this.message, this.failure]) : super._();
 
   @override
   final String? message;
@@ -884,34 +879,32 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnauthenticatedFailure &&
+            other is _$UnauthenticatedFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(runtimeType, message, const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UnauthenticatedFailureCopyWith<_$UnauthenticatedFailure> get copyWith =>
-      __$$UnauthenticatedFailureCopyWithImpl<_$UnauthenticatedFailure>(
-          this, _$identity);
+  _$$UnauthenticatedFailureImplCopyWith<_$UnauthenticatedFailureImpl> get copyWith =>
+      __$$UnauthenticatedFailureImplCopyWithImpl<_$UnauthenticatedFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
-    required TResult Function(String? message, dynamic failure)
-        requestCancelled,
+    required TResult Function(String? message, dynamic failure) requestCancelled,
     required TResult Function(String message, dynamic failure) customFailure,
-    required TResult Function(String? message, dynamic failure)
-        noInternetFailure,
+    required TResult Function(String? message, dynamic failure) noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
     required TResult Function(dynamic error, dynamic failure) unknownError,
@@ -995,46 +988,45 @@ class _$UnauthenticatedFailure extends UnauthenticatedFailure {
 }
 
 abstract class UnauthenticatedFailure extends NetworkFailure {
-  const factory UnauthenticatedFailure(
-      [final String? message,
-      final dynamic failure]) = _$UnauthenticatedFailure;
+  const factory UnauthenticatedFailure([final String? message, final dynamic failure]) = _$UnauthenticatedFailureImpl;
   const UnauthenticatedFailure._() : super._();
 
   String? get message;
   @override
   dynamic get failure;
+
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$UnauthenticatedFailureCopyWith<_$UnauthenticatedFailure> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnauthenticatedFailureImplCopyWith<_$UnauthenticatedFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnknownErrorCopyWith<$Res>
-    implements $NetworkFailureCopyWith<$Res> {
-  factory _$$UnknownErrorCopyWith(
-          _$UnknownError value, $Res Function(_$UnknownError) then) =
-      __$$UnknownErrorCopyWithImpl<$Res>;
+abstract class _$$UnknownErrorImplCopyWith<$Res> implements $NetworkFailureCopyWith<$Res> {
+  factory _$$UnknownErrorImplCopyWith(_$UnknownErrorImpl value, $Res Function(_$UnknownErrorImpl) then) =
+      __$$UnknownErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic error, dynamic failure});
 }
 
 /// @nodoc
-class __$$UnknownErrorCopyWithImpl<$Res>
-    extends _$NetworkFailureCopyWithImpl<$Res, _$UnknownError>
-    implements _$$UnknownErrorCopyWith<$Res> {
-  __$$UnknownErrorCopyWithImpl(
-      _$UnknownError _value, $Res Function(_$UnknownError) _then)
+class __$$UnknownErrorImplCopyWithImpl<$Res> extends _$NetworkFailureCopyWithImpl<$Res, _$UnknownErrorImpl>
+    implements _$$UnknownErrorImplCopyWith<$Res> {
+  __$$UnknownErrorImplCopyWithImpl(_$UnknownErrorImpl _value, $Res Function(_$UnknownErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_$UnknownError(
+    return _then(_$UnknownErrorImpl(
       freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -1049,8 +1041,8 @@ class __$$UnknownErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnknownError extends UnknownError {
-  const _$UnknownError(this.error, [this.failure]) : super._();
+class _$UnknownErrorImpl extends UnknownError {
+  const _$UnknownErrorImpl(this.error, [this.failure]) : super._();
 
   @override
   final dynamic error;
@@ -1063,35 +1055,33 @@ class _$UnknownError extends UnknownError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnknownError &&
+            other is _$UnknownErrorImpl &&
             const DeepCollectionEquality().equals(other.error, error) &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(error),
-      const DeepCollectionEquality().hash(failure));
+      runtimeType, const DeepCollectionEquality().hash(error), const DeepCollectionEquality().hash(failure));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
-      __$$UnknownErrorCopyWithImpl<_$UnknownError>(this, _$identity);
+  _$$UnknownErrorImplCopyWith<_$UnknownErrorImpl> get copyWith =>
+      __$$UnknownErrorImplCopyWithImpl<_$UnknownErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, dynamic failure) serverFailure,
-    required TResult Function(String? message, dynamic failure)
-        requestCancelled,
+    required TResult Function(String? message, dynamic failure) requestCancelled,
     required TResult Function(String message, dynamic failure) customFailure,
-    required TResult Function(String? message, dynamic failure)
-        noInternetFailure,
+    required TResult Function(String? message, dynamic failure) noInternetFailure,
     required TResult Function(String? message, dynamic failure)
         unauthenticatedFailure,
     required TResult Function(dynamic error, dynamic failure) unknownError,
@@ -1175,15 +1165,16 @@ class _$UnknownError extends UnknownError {
 }
 
 abstract class UnknownError extends NetworkFailure {
-  const factory UnknownError(final dynamic error, [final dynamic failure]) =
-      _$UnknownError;
+  const factory UnknownError(final dynamic error, [final dynamic failure]) = _$UnknownErrorImpl;
   const UnknownError._() : super._();
 
   dynamic get error;
   @override
   dynamic get failure;
+
+  /// Create a copy of NetworkFailure
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$UnknownErrorCopyWith<_$UnknownError> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnknownErrorImplCopyWith<_$UnknownErrorImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -56,7 +56,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
         await onFailure?.call(res);
       }
     } catch (e, st) {
-      logger.e(ErrorLogType.baseBlocError, e, st);
+      logger.e(ErrorLogType.baseBlocError, error: e, stackTrace: st);
       await unknownError?.call(e);
     }
   }
@@ -144,7 +144,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       }
       return res;
     } catch (e, st) {
-      logger.e(ErrorLogType.baseBlocError, e, st);
+      logger.e(ErrorLogType.baseBlocError, error: e, stackTrace: st);
       await loadingChanged?.call(false);
       if (useBaseBlocLoader) {
         _isLoadingChanged(false);
@@ -153,8 +153,7 @@ class BaseBloc<E, S> extends Bloc<E, S> {
       if (onUnknownErrorDefaultHandler) {
         helperBloc.add(HelperBlocEvent.unknownErrorHappened(e));
       }
-      return DataModelWrapper.networkDataFailure(
-          networkFailure: NetworkFailure.unknownError(e));
+      return DataModelWrapper.networkDataFailure(networkFailure: NetworkFailure.unknownError(e));
     }
   }
 

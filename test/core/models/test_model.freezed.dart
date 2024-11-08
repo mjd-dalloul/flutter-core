@@ -12,7 +12,7 @@ part of 'test_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TestModel _$TestModelFromJson(Map<String, dynamic> json) {
   return _TestModel.fromJson(json);
@@ -21,12 +21,16 @@ TestModel _$TestModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TestModel {
   int? get id => throw _privateConstructorUsedError;
+
   String? get body => throw _privateConstructorUsedError;
 
+  /// Serializes this TestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $TestModelCopyWith<TestModel> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of TestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $TestModelCopyWith<TestModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -44,9 +48,12 @@ class _$TestModelCopyWithImpl<$Res, $Val extends TestModel>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -67,30 +74,29 @@ class _$TestModelCopyWithImpl<$Res, $Val extends TestModel>
 }
 
 /// @nodoc
-abstract class _$$_TestModelCopyWith<$Res> implements $TestModelCopyWith<$Res> {
-  factory _$$_TestModelCopyWith(
-          _$_TestModel value, $Res Function(_$_TestModel) then) =
-      __$$_TestModelCopyWithImpl<$Res>;
+abstract class _$$TestModelImplCopyWith<$Res> implements $TestModelCopyWith<$Res> {
+  factory _$$TestModelImplCopyWith(_$TestModelImpl value, $Res Function(_$TestModelImpl) then) =
+      __$$TestModelImplCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({int? id, String? body});
 }
 
 /// @nodoc
-class __$$_TestModelCopyWithImpl<$Res>
-    extends _$TestModelCopyWithImpl<$Res, _$_TestModel>
-    implements _$$_TestModelCopyWith<$Res> {
-  __$$_TestModelCopyWithImpl(
-      _$_TestModel _value, $Res Function(_$_TestModel) _then)
-      : super(_value, _then);
+class __$$TestModelImplCopyWithImpl<$Res> extends _$TestModelCopyWithImpl<$Res, _$TestModelImpl>
+    implements _$$TestModelImplCopyWith<$Res> {
+  __$$TestModelImplCopyWithImpl(_$TestModelImpl _value, $Res Function(_$TestModelImpl) _then) : super(_value, _then);
 
+  /// Create a copy of TestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
     Object? body = freezed,
   }) {
-    return _then(_$_TestModel(
+    return _then(_$TestModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -105,11 +111,10 @@ class __$$_TestModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TestModel extends _TestModel {
-  const _$_TestModel({this.id, this.body}) : super._();
+class _$TestModelImpl extends _TestModel {
+  const _$TestModelImpl({this.id, this.body}) : super._();
 
-  factory _$_TestModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TestModelFromJson(json);
+  factory _$TestModelImpl.fromJson(Map<String, dynamic> json) => _$$TestModelImplFromJson(json);
 
   @override
   final int? id;
@@ -122,45 +127,50 @@ class _$_TestModel extends _TestModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TestModel &&
+            other is _$TestModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.body, body) || other.body == body));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, body);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TestModelCopyWith<_$_TestModel> get copyWith =>
-      __$$_TestModelCopyWithImpl<_$_TestModel>(this, _$identity);
+  _$$TestModelImplCopyWith<_$TestModelImpl> get copyWith =>
+      __$$TestModelImplCopyWithImpl<_$TestModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TestModelToJson(
+    return _$$TestModelImplToJson(
       this,
     );
   }
 }
 
 abstract class _TestModel extends TestModel {
-  const factory _TestModel({final int? id, final String? body}) = _$_TestModel;
+  const factory _TestModel({final int? id, final String? body}) = _$TestModelImpl;
+
   const _TestModel._() : super._();
 
-  factory _TestModel.fromJson(Map<String, dynamic> json) =
-      _$_TestModel.fromJson;
+  factory _TestModel.fromJson(Map<String, dynamic> json) = _$TestModelImpl.fromJson;
 
   @override
   int? get id;
+
   @override
   String? get body;
+
+  /// Create a copy of TestModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TestModelCopyWith<_$_TestModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TestModelImplCopyWith<_$TestModelImpl> get copyWith => throw _privateConstructorUsedError;
 }
