@@ -84,10 +84,10 @@ abstract class _BaseBlocPageState<P extends StatefulWidget, B extends BaseBloc>
       );
 }
 
-abstract class BaseBlocGetItPage<P extends StatefulWidget, B extends BaseBloc>
-    extends State<P> {
+abstract class BaseBlocGetItPage<P extends StatefulWidget, B extends BaseBloc> extends _BaseBlocPageState<P, B> {
   final B _bloc = GetIt.I<B>();
 
+  @override
   B get bloc => _bloc;
 
   @override

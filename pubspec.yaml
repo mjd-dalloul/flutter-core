@@ -22,6 +22,7 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   logger: ^2.4.0
   flutter_mobx: ^2.2.1+1
+  mobx: ^2.4.0
   json_annotation: ^4.9.0
   fluttertoast:
 
