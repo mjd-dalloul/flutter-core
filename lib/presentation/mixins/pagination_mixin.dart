@@ -9,7 +9,6 @@ mixin Pagination<S extends StatefulWidget, M> on State<S> {
   @override
   void initState() {
     super.initState();
-    pageController.addPageRequestListener((page) => onPageRequested(page));
   }
 
   @override
