@@ -4,8 +4,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 mixin Pagination<S extends StatefulWidget, M> on State<S> {
   PagingController<int, M> get pageController;
 
-  void onPageRequested(int pageNumber);
-
   @override
   void initState() {
     super.initState();
