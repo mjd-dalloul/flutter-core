@@ -21,7 +21,6 @@ TestModel _$TestModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TestModel {
   int? get id => throw _privateConstructorUsedError;
-
   String? get body => throw _privateConstructorUsedError;
 
   /// Serializes this TestModel to a JSON map.
@@ -48,7 +47,6 @@ class _$TestModelCopyWithImpl<$Res, $Val extends TestModel>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -77,7 +75,6 @@ class _$TestModelCopyWithImpl<$Res, $Val extends TestModel>
 abstract class _$$TestModelImplCopyWith<$Res> implements $TestModelCopyWith<$Res> {
   factory _$$TestModelImplCopyWith(_$TestModelImpl value, $Res Function(_$TestModelImpl) then) =
       __$$TestModelImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({int? id, String? body});
@@ -157,14 +154,12 @@ class _$TestModelImpl extends _TestModel {
 
 abstract class _TestModel extends TestModel {
   const factory _TestModel({final int? id, final String? body}) = _$TestModelImpl;
-
   const _TestModel._() : super._();
 
   factory _TestModel.fromJson(Map<String, dynamic> json) = _$TestModelImpl.fromJson;
 
   @override
   int? get id;
-
   @override
   String? get body;
 

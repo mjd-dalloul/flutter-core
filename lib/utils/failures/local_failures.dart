@@ -5,28 +5,32 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'local_failures.freezed.dart';
 
 @freezed
-class LocalFailure with _$LocalFailure implements Exception, BaseFailure {
+sealed class LocalFailure with _$LocalFailure implements Exception, BaseFailure {
   const LocalFailure._();
 
-  const factory LocalFailure.customFailure(String message, [dynamic failure]) =
-      CustomFailure;
+  const factory LocalFailure.customFailure(String message, [dynamic failure]) = CustomFailure;
 
-  const factory LocalFailure.unknownError(dynamic error, [dynamic failure]) =
-      UnknownError;
+  const factory LocalFailure.unknownError(dynamic error, [dynamic failure]) = UnknownError;
 
   @override
   String get failureMessage => _message;
 
   @override
-  get appFailure => _customFailure;
+  dynamic get appFailure => _customFailure;
 }
 
 extension LocalFailureMessage on LocalFailure {
-  String get _message => map(
-        customFailure: (failure) => failure.message,
-        unknownError: (_) => DefaultValues.SOMETHING_WENT_WRONG,
-      );
+  String get _message {
+    return switch (this) {
+      CustomFailure(message: final message) => message,
+      UnknownError() => DefaultValues.SOMETHING_WENT_WRONG,
+    };
+  }
 
-  dynamic get _customFailure =>
-      map(customFailure: (f) => f.failure, unknownError: (err) => err.failure);
+  dynamic get _customFailure {
+    return switch (this) {
+      CustomFailure(failure: final failure) => failure,
+      UnknownError(failure: final failure) => failure,
+    };
+  }
 }

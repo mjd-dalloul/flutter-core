@@ -107,14 +107,14 @@ class BaseRemoteDataSource implements IBaseRemoteDataSource {
     } on NetworkFailure catch (e, stacktrace) {
       /// our failure we will handle it.
       logger.e(
-        e.map(
-          serverFailure: (_) => ErrorLogType.serverFailure,
-          requestCancelled: (_) => ErrorLogType.requestCancelled,
-          customFailure: (_) => ErrorLogType.customFailure,
-          noInternetFailure: (_) => ErrorLogType.noInternetFailure,
-          unauthenticatedFailure: (_) => ErrorLogType.unauthenticatedFailure,
-          unknownError: (_) => ErrorLogType.unknownError,
-        ),
+        switch (e) {
+          ServerFailure() => ErrorLogType.serverFailure,
+          RequestCancelled() => ErrorLogType.requestCancelled,
+          CustomFailure() => ErrorLogType.customFailure,
+          NoInternetFailure() => ErrorLogType.noInternetFailure,
+          UnauthenticatedFailure() => ErrorLogType.unauthenticatedFailure,
+          UnknownError() => ErrorLogType.unknownError,
+        },
         error: e,
         stackTrace: stacktrace,
       );

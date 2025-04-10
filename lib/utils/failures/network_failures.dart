@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'network_failures.freezed.dart';
 
 @freezed
-class NetworkFailure with _$NetworkFailure implements Exception, BaseFailure {
+sealed class NetworkFailure with _$NetworkFailure implements Exception, BaseFailure {
   const NetworkFailure._();
 
   const factory NetworkFailure.serverFailure(
@@ -23,8 +23,7 @@ class NetworkFailure with _$NetworkFailure implements Exception, BaseFailure {
   const factory NetworkFailure.unauthenticatedFailure(
       [String? message, dynamic failure]) = UnauthenticatedFailure;
 
-  const factory NetworkFailure.unknownError(dynamic error, [dynamic failure]) =
-      UnknownError;
+  const factory NetworkFailure.unknownError(dynamic error, [dynamic failure]) = UnknownError;
 
   @override
   String get failureMessage => _message;
@@ -34,25 +33,28 @@ class NetworkFailure with _$NetworkFailure implements Exception, BaseFailure {
 }
 
 extension NetworkFailureMessage on NetworkFailure {
-  String get _message => map(
-        serverFailure: (failure) =>
-            failure.message ?? DefaultValues.SERVER_FAILURE,
-        customFailure: (failure) => failure.message,
-        noInternetFailure: (failure) =>
-            failure.message ?? DefaultValues.NO_INTERNET_CONNECTION,
-        unauthenticatedFailure: (failure) =>
-            failure.message ?? DefaultValues.UNAUTHENTICATED,
-        requestCancelled: (failure) =>
-            failure.message ?? DefaultValues.REQUEST_CANCELLED,
-        unknownError: (_) => DefaultValues.SOMETHING_WENT_WRONG,
-      );
+  String get _message {
+    return switch (this) {
+      ServerFailure(message: final message) => message ?? DefaultValues.SERVER_FAILURE,
+      CustomFailure(
+        message: final message,
+      ) =>
+        message,
+      NoInternetFailure(message: final message) => message ?? DefaultValues.NO_INTERNET_CONNECTION,
+      UnauthenticatedFailure(message: final message) => message ?? DefaultValues.UNAUTHENTICATED,
+      RequestCancelled(message: final message) => message ?? DefaultValues.REQUEST_CANCELLED,
+      UnknownError() => DefaultValues.SOMETHING_WENT_WRONG,
+    };
+  }
 
-  dynamic get _customFailure => map(
-        serverFailure: (failure) => failure.failure,
-        requestCancelled: (failure) => failure.failure,
-        customFailure: (failure) => failure.failure,
-        noInternetFailure: (failure) => failure.failure,
-        unauthenticatedFailure: (failure) => failure.failure,
-        unknownError: (failure) => failure.failure,
-      );
+  dynamic get _customFailure {
+    return switch (this) {
+      ServerFailure(failure: final failure) => failure,
+      RequestCancelled(failure: final failure) => failure,
+      CustomFailure(failure: final failure) => failure,
+      NoInternetFailure(failure: final failure) => failure,
+      UnauthenticatedFailure(failure: final failure) => failure,
+      UnknownError(failure: final failure) => failure,
+    };
+  }
 }

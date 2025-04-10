@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.3.2
-  freezed_annotation: ^3.0.0
+  freezed_annotation: ^2.4.4
   dio: ^5.7.0
   flutter_bloc: ^9.1.0
   intl: ^0.20.2
@@ -31,10 +31,14 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
   build_runner: ^2.4.13
-  mobx_codegen: ^2.6.2
-  freezed: ^3.0.0-0.0.dev
+  mobx_codegen: ^2.7.0
+  freezed: ^2.5.7
   mockito: ^5.4.4
-  json_serializable: ^6.8.0
+  json_serializable: ^6.7.1
+
+dependency_overrides:
+#  analyzer: ^7.3.0
+#  source_gen: ^1.2.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -966,50 +966,46 @@ class _$HelperBlocStateImpl implements _HelperBlocState {
   final ContextCallback contextCallback;
   @override
   final BaseFailure? failure;
-@override
-final Object? unknownError;
+  @override
+  final Object? unknownError;
 
-@override
+  @override
 String toString() {
 return 'HelperBlocState(isLoading: $isLoading, contextCallback: $contextCallback, failure: $failure, unknownError: $unknownError)';
 }
 
-@override
-bool operator ==(Object other) {
-return identical(this, other) ||
-(other.runtimeType == runtimeType &&
-other is _$HelperBlocStateImpl &&
-(identical(other.isLoading, isLoading) ||
-other.isLoading == isLoading) &&
-(identical(other.contextCallback, contextCallback) ||
-other.contextCallback == contextCallback) &&
-(identical(other.failure, failure) || other.failure == failure) &&
-const DeepCollectionEquality()
-    .equals(other.unknownError, unknownError));
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HelperBlocStateImpl &&
+            (identical(other.isLoading, isLoading) || other.isLoading == isLoading) &&
+            (identical(other.contextCallback, contextCallback) || other.contextCallback == contextCallback) &&
+            (identical(other.failure, failure) || other.failure == failure) &&
+            const DeepCollectionEquality().equals(other.unknownError, unknownError));
+  }
 
-@override
+  @override
 int get hashCode => Object.hash(runtimeType, isLoading, contextCallback,
 failure, const DeepCollectionEquality().hash(unknownError));
 
-/// Create a copy of HelperBlocState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-@pragma('vm:prefer-inline')
-_$$HelperBlocStateImplCopyWith<_$HelperBlocStateImpl> get copyWith =>
-__$$HelperBlocStateImplCopyWithImpl<_$HelperBlocStateImpl>(
-this, _$identity);
+  /// Create a copy of HelperBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HelperBlocStateImplCopyWith<_$HelperBlocStateImpl> get copyWith =>
+      __$$HelperBlocStateImplCopyWithImpl<_$HelperBlocStateImpl>(this, _$identity);
 }
 
 abstract class _HelperBlocState implements HelperBlocState {
-const factory _HelperBlocState(
-{required final bool isLoading,
-required final ContextCallback contextCallback,
-final BaseFailure? failure,
-final Object? unknownError}) = _$HelperBlocStateImpl;
+  const factory _HelperBlocState(
+      {required final bool isLoading,
+      required final ContextCallback contextCallback,
+      final BaseFailure? failure,
+      final Object? unknownError}) = _$HelperBlocStateImpl;
 
-@override
+  @override
 bool get isLoading;
 @override
 ContextCallback get contextCallback;
@@ -1018,10 +1014,9 @@ BaseFailure? get failure;
 @override
 Object? get unknownError;
 
-/// Create a copy of HelperBlocState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@JsonKey(includeFromJson: false, includeToJson: false)
-_$$HelperBlocStateImplCopyWith<_$HelperBlocStateImpl> get copyWith =>
-throw _privateConstructorUsedError;
+  /// Create a copy of HelperBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$HelperBlocStateImplCopyWith<_$HelperBlocStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

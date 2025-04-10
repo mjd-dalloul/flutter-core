@@ -140,6 +140,11 @@ class _$NetworkDataImpl<T> extends NetworkData<T> {
   final T? data;
 
   @override
+  String toString() {
+    return 'DataModelWrapper<$T>.networkData(data: $data)';
+  }
+
+  @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -278,6 +283,11 @@ class _$EmptyImpl<T> extends Empty<T> {
   const _$EmptyImpl() : super._();
 
   @override
+  String toString() {
+    return 'DataModelWrapper<$T>.empty()';
+  }
+
+  @override
   bool operator ==(Object other) {
     return identical(this, other) || (other.runtimeType == runtimeType && other is _$EmptyImpl<T>);
   }
@@ -414,6 +424,11 @@ class _$IsLoadingImpl<T> extends IsLoading<T> {
 
   @override
   final bool isLoading;
+
+  @override
+  String toString() {
+    return 'DataModelWrapper<$T>.isLoading(isLoading: $isLoading)';
+  }
 
   @override
   bool operator ==(Object other) {
@@ -587,6 +602,11 @@ class _$NetworkDataFailureImpl<T> extends NetworkDataFailure<T> {
   final NetworkFailure networkFailure;
 
   @override
+  String toString() {
+    return 'DataModelWrapper<$T>.networkDataFailure(networkFailure: $networkFailure)';
+  }
+
+  @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -757,6 +777,11 @@ class _$LocalDataFailureImpl<T> extends LocalDataFailure<T> {
   final LocalFailure localFailure;
 
   @override
+  String toString() {
+    return 'DataModelWrapper<$T>.localDataFailure(localFailure: $localFailure)';
+  }
+
+  @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -911,6 +936,11 @@ class _$LocalDataImpl<T> extends LocalData<T> {
 
   @override
   final T? data;
+
+  @override
+  String toString() {
+    return 'DataModelWrapper<$T>.localData(data: $data)';
+  }
 
   @override
   bool operator ==(Object other) {

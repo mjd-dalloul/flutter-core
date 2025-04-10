@@ -43,13 +43,12 @@ abstract class BaseRepository {
         onRemoteSuccess: onRemoteSuccess,
         onRemoteFailure: onRemoteFailure,
       );
-      if (tryLocalIfRemoteFails &&
-          ret.isFailure &&
-          localCall != null &&
-          ret.networkFailure!.maybeMap(orElse: () => false, noInternetFailure: (_) => true)) {
-        final localResult = await _localObjectWrapper(localCall: localCall);
-        if (localResult != null && localResult.isSuccess) {
-          ret = localResult;
+      if (tryLocalIfRemoteFails && ret.isFailure && localCall != null) {
+        if (ret.networkFailure case NoInternetFailure()) {
+          final localResult = await _localObjectWrapper(localCall: localCall);
+          if (localResult != null && localResult.isSuccess) {
+            ret = localResult;
+          }
         }
       }
     } else {

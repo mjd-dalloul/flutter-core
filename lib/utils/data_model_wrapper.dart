@@ -6,96 +6,121 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'data_model_wrapper.freezed.dart';
 
 @freezed
-class DataModelWrapper<T> with _$DataModelWrapper {
+sealed class DataModelWrapper<T> with _$DataModelWrapper<T> {
   const DataModelWrapper._();
 
   const factory DataModelWrapper.networkData({
     T? data,
-  }) = NetworkData;
+  }) = NetworkData<T>;
 
-  const factory DataModelWrapper.empty() = Empty;
+  const factory DataModelWrapper.empty() = Empty<T>;
 
   const factory DataModelWrapper.isLoading({
     required bool isLoading,
-  }) = IsLoading;
+  }) = IsLoading<T>;
 
   const factory DataModelWrapper.networkDataFailure({
     required NetworkFailure networkFailure,
-  }) = NetworkDataFailure;
+  }) = NetworkDataFailure<T>;
 
   const factory DataModelWrapper.localDataFailure({
     required LocalFailure localFailure,
-  }) = LocalDataFailure;
+  }) = LocalDataFailure<T>;
 
   const factory DataModelWrapper.localData({
     T? data,
-  }) = LocalData;
+  }) = LocalData<T>;
+}
 
+extension DataModelWrapperExtension<T> on DataModelWrapper<T> {
   DataModelWrapper<T> transformData(T Function(T) transform) {
-    return maybeMap(
-      networkData: (res) => DataModelWrapper.networkData(data: transform.call(res.data)),
-      localData: (res) => DataModelWrapper.localData(data: transform.call(res.data)),
-      orElse: () => this,
-    );
+    return switch (this) {
+      NetworkData(data: final data) => DataModelWrapper<T>.networkData(data: transform.call(data as T)),
+      LocalData(data: final data) => DataModelWrapper<T>.localData(data: transform.call(data as T)),
+      _ => this,
+    };
   }
 
-  bool get isSuccess => maybeMap(
-        localData: (_) => true,
-        networkData: (_) => true,
-        orElse: () => false,
-      );
+  bool get isSuccess {
+    return switch (this) {
+      LocalData() => true,
+      NetworkData() => true,
+      _ => false,
+    };
+  }
 
-  bool get isFailure => maybeMap(
-        localDataFailure: (_) => true,
-        networkDataFailure: (_) => true,
-        orElse: () => false,
-      );
+  bool get isFailure {
+    return switch (this) {
+      LocalDataFailure() => true,
+      NetworkDataFailure() => true,
+      _ => false,
+    };
+  }
 
   T getOrThrow() {
-    if (this.isFailure) {
-      throw this.failure!;
-    } else {
-      return this.data!;
-    }
+    return switch (this) {
+      LocalData(data: final data) => data as T,
+      NetworkData(data: final data) => data as T,
+      _ => throw failure as Object,
+    };
   }
 
-  T? get data => maybeWhen(
-        localData: (data) => data,
-        networkData: (data) => data,
-        orElse: () => null,
-      );
-
-  BaseFailure? get failure =>
-      maybeWhen(localDataFailure: (failure) => failure, networkDataFailure: (failure) => failure, orElse: () => null);
-
-  NetworkFailure? get networkFailure => maybeWhen(
-        networkDataFailure: (f) => f,
-        orElse: () => null,
-      );
-
-  LocalFailure? get localFailure => maybeWhen(
-        localDataFailure: (f) => f,
-        orElse: () => null,
-      );
-
-  bool get isLoading => maybeWhen(
-        isLoading: (isLoading) => isLoading,
-        orElse: () => false,
-      );
-
-  bool get isEmpty => maybeWhen(
-        empty: () => true,
-        orElse: () => false,
-      );
-
-  @override
-  String toString() {
-    return maybeWhen(
-      orElse: () => '',
-      networkData: (data) => 'DataModelWrapper.networkData with data ${data.toString()}',
-      localData: (data) => 'DataModelWrapper.localData with data ${data.toString()}',
-      networkDataFailure: (failure) => 'DataModelWrapper.networkFailure with failure ${failure.toString()}',
-      localDataFailure: (failure) => 'DataModelWrapper.localFailure with failure ${failure.toString()}',
-    );
+  T? get data {
+    return switch (this) {
+      LocalData(data: final data) => data,
+      NetworkData(data: final data) => data,
+      _ => null,
+    };
   }
+
+  BaseFailure? get failure {
+    return switch (this) {
+      LocalDataFailure(localFailure: final failure) => failure,
+      NetworkDataFailure(networkFailure: final failure) => failure,
+      _ => null,
+    };
+  }
+
+  NetworkFailure? get networkFailure {
+    return switch (this) {
+      NetworkDataFailure(networkFailure: final failure) => failure,
+      _ => null,
+    };
+  }
+
+  LocalFailure? get localFailure {
+    return switch (this) {
+      LocalDataFailure(localFailure: final failure) => failure,
+      _ => null,
+    };
+  }
+
+  bool get isLoading {
+    return switch (this) {
+      IsLoading(isLoading: final isLoading) => isLoading,
+      _ => false,
+    };
+  }
+
+  bool get isEmpty {
+    return switch (this) {
+      Empty() => true,
+      _ => false,
+    };
+  }
+//
+// @override
+// String toString() {
+//   return switch (this) {
+//     NetworkData(data: final data) =>
+//     'DataModelWrapper.networkData with data ${data.toString()}',
+//     LocalData(data: final data) =>
+//     'DataModelWrapper.localData with data ${data.toString()}',
+//     NetworkDataFailure(networkFailure: final failure) =>
+//     'DataModelWrapper.networkFailure with failure ${failure.toString()}',
+//     LocalDataFailure(localFailure: final failure) =>
+//     'DataModelWrapper.localFailure with failure ${failure.toString()}',
+//     _ => '',
+//   };
+// }
 }
