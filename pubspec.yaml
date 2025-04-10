@@ -24,6 +24,7 @@ dependencies:
   flutter_mobx: ^2.2.1+1
   mobx: ^2.4.0
   json_annotation: ^4.9.0
+  equatable: ^2.0.7
   fluttertoast:
 
 dev_dependencies:
