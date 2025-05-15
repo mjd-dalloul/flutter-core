@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_core/utils/extensions/paging_state_ext.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 mixin Pagination<S extends StatefulWidget, M> on State<S> {
-  PagingController<int, M> get pageController;
+  PagingState<int, M> get pagingState;
 
   @override
   void initState() {
@@ -12,6 +13,11 @@ mixin Pagination<S extends StatefulWidget, M> on State<S> {
   @override
   void dispose() {
     super.dispose();
-    pageController.dispose();
   }
+
+  void fetchPage() {
+    fetchNextPage(pagingState.nextPageNumber);
+  }
+
+  void fetchNextPage(int pageNumber) {}
 }
