@@ -19,5 +19,5 @@ mixin Pagination<S extends StatefulWidget, M> on State<S> {
     fetchNextPage(pagingState.nextPageNumber);
   }
 
-  void fetchNextPage(int pageNumber) {}
+  void fetchNextPage(int pageNumber);
 }
