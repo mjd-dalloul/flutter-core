@@ -57,10 +57,11 @@ extension DataModelWrapperExtension<T> on DataModelWrapper<T> {
     };
   }
 
-  T getOrThrow() {
+  T? getOrThrow() {
     return switch (this) {
       LocalData(data: final data) => data as T,
       NetworkData(data: final data) => data as T,
+      Empty() => data,
       _ => throw failure as Object,
     };
   }
