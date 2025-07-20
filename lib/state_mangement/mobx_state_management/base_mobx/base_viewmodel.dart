@@ -105,6 +105,7 @@ abstract class _BaseViewmodelBase with Store {
     void Function(BaseFailure)? onFailure,
     void Function(dynamic)? unknownError,
     bool useLoader = false,
+    bool showDefaultError = true,
   }) {
     if (useLoader) {
       startLoading();
@@ -113,6 +114,7 @@ abstract class _BaseViewmodelBase with Store {
       block(),
       onFailure: onFailure,
       unknownError: unknownError,
+      showDefaultError: showDefaultError,
     ).whenComplete(() {
       if (useLoader) {
         stopLoading();
@@ -124,17 +126,24 @@ abstract class _BaseViewmodelBase with Store {
     Future<T> future, {
     void Function(BaseFailure)? onFailure,
     void Function(dynamic)? unknownError,
+    required showDefaultError,
   }) =>
       future.catchError((error) {
         if (error is BaseFailure) {
           onFailure?.call(error);
-          errorHandler(error);
+          if (showDefaultError) {
+            errorHandler(error);
+          }
         } else {
           unknownError?.call(error);
-          unknownErrorHandler(error);
+          if (showDefaultError) {
+            unknownErrorHandler(error);
+          }
         }
         logger.e(ErrorLogType.baseViewModelError, error: error);
-        throw error;
+        if (showDefaultError) {
+          throw error;
+        }
       });
 
   void errorHandler(BaseFailure failure) {
