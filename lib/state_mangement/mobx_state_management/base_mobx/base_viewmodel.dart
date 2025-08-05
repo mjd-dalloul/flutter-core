@@ -141,9 +141,7 @@ abstract class _BaseViewmodelBase with Store {
           }
         }
         logger.e(ErrorLogType.baseViewModelError, error: error);
-        if (showDefaultError) {
-          throw error;
-        }
+        throw error;
       });
 
   void errorHandler(BaseFailure failure) {
