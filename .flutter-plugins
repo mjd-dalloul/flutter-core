@@ -12,3 +12,4 @@ shared_preferences_windows=/Users/majddalloul/.pub-cache/hosted/pub.dev/shared_p
 sqflite=/Users/majddalloul/.pub-cache/hosted/pub.dev/sqflite-2.4.2/
 sqflite_android=/Users/majddalloul/.pub-cache/hosted/pub.dev/sqflite_android-2.4.1/
 sqflite_darwin=/Users/majddalloul/.pub-cache/hosted/pub.dev/sqflite_darwin-2.4.2/
+sqflite_sqlcipher=/Users/majddalloul/.pub-cache/hosted/pub.dev/sqflite_sqlcipher-3.3.0/
