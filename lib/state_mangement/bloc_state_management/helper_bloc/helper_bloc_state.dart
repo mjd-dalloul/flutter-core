@@ -1,7 +1,7 @@
 part of 'helper_bloc.dart';
 
 @freezed
-class HelperBlocState with _$HelperBlocState {
+abstract class HelperBlocState with _$HelperBlocState {
   const factory HelperBlocState({
     required bool isLoading,
     required ContextCallback contextCallback,

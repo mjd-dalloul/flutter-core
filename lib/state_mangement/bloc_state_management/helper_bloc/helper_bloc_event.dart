@@ -1,7 +1,7 @@
 part of 'helper_bloc.dart';
 
 @freezed
-class HelperBlocEvent with _$HelperBlocEvent {
+sealed class HelperBlocEvent with _$HelperBlocEvent {
   const factory HelperBlocEvent.loadingChanged(bool isLoading) = LoadingChanged;
 
   const factory HelperBlocEvent.failureCleared() = FailureCleared;

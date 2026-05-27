@@ -9,8 +9,10 @@ part of 'base_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$BaseViewmodel on _BaseViewmodelBase, Store {
-  late final _$isLoadingAtom =
-      Atom(name: '_BaseViewmodelBase.isLoading', context: context);
+  late final _$isLoadingAtom = Atom(
+    name: '_BaseViewmodelBase.isLoading',
+    context: context,
+  );
 
   @override
   bool get isLoading {
@@ -25,8 +27,10 @@ mixin _$BaseViewmodel on _BaseViewmodelBase, Store {
     });
   }
 
-  late final _$contextCallbackAtom =
-      Atom(name: '_BaseViewmodelBase.contextCallback', context: context);
+  late final _$contextCallbackAtom = Atom(
+    name: '_BaseViewmodelBase.contextCallback',
+    context: context,
+  );
 
   @override
   ContextCallback? get contextCallback {
@@ -41,13 +45,16 @@ mixin _$BaseViewmodel on _BaseViewmodelBase, Store {
     });
   }
 
-  late final _$_BaseViewmodelBaseActionController =
-      ActionController(name: '_BaseViewmodelBase', context: context);
+  late final _$_BaseViewmodelBaseActionController = ActionController(
+    name: '_BaseViewmodelBase',
+    context: context,
+  );
 
   @override
   void getContext(ContextCallback callback) {
     final _$actionInfo = _$_BaseViewmodelBaseActionController.startAction(
-        name: '_BaseViewmodelBase.getContext');
+      name: '_BaseViewmodelBase.getContext',
+    );
     try {
       return super.getContext(callback);
     } finally {
@@ -58,7 +65,8 @@ mixin _$BaseViewmodel on _BaseViewmodelBase, Store {
   @override
   void startLoading() {
     final _$actionInfo = _$_BaseViewmodelBaseActionController.startAction(
-        name: '_BaseViewmodelBase.startLoading');
+      name: '_BaseViewmodelBase.startLoading',
+    );
     try {
       return super.startLoading();
     } finally {
@@ -69,7 +77,8 @@ mixin _$BaseViewmodel on _BaseViewmodelBase, Store {
   @override
   void stopLoading() {
     final _$actionInfo = _$_BaseViewmodelBaseActionController.startAction(
-        name: '_BaseViewmodelBase.stopLoading');
+      name: '_BaseViewmodelBase.stopLoading',
+    );
     try {
       return super.stopLoading();
     } finally {
@@ -80,7 +89,8 @@ mixin _$BaseViewmodel on _BaseViewmodelBase, Store {
   @override
   void toggleLoading() {
     final _$actionInfo = _$_BaseViewmodelBaseActionController.startAction(
-        name: '_BaseViewmodelBase.toggleLoading');
+      name: '_BaseViewmodelBase.toggleLoading',
+    );
     try {
       return super.toggleLoading();
     } finally {

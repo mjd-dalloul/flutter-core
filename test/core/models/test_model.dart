@@ -4,7 +4,7 @@ part 'test_model.freezed.dart';
 part 'test_model.g.dart';
 
 @freezed
-class TestModel with _$TestModel {
+abstract class TestModel with _$TestModel {
   const factory TestModel({
     int? id,
     String? body,
