@@ -1,5 +1,5 @@
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-extension PagingStateExt<T> on PagingState<int, T> {
-  int get nextPageNumber => (keys ?? []).length;
+extension PagingStateExt<K, T> on PagingState<K?, T> {
+  K? get nextPageNumber => (keys ?? []).lastOrNull;
 }

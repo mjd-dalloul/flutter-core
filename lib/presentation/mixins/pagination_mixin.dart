@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_core/utils/extensions/paging_state_ext.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-mixin Pagination<S extends StatefulWidget, M> on State<S> {
-  PagingState<int, M> get pagingState;
+mixin Pagination<S extends StatefulWidget, M, K> on State<S> {
+  PagingState<K, M> get pagingState;
 
   @override
   void initState() {
@@ -19,5 +19,5 @@ mixin Pagination<S extends StatefulWidget, M> on State<S> {
     fetchNextPage(pagingState.nextPageNumber);
   }
 
-  void fetchNextPage(int pageNumber);
+  void fetchNextPage(K? pageKey);
 }
